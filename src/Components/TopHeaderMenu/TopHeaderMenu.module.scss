@@ -1,0 +1,111 @@
+@import '../../App.scss';
+
+$light-grey: #757373;
+
+.Container {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.Leftwrapper {
+  align-items: center;
+
+  .LeftInfo {
+    display: flex;
+    align-items: center;
+    p {
+      color: $light-grey;
+      margin-left: 6px;
+    }
+  }
+
+  .FastShippingIcon {
+    color: #4dae65;
+    font-size: 22px;
+  }
+}
+
+.Divider {
+  margin: -5px 0px;
+  width: 2px;
+  background-color: #ffffff;
+  color: #ffffff;
+}
+
+.RightWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex: 0.5;
+
+  .ChangeMenu {
+    display: flex;
+    flex-direction: row;
+    color: $light-grey;
+    font-weight: 500;
+    div {
+      display: flex;
+      align-items: center;
+      margin: 0 0.2em;
+      :nth-child(1) {
+        font-size: 1.5em;
+      }
+    }
+  }
+
+  .TopMenuItemContainer {
+    display: flex;
+    justify-content: space-evenly;
+
+    a {
+      margin: 0 0.8em;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-weight: 600;
+      color: $light-grey;
+      font-size: 1.1em;
+      :nth-child(1) {
+        font-size: 1.6em;
+        margin: 0 0.1em;
+      }
+      .MapIcon {
+        margin-right: -0.06em;
+      }
+      &:hover {
+        color: #40add8;
+      }
+    }
+  }
+
+  .SocialIconContainer {
+    display: flex;
+    justify-content: space-around;
+    a {
+      color: $light-grey;
+      margin-left: 0.6em;
+      padding: 0.4em 0.4em 0.2em 0.48em;
+      transition: all 0.3s;
+      border-radius: 50%;
+      &:hover {
+        border-radius: 50%;
+        color: #ffffff;
+        background-color: #da5e34;
+      }
+    }
+    :nth-child(2) {
+      &:hover {
+        background-color: #2fb0e3;
+      }
+    }
+    :nth-child(3) {
+      &:hover {
+        background-color: #4d69a3;
+      }
+    }
+  }
+}
