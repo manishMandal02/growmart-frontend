@@ -1,0 +1,13 @@
+@import '../../../App.scss';
+
+.Sidebar {
+  margin: 1.8em;
+  border: 1px solid $light-grey;
+  width: 22vw;
+
+  .AccordionSummary {
+    margin: -6px -1px;
+    border: 1px solid $light-grey;
+    border-bottom: none;
+  }
+}

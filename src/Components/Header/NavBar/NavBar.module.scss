@@ -1,0 +1,82 @@
+@import '../../../App.scss';
+
+.NavBar {
+  display: flex;
+  border: 1px solid #cfcdcd;
+  padding-left: 2.8em;
+  justify-content: space-between;
+  .LeftMenu {
+    display: flex;
+    .AllDepartments {
+      display: flex;
+      align-items: center;
+      color: $primary-color;
+      font-size: 1.2em;
+      font-weight: 600;
+      border: 1px solid #cfcdcd;
+      border-top: none;
+      border-bottom: none;
+      padding: 0em 0.8em;
+      margin-top: -0.02em;
+      transition: all 0.18s;
+      &:hover {
+        background-color: $primary-color;
+        border: 1px solid $primary-color;
+        border-top: none;
+        border-bottom: none;
+        color: #ffffff;
+        cursor: pointer;
+      }
+      :nth-child(1) {
+        margin-right: 0.2em;
+      }
+    }
+
+    .MainMenu {
+      margin-left: -1em;
+      width: 42vw;
+      display: flex;
+      list-style-type: none;
+      align-items: center;
+      font-size: 1.1em;
+      font-weight: 500;
+
+      a {
+        padding: 0.4em 0.8em;
+        transition: all 0.1s;
+        text-decoration: none;
+        color: $dark-grey;
+
+        &:hover {
+          cursor: pointer;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .RightMenu {
+    margin-right: 3.5em;
+    display: flex;
+    width: 16vw;
+    justify-content: space-around;
+    a {
+      color: $dark-grey;
+      font-size: 1.2em;
+      font-weight: 700;
+      text-decoration: none;
+      color: #3a3636;
+      padding: 0.4em;
+      &:hover {
+        color: $secondary-color;
+      }
+      .OffersMenu {
+        display: flex;
+        align-items: center;
+        :nth-child(1) {
+          margin-right: 0.2em;
+        }
+      }
+    }
+  }
+}

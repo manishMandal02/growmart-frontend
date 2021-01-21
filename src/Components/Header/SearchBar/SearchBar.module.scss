@@ -1,4 +1,4 @@
-@import '../../App.scss';
+@import '../../../App.scss';
 
 .NavBar {
   padding: 0.8em 0.8em;
@@ -27,7 +27,7 @@
         border: none;
         outline: none;
         padding: 0.8em;
-        width: 70%;
+        width: 80%;
         font-size: 1.1em;
       }
       .SearchIcon {

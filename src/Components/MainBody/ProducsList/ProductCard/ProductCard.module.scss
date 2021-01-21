@@ -1,0 +1,22 @@
+@import '../../../../App.scss';
+
+.ProductCard {
+  padding: 0.8em;
+  display: flex;
+  height: 40vh;
+  width: 16vw;
+  flex-direction: column;
+  .CardTopContainer {
+    background-size: 80%;
+    height: 65%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .CardBottom {
+    display: flex;
+  }
+}

@@ -1,0 +1,15 @@
+@import '../../../App.scss';
+
+.MainContainer {
+  margin: 0.2em;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+  .SortByWrapper {
+    display: flex;
+  }
+  .PaginationWrapper {
+    display: flex;
+  }
+}

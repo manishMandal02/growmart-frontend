@@ -8,7 +8,7 @@ import {
 import { IconButton, Badge } from '@material-ui/core/';
 
 import classes from './SearchBar.module.scss';
-import Logo from '../../Assets/Images/main-logo.png';
+import Logo from '../../../Assets/Images/main-logo.png';
 
 const SearchBar = () => {
   return (
