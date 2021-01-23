@@ -1,9 +1,12 @@
 @import '../../App.scss';
 
 .MainBodyContainer {
-  margin: 0px;
-  margin-right: 0;
-  padding: 0em;
-  display: flex;
-  max-width: 100vw;
+  .MainBodyWrapper {
+    display: flex;
+    margin: 1.8em 0em 0.8em 0em;
+    margin-right: 0;
+    padding: 0em;
+    max-width: 100vw;
+    align-items: flex-start;
+  }
 }

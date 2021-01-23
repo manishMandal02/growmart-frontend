@@ -1,22 +1,140 @@
 @import '../../../../App.scss';
 
 .ProductCard {
-  padding: 0.8em;
+  border-radius: 0.2em;
   display: flex;
-  height: 40vh;
-  width: 16vw;
+  max-height: 40%;
+  justify-content: flex-start;
+  width: 18vw;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: box-shadow 0.1s ease-in-out;
   flex-direction: column;
+  &:hover .CardTopContainer > .CardTopWrapper {
+    visibility: visible;
+    opacity: 1;
+  }
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  }
   .CardTopContainer {
-    background-size: 80%;
-    height: 65%;
+    height: 25vh;
+    background-size: 70%;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+
+    .CardTopWrapper {
+      transition: all 2s;
+      display: flex;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.15s linear;
+
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      .CardTop {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        .AddToCardIcon {
+          cursor: pointer;
+
+          transition: all 0.1s;
+          margin: 0.6em;
+          border-radius: 50%;
+          color: $mid-grey;
+          padding: 0.4em 0.5em;
+          box-shadow: #00000029 0px 3px 6px, #0000003b 0px 3px 6px;
+          &:hover {
+            background-color: $primary-color;
+            color: #ffff;
+          }
+        }
+      }
+      .QuickView {
+        display: flex;
+        width: 100%;
+        button {
+          outline: none;
+          border: none;
+          color: #ffff;
+          transition: background-color 100ms linear;
+          background-color: #6cb67edc;
+          padding: 0.75em 0.6em;
+          width: 100%;
+          font-size: 0.85em;
+          font-weight: 500;
+          cursor: pointer;
+          &:hover {
+            background-color: $primary-color;
+          }
+        }
+      }
+    }
   }
   .CardBottom {
+    border-top: 1px solid #eeebeb;
+    max-height: 100%;
+    padding: 0;
     display: flex;
+    flex-direction: column;
+    .Top {
+      margin: 0.4em 0.6em 0 0.6em;
+      display: flex;
+      justify-content: space-between;
+      .Categories {
+        display: flex;
+        align-items: flex-start;
+        line-height: 0.9em;
+        margin: 0;
+        color: $mid-grey;
+        max-width: 85%;
+        p {
+          font-size: 0.85em;
+          font-weight: 400;
+          margin: 0.1em 0.25em 0em 0em;
+          cursor: pointer;
+          &:hover {
+            font-weight: 500;
+            color: $primary-color;
+          }
+        }
+      }
+      .LikeIcon {
+        cursor: pointer;
+
+        transition: all 0.1s;
+        border-radius: 50%;
+        padding: 0.4em 0.4em 0.1em 0.4em;
+        color: $mid-grey;
+        box-shadow: #43475545 0px 0px 0.25em, #5a7dbc0d 0px 0.25em 1em;
+        &:hover {
+          background-color: $secondary-color;
+          color: #ffff;
+        }
+      }
+    }
+
+    .Info {
+      margin: -0.9em 0.2em 0.2em 0.8em;
+      padding: 0em 0.6em 0.8em 0em;
+      p {
+        margin: 0;
+      }
+      .Title {
+        font-size: 1.2em;
+        font-weight: 400;
+        color: $dark-grey;
+        margin: 0.2em 0em 0.3em 0em;
+      }
+      .Price {
+        font-size: 1.1em;
+        margin-bottom: 0.4;
+        font-weight: 500;
+        color: $dark-grey;
+      }
+    }
   }
 }

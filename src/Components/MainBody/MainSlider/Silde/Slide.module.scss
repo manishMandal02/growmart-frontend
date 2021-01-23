@@ -1,0 +1,58 @@
+@import '../../../../App.scss';
+
+.Slide {
+  height: 46vh;
+  padding: 2em 1em 2em 1em;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: 100%;
+
+  .SlideContent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    color: $dark-grey;
+    p {
+      font-size: 1.4em;
+      color: $mid-grey;
+    }
+    h2 {
+      font-size: 3.6em;
+      letter-spacing: 0.04em;
+    }
+    h6 {
+      font-size: 2.8em;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
+      display: flex;
+      font-weight: 500;
+      p {
+        transform: rotate(-12deg);
+        margin: 0;
+        margin-left: 2.5em;
+        color: $primary-color;
+        font-family: cursive;
+        font-size: 0.6em;
+      }
+    }
+    h1 {
+      font-size: 1.6em;
+      display: flex;
+      margin: 1.5em 0em 0 4em;
+
+      p {
+        margin: -0.4em 0 0 0.2em;
+        transform: rotate(-6deg);
+        border-radius: 0.1em;
+        font-size: 2em;
+        padding: 0.1em;
+        color: #ffff;
+        background-color: black;
+      }
+    }
+  }
+}

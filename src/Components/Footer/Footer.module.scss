@@ -1,0 +1,97 @@
+@import '../../App.scss';
+
+.Footer {
+  display: flex;
+  background-color: #f1f1f18c;
+
+  flex-direction: column;
+  .FooterTop {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5em 5em 1em 5em;
+    .FooterInfo {
+      margin-top: 1em;
+      h4 {
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #353434;
+      }
+      ul {
+        display: flex;
+        margin: 0.8em 0 0 0.2em;
+        padding: 0;
+        flex-direction: column;
+        a {
+          margin-bottom: 0.4em;
+          color: rgb(65, 64, 64);
+          font-size: 0.9em;
+          text-decoration: none;
+          &:hover {
+            font-weight: 600;
+          }
+        }
+      }
+      .Container {
+        h4 {
+          margin: 0;
+          font-size: 1.2em;
+          font-weight: 700;
+          color: #353434;
+        }
+
+        .SocialIconContainer {
+          display: flex;
+          justify-content: flex-start;
+          margin: 0.3em 0 0.6em 0;
+          a {
+            color: $dark-grey;
+            margin-right: 0.6em;
+            padding: 0.5em 0.5em 0.2em 0.48em;
+            transition: all 0.3s;
+            border-radius: 50%;
+            border: 0.04em solid $light-grey;
+            &:hover {
+              border-radius: 50%;
+              color: #ffffff;
+              background-color: #da5e34;
+            }
+          }
+          :nth-child(2) {
+            &:hover {
+              background-color: #2fb0e3;
+            }
+          }
+          :nth-child(3) {
+            &:hover {
+              background-color: #4d69a3;
+            }
+          }
+        }
+
+        .PaymentsIcon {
+          display: flex;
+          flex-direction: row;
+          font-size: 2.4em;
+          margin: 0em 0 0 0;
+          color: #252323cc;
+          justify-content: space-between;
+          li {
+            list-style-type: none;
+            margin-right: 0.2em;
+          }
+        }
+      }
+    }
+  }
+  .FooterBottom {
+    padding: 1em 0.2em 0.8em 0.2em;
+    border-top: 0.04px solid $light-grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    color: $mid-grey;
+    font-weight: lighter;
+  }
+}

@@ -1,15 +1,45 @@
 @import '../../../App.scss';
 
 .MainContainer {
-  margin: 0.2em;
-  padding: 2em;
+  margin: 0 0.2em 0 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  width: 75vw;
+  max-width: 90%;
   .SortByWrapper {
-    display: flex;
+    margin: -0.2em 0em 0.8em 0em;
+    form {
+      label {
+        font-size: 1em;
+        font-weight: 500;
+        color: $mid-grey;
+        margin-right: 0.4em;
+      }
+      select {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        font-size: 1em;
+        color: $mid-grey;
+        padding: 0.4em;
+        border: 0em solid $light-grey;
+        outline: none;
+      }
+    }
   }
+
+  .Grid {
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+    padding: 0 0 1em 0;
+  }
+
   .PaginationWrapper {
+    border-top: 0.04em solid $light-grey;
+    padding: 0.8em 0 0 0;
+    width: 95%;
+    max-width: 100%;
+    justify-content: flex-end;
+    align-items: center;
     display: flex;
   }
 }
