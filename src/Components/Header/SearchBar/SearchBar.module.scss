@@ -9,8 +9,12 @@
     display: flex;
     width: 52vw;
     align-items: center;
-    img {
-      width: 80%;
+    a {
+      padding: 0;
+      max-width: fit-content;
+      img {
+        width: 90%;
+      }
     }
 
     .Search {
@@ -18,10 +22,15 @@
       justify-content: space-between;
       border: 0.1em solid $primary-color;
       width: 82vw;
-      margin-left: 2.5em;
+      margin-left: 2.8em;
       border-radius: 0.4em;
       padding: 2px 0 2px 2px;
       height: 2.6em;
+      &:hover {
+        box-shadow: rgba(71, 150, 94, 0.342) 0px 3px 6px,
+          rgba(107, 165, 105, 0.342) 0px 3px 6px;
+      }
+
       input {
         color: $dark-grey;
         border: none;
@@ -63,8 +72,11 @@
     align-items: center;
     color: $dark-grey;
     margin-top: 0em;
-    &:hover .MenuIcons {
-      transform: scale(1.15);
+    cursor: pointer;
+    &:hover {
+      .MenuIcons {
+        transform: scale(1.15);
+      }
     }
     .MenuIcons {
       transition: all 0.2s;
@@ -73,9 +85,19 @@
     }
   }
   .ShoppingCart {
+    margin-top: 0.2em;
     display: flex;
     align-items: center;
     color: $dark-grey;
+    cursor: pointer;
+    &:hover {
+      .MenuIcons {
+        transform: scale(1.1);
+      }
+      // .CaptionText {
+      //   font-weight: 600;
+      // }
+    }
     .TextWrapper {
       margin-top: -0.1em;
       margin-left: 0.1em;
@@ -90,7 +112,8 @@
   }
   .MenuIcons {
     margin-top: 0.1em;
-    font-size: 2.2em;
+    font-size: 2.1em;
+    transition: all 0.2s;
   }
 
   .TextWrapper {
@@ -100,7 +123,7 @@
     }
     .CaptionText {
       color: $dark-grey;
-      font-size: 0.85em;
+      font-size: 0.95em;
       margin: 0em 0 -0.35em 0em;
     }
     .MainText {

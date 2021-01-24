@@ -14,9 +14,9 @@ const SearchBar = () => {
   return (
     <div className={classes.NavBar}>
       <div className={classes.LeftContainer}>
-        <div>
+        <a href='/'>
           <img src={Logo} alt='GorwMart Logo' />
-        </div>
+        </a>
 
         <div className={classes.Search}>
           <input type='text' placeholder='search...' />
@@ -36,6 +36,7 @@ const SearchBar = () => {
             <p className={classes.MainText}>Log In/ Register</p>
           </div>
         </div>
+
         <div className={classes.ShoppingCart}>
           <Badge
             color='secondary'

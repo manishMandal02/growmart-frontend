@@ -11,6 +11,8 @@ import {
 } from '@material-ui/core';
 
 import classes from './Sidebar.module.scss';
+import FilterByPrice from './FilterByPrice/FilterByPrice';
+import SidebarProductsCard from './SidebarProductsCard/SidebarProductCard';
 
 const useStyles = makeStyles({
   content: {
@@ -35,14 +37,15 @@ const Sidebar = () => {
             aria-controls='panel1a-content'
             id='panel1a-header'
           >
+            {/* Filter By Price */}
             <Typography component='div'>
               <Box fontWeight={600} fontSize={20} m={1}>
                 Filter By Price
               </Box>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>Filter By Price</Typography>
+          <AccordionDetails className={classes.FilterByPrice}>
+            <FilterByPrice />
           </AccordionDetails>
         </Accordion>
       </div>
@@ -65,13 +68,13 @@ const Sidebar = () => {
               </Box>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <li>Categories1</li>
-              <li>Categories2</li>
-              <li>Categories3</li>
-              <li>Categories4</li>
-            </Typography>
+          <AccordionDetails className={classes.Categories}>
+            <ul>
+              <a href='#/'>Categorie1</a>
+              <a href='#/'>Categorie2</a>
+              <a href='#/'>Categorie3</a>
+              <a href='#/'>Categorie4</a>
+            </ul>
           </AccordionDetails>
         </Accordion>
       </div>
@@ -94,13 +97,13 @@ const Sidebar = () => {
               </Box>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <li>Brand1</li>
-              <li>Brand2</li>
-              <li>Brand3</li>
-              <li>Brand4</li>
-            </Typography>
+          <AccordionDetails className={classes.Categories}>
+            <ul>
+              <a href='#/'>Brand1</a>
+              <a href='#/'>Brand2</a>
+              <a href='#/'>Brand3</a>
+              <a href='#/'>Brand4</a>
+            </ul>
           </AccordionDetails>
         </Accordion>
       </div>
@@ -111,12 +114,50 @@ const Sidebar = () => {
             Recently Added
           </Box>
         </Typography>
-        <ul>
-          <li>Product1</li>
-          <li>Product2</li>
-          <li>Product3</li>
-          <li>Product4</li>
-        </ul>
+        <div className={classes.RecentlyAdded}>
+          <ul>
+            <li>
+              <SidebarProductsCard
+                img={
+                  'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/578239-300x300.jpg'
+                }
+                title={'Sample Product'}
+                price={'29.00'}
+                rating={'2'}
+              />
+            </li>
+            <li>
+              <SidebarProductsCard
+                img={
+                  'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
+                }
+                title={'Sample Product'}
+                price={'29.00'}
+                rating={'2'}
+              />
+            </li>
+            <li>
+              <SidebarProductsCard
+                img={
+                  'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
+                }
+                title={'Sample Product'}
+                price={'29.00'}
+                rating={'2'}
+              />
+            </li>
+            <li>
+              <SidebarProductsCard
+                img={
+                  'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
+                }
+                title={'Sample Product'}
+                price={'29.00'}
+                rating={'2'}
+              />
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

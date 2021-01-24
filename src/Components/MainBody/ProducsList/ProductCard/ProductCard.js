@@ -50,7 +50,7 @@ const ProductCard = (props) => {
                 readOnly
               />
             </div>
-            <p className={classes.Price}>{props.price}</p>
+            <p className={classes.Price}>{`$${props.price}`}</p>
           </div>
         </div>
       </div>

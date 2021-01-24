@@ -59,22 +59,36 @@
     margin-right: 3.5em;
     display: flex;
     width: 16vw;
-    justify-content: space-around;
+    justify-content: flex-end;
+    border-left: 0.04em solid $light-grey;
+    margin: -0.6em -1em -0.6em 1em;
     a {
       color: $dark-grey;
       font-size: 1.2em;
-      font-weight: 700;
+      font-weight: 600;
       text-decoration: none;
       color: #3a3636;
       padding: 0.4em;
+      margin: 0.6em 0;
+
       &:hover {
-        color: $secondary-color;
+        color: $primary-color;
+
+        .OffersMenu {
+          :nth-child(1) {
+            color: $primary-color;
+
+            transform: scale(1.06);
+          }
+        }
       }
       .OffersMenu {
         display: flex;
         align-items: center;
         :nth-child(1) {
-          margin-right: 0.2em;
+          transition: all 0.2s;
+
+          margin-right: 0.1em;
         }
       }
     }

@@ -33,10 +33,10 @@ const ProductsList = () => {
         <Grid item>
           <ProductCard
             img={
-              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/578239-300x300.jpg'
             }
-            title={'Sample Product1'}
-            price={'$29.00'}
+            title={'Sample Product'}
+            price={'29.00'}
             rating={'2'}
           />
         </Grid>
@@ -45,28 +45,28 @@ const ProductsList = () => {
             img={
               'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
             }
-            title={'Sample Product1'}
-            price={'$29.00'}
+            title={'Sample Product'}
+            price={'29.00'}
             rating={'0'}
           />
         </Grid>
         <Grid item>
           <ProductCard
             img={
-              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/578239-300x300.jpg'
             }
-            title={'Sample Product1'}
-            price={'$29.00'}
+            title={'Sample Product'}
+            price={'29.00'}
             rating={'3'}
           />
         </Grid>
         <Grid item>
           <ProductCard
             img={
-              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
             }
-            title={'Sample Product1'}
-            price={'$29.00'}
+            title={'Sample Product'}
+            price={'29.00'}
             rating={'4'}
           />
         </Grid>
@@ -75,9 +75,59 @@ const ProductsList = () => {
             img={
               'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
             }
-            title={'Sample Product1'}
-            price={'$29.00'}
+            title={'Sample Product'}
+            price={'29.00'}
             rating={'5'}
+          />
+        </Grid>
+        <Grid item>
+          <ProductCard
+            img={
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/578239-300x300.jpg'
+            }
+            title={'Sample Product'}
+            price={'29.00'}
+            rating={'3'}
+          />
+        </Grid>
+        <Grid item>
+          <ProductCard
+            img={
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
+            }
+            title={'Sample Product'}
+            price={'29.00'}
+            rating={'3'}
+          />
+        </Grid>
+        <Grid item>
+          <ProductCard
+            img={
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
+            }
+            title={'Sample Product'}
+            price={'29.00'}
+            rating={'3'}
+          />
+        </Grid>
+        <Grid item>
+          <ProductCard
+            img={
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
+            }
+            title={'Sample Product'}
+            price={'29.00'}
+            rating={'3'}
+          />
+        </Grid>
+        <Grid item>
+          <ProductCard
+            img={
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/578239-300x300.jpg'
+            }
+            title={'Sample Product'}
+            price={'29.00'}
+            rating={'3'}
           />
         </Grid>
         <Grid item>
@@ -85,8 +135,18 @@ const ProductsList = () => {
             img={
               'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/602180-300x300.jpg'
             }
-            title={'Sample Product1'}
-            price={'$29.00'}
+            title={'Sample Product'}
+            price={'29.00'}
+            rating={'3'}
+          />
+        </Grid>
+        <Grid item>
+          <ProductCard
+            img={
+              'https://www.portotheme.com/wordpress/porto/shop35/wp-content/uploads/sites/178/2020/07/496465-300x300.jpg'
+            }
+            title={'Sample Product'}
+            price={'29.00'}
             rating={'3'}
           />
         </Grid>

@@ -44,6 +44,9 @@ const MainSlider = () => {
         <SwiperSlide>
           <Slide />
         </SwiperSlide>
+        <SwiperSlide>
+          <Slide />
+        </SwiperSlide>
       </Swiper>
     </div>
   );
