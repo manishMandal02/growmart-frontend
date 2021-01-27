@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+// npm install react-router react-redux redux redux-saga @material-ui/core @material-ui/icons @material-ui/styles @material-ui/lab
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -12,7 +13,7 @@ const theme = createMuiTheme({
       main: '#4DAE65',
     },
     secondary: {
-      main: '#FF5B5B',
+      main: '#40add8',
     },
   },
   typography: {
@@ -28,5 +29,3 @@ ReactDOM.render(
   </ThemeProvider>,
   document.getElementById('root')
 );
-
-reportWebVitals();

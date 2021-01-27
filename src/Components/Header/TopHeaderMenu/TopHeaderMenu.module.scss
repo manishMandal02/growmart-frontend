@@ -1,6 +1,6 @@
 @import '../../../App.scss';
 
-$light-grey: #757373;
+// $light-grey: #757373;
 
 .Container {
   background-color: #f4f4f4;
@@ -18,7 +18,8 @@ $light-grey: #757373;
     display: flex;
     align-items: center;
     p {
-      color: $light-grey;
+      color: $mid-grey;
+
       margin-left: 6px;
     }
   }
@@ -30,10 +31,12 @@ $light-grey: #757373;
 }
 
 .Divider {
-  margin: -5px 0px;
-  width: 2px;
-  background-color: #ffffff;
-  color: #ffffff;
+  width: 0.04em;
+  border: 1px solid $light-grey;
+  height: 5.5vh;
+  margin-top: -0.8em;
+  margin-bottom: -0.8em;
+  background-color: $light-grey;
 }
 
 .RightWrapper {
@@ -45,7 +48,8 @@ $light-grey: #757373;
   .ChangeMenu {
     display: flex;
     flex-direction: row;
-    color: $light-grey;
+    color: $mid-grey;
+
     font-weight: 500;
     div {
       display: flex;
@@ -67,7 +71,7 @@ $light-grey: #757373;
       align-items: center;
       text-decoration: none;
       font-weight: 600;
-      color: $light-grey;
+      color: $mid-grey;
       font-size: 1.1em;
       :nth-child(1) {
         font-size: 1.6em;
@@ -86,7 +90,8 @@ $light-grey: #757373;
     display: flex;
     justify-content: space-around;
     a {
-      color: $light-grey;
+      color: $mid-grey;
+
       margin-left: 0.6em;
       padding: 0.5em 0.5em 0.2em 0.48em;
       transition: all 0.3s;

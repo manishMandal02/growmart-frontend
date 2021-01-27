@@ -1,6 +1,8 @@
 import React from 'react';
-import Footer from '../../Components/Footer/Footer';
 
+// import ProdcutPage from '../../Components/MainBody/ProdcutPage/ProdcutPage';
+
+import Footer from '../../Components/Footer/Footer';
 import Header from '../Header/Header';
 import MainBody from '../MainBody/MainBody';
 

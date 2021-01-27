@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 
 import {
   Search,
@@ -7,10 +7,18 @@ import {
 } from '@material-ui/icons';
 import { IconButton, Badge } from '@material-ui/core/';
 
+import Modal from '../../UI/Modal/Modal';
+import Login from '../../Auth/Login/Login';
 import classes from './SearchBar.module.scss';
 import Logo from '../../../Assets/Images/main-logo.png';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const [open, setOpen] = useState(false);
+
+  const handelModalState = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
   return (
     <div className={classes.NavBar}>
       <div className={classes.LeftContainer}>
@@ -29,19 +37,22 @@ const SearchBar = () => {
       </div>
 
       <div className={classes.RightContainer}>
-        <div className={classes.SingIn}>
+        <div className={classes.SingIn} onClick={handelModalState}>
           <PermIdentityOutlined className={classes.MenuIcons} />
           <div className={classes.TextWrapper}>
             <p className={classes.CaptionText}>Welcome</p>
             <p className={classes.MainText}>Log In/ Register</p>
           </div>
+          <Modal show={open} updateModalState={() => handelModalState()}>
+            <Login />
+          </Modal>
         </div>
 
         <div className={classes.ShoppingCart}>
           <Badge
             color='secondary'
             className={classes.CartBadge}
-            badgeContent={0}
+            badgeContent={6}
             showZero
             overlap='circle'
           >

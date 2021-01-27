@@ -2,7 +2,6 @@ import React from 'react';
 
 import { FaShippingFast } from 'react-icons/fa';
 import {
-  ExpandMoreOutlined,
   LocationOnOutlined,
   LiveHelpOutlined,
   LocalShippingOutlined,
@@ -11,7 +10,6 @@ import {
   LinkedIn,
 } from '@material-ui/icons';
 
-import { Divider } from '@material-ui/core';
 import classes from './TopHeaderMenu.module.scss';
 
 const TopHeaderMenu = () => {
@@ -25,7 +23,7 @@ const TopHeaderMenu = () => {
       </div>
 
       <div className={classes.RightWrapper}>
-        <div className={classes.ChangeMenu}>
+        {/* <div className={classes.ChangeMenu}>
           <div>
             USD
             <ExpandMoreOutlined />
@@ -34,14 +32,14 @@ const TopHeaderMenu = () => {
             ENG
             <ExpandMoreOutlined />
           </div>
-        </div>
-        <Divider
+        </div> */}
+        {/* <Divider
           className={classes.Divider}
           component='hr'
           flexItem='true'
           orientation='vertical'
           variant='fullWidth'
-        />
+        /> */}
         <div className={classes.TopMenuItemContainer}>
           <a href='/'>
             <LocationOnOutlined className={classes.MapIcon} />
@@ -56,13 +54,7 @@ const TopHeaderMenu = () => {
             <p>FAQ</p>
           </a>
         </div>
-        <Divider
-          className={classes.Divider}
-          component='hr'
-          flexItem='true'
-          orientation='vertical'
-          variant='fullWidth'
-        />
+        <div className={classes.Divider}></div>
         <div className={classes.SocialIconContainer}>
           <a href='/'>
             <LinkedIn />

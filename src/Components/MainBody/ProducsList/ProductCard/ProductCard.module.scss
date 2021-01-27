@@ -89,9 +89,9 @@
         align-items: flex-start;
         line-height: 0.9em;
         margin: 0;
-        color: $mid-grey;
         max-width: 85%;
         p {
+          color: $dark-grey;
           font-size: 0.85em;
           font-weight: 400;
           margin: 0.1em 0.25em 0em 0em;
@@ -125,14 +125,14 @@
       }
       .Title {
         font-size: 1.2em;
-        font-weight: 400;
+        font-weight: 600;
         color: $dark-grey;
         margin: 0.2em 0em 0.3em 0em;
       }
       .Price {
         font-size: 1.1em;
         margin-bottom: 0.4;
-        font-weight: 500;
+        font-weight: 600;
         color: $dark-grey;
       }
     }

@@ -1,0 +1,23 @@
+@import '../../../App.scss';
+
+.Login {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  .LeftContainer {
+    padding: 2em;
+    background: rgb(42, 227, 134);
+    background: linear-gradient(
+      0deg,
+      rgba(42, 227, 134, 1) 11%,
+      rgba(0, 180, 239, 1) 99%
+    );
+    img {
+      width: 60%;
+    }
+  }
+
+  .RightContainer {
+    display: flex;
+  }
+}
