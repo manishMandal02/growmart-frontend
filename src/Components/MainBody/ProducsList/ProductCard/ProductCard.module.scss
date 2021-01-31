@@ -1,6 +1,9 @@
 @import '../../../../App.scss';
 
 .ProductCard {
+  cursor: pointer;
+
+  text-decoration: none;
   border-radius: 0.2em;
   display: flex;
   max-height: 40%;
@@ -19,7 +22,7 @@
   }
   .CardTopContainer {
     height: 25vh;
-    background-size: 70%;
+    background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 

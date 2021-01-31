@@ -12,7 +12,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className={classes.Footer}>
+    <footer className={classes.Footer}>
       <div className={classes.FooterTop}>
         <div className={classes.FooterInfo}>
           <h4>Customer Service</h4>
@@ -79,7 +79,7 @@ const Footer = () => {
       <div className={classes.FooterBottom}>
         <p>Manish Mandal. © 2021. All Rights Reserved.</p>
       </div>
-    </div>
+    </footer>
   );
 };
 

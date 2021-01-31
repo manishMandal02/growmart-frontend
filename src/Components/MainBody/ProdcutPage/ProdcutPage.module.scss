@@ -16,16 +16,18 @@
         width: 80%;
       }
       span {
+        margin-top: 0.4em;
         img {
-          border: 1px solid $light-grey;
+          border: 2px solid $mid-grey;
           width: 15%;
         }
       }
     }
 
     .ProdcutInfo {
+      width: 75%;
       > p:nth-child(1) {
-        font-size: 2.4em;
+        font-size: 2.2em;
         font-weight: 600;
         color: $dark-grey;
       }
@@ -51,11 +53,19 @@
         padding-bottom: 0.4em;
         margin-bottom: 0.8em;
         border-bottom: 1px solid $light-grey;
-        max-width: 25%;
+        max-width: 30%;
+        display: flex;
+        align-items: center;
+        > span:nth-child(2) {
+          font-size: 0.9em;
+          margin-left: 0.3em;
+          color: $dark-grey;
+          font-weight: 600;
+        }
       }
 
       .Price {
-        padding: 0.5em 1.2em 0.5em 0.9em;
+        padding: 0.5em 1.2em 0.5em 1.1em;
         background-color: #e7ffecee;
         max-width: 12%;
         border-radius: 0.4em;

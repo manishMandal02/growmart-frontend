@@ -8,7 +8,6 @@ const Modal = (props) => {
     if (modal && !props.show) {
       document.body.appendChild(modal);
     }
-    console.log(modal);
   }, [props.show]);
 
   return props.show ? (

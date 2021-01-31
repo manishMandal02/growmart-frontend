@@ -5,11 +5,11 @@ import TopHeaderMenu from '../../Components/Header/TopHeaderMenu/TopHeaderMenu';
 
 const Header = () => {
   return (
-    <>
+    <header>
       <TopHeaderMenu />
       <SearchBar />
       <NavBar />
-    </>
+    </header>
   );
 };
 

@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Search,
@@ -22,9 +23,9 @@ const SearchBar = (props) => {
   return (
     <div className={classes.NavBar}>
       <div className={classes.LeftContainer}>
-        <a href='/'>
+        <Link to='/'>
           <img src={Logo} alt='GorwMart Logo' />
-        </a>
+        </Link>
 
         <div className={classes.Search}>
           <input type='text' placeholder='search...' />

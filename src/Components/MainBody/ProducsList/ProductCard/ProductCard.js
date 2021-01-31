@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { LocalMallOutlined, FavoriteBorderOutlined } from '@material-ui/icons';
 import {} from '@material-ui/core';
@@ -7,8 +8,18 @@ import { Rating } from '@material-ui/lab';
 import classes from './ProductCard.module.scss';
 
 const ProductCard = (props) => {
+  const history = useHistory();
+
+  const productClickHandler = (e) => {
+    e.stopPropagation();
+    history.push(`/product/${props.id}`);
+  };
   return (
-    <div className={classes.ProductCard}>
+    <div
+      to={`/product/${props.id}`}
+      onClick={productClickHandler}
+      className={classes.ProductCard}
+    >
       <div
         className={classes.CardTopContainer}
         style={{
