@@ -1,13 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { LocalMallOutlined, FavoriteBorderOutlined } from '@material-ui/icons';
-import {} from '@material-ui/core';
-import { Rating } from '@material-ui/lab';
+import { Snackbar } from '@material-ui/core';
+import { Alert, Rating } from '@material-ui/lab';
 
 import classes from './ProductCard.module.scss';
+import { addItemToCart } from '../../../../Store/Actions/CartActions/CartActions';
 
+//#############
 const ProductCard = (props) => {
+  //state
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarOpen2, setSnackbarOpen2] = useState(false);
+
+  // Handle snackbar state
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+  const handleSnackbarClose2 = () => {
+    setSnackbarOpen(false);
+  };
+  const dispatch = useDispatch();
+
+  //Handler add to cart click
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    dispatch(addItemToCart(props.id));
+    setSnackbarOpen(true);
+  };
+  //Handler add to Likes click
+  const handleAddToLikes = (e) => {
+    e.stopPropagation();
+    setSnackbarOpen2(true);
+  };
   const history = useHistory();
 
   const productClickHandler = (e) => {
@@ -15,11 +42,7 @@ const ProductCard = (props) => {
     history.push(`/product/${props.id}`);
   };
   return (
-    <div
-      to={`/product/${props.id}`}
-      onClick={productClickHandler}
-      className={classes.ProductCard}
-    >
+    <div onClick={productClickHandler} className={classes.ProductCard}>
       <div
         className={classes.CardTopContainer}
         style={{
@@ -29,7 +52,10 @@ const ProductCard = (props) => {
         <div className={classes.CardTopWrapper}>
           <div className={classes.CardTop}>
             {/* <div className={classes.OffTagIcon}></div> */}
-            <div className={classes.AddToCardIcon}>
+            <div
+              className={classes.AddToCardIcon}
+              onClick={(e) => handleAddToCart(e)}
+            >
               <LocalMallOutlined />
             </div>
           </div>
@@ -46,7 +72,10 @@ const ProductCard = (props) => {
             <p>{'#Cooking'}</p>
             <p>{'#Vegetable'}</p>
           </div>
-          <div className={classes.LikeIcon}>
+          <div
+            className={classes.LikeIcon}
+            onClick={(e) => handleAddToLikes(e)}
+          >
             <FavoriteBorderOutlined />
           </div>
         </div>
@@ -65,6 +94,24 @@ const ProductCard = (props) => {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert severity='success' variant='filled'>
+          {props.title} <strong>Added to Cart</strong>
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={snackbarOpen2}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose2}
+      >
+        <Alert severity='success' variant='filled'>
+          {props.title} <strong>Added to Whishlist</strong>
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

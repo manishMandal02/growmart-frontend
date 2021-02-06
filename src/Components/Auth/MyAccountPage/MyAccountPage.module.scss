@@ -1,0 +1,121 @@
+@import '../../../index.scss';
+
+.Container {
+  display: flex;
+  padding: 4em 1em;
+  justify-content: center;
+  background-color: $white-grey;
+  .LeftContainer {
+    display: flex;
+    flex-direction: column;
+    .WelcomeCard {
+      border-radius: 0.2em;
+      background-color: #ffff;
+      padding: 0.6em 0.8em;
+      display: flex;
+      box-shadow: $shadow2;
+
+      svg {
+        font-size: 3em;
+        color: $primary-color;
+      }
+      span {
+        margin: 0.2em;
+        > p:nth-child(1) {
+          font-size: 0.8em;
+          margin-bottom: -0.2em;
+        }
+        > p:nth-child(2) {
+          font-size: 1.2em;
+          font-weight: 600;
+        }
+      }
+    }
+    .SideMenu {
+      box-shadow: $shadow2;
+      margin-top: 1em;
+      background-color: #ffff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0.2em;
+
+      a {
+        display: flex;
+        align-items: center;
+        padding: 0.8em 0.6em;
+        text-decoration: none;
+        color: $dark-grey;
+        font-size: 1em;
+        font-weight: 600;
+        outline: none;
+        svg {
+          font-size: 2em;
+          color: $primary-color;
+          margin-right: 0.2em;
+        }
+        &:hover {
+          background-color: #f8f8f8;
+        }
+        &:focus {
+          background-color: #f8f8f8;
+        }
+      }
+    }
+  }
+
+  .RightContainer {
+    margin-left: 1em;
+    display: flex;
+    width: 35%;
+    background-color: #ffff;
+    box-shadow: $shadow2;
+    border-radius: 0.2em;
+
+    .AccoutTab {
+      width: 90%;
+      padding: 0.2em 1.5em 1em 1.5em;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.6em;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+
+        p {
+          margin: 0.8em 0 0.3em 0;
+          font-size: 1.2em;
+          font-weight: 600;
+        }
+        input {
+          font-size: 1em;
+          padding: 0.6em 0.6em;
+          outline: none;
+          width: 90%;
+          border: 1px solid $light-grey;
+        }
+        button {
+          margin: 1em 0 0.4em 0;
+          cursor: pointer;
+          outline: none;
+          padding: 0.6em 1.2em;
+          border: none;
+          border-radius: 0.2em;
+          font-size: 1em;
+          font-weight: 600;
+          color: #ffff;
+          background-color: #1cc576;
+          &:hover {
+            transform: scale(1.02);
+          }
+        }
+      }
+    }
+  }
+}

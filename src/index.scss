@@ -9,7 +9,7 @@ body {
   overflow-y: scroll;
 
   scrollbar-width: thin;
-  scrollbar-color: $dark-grey $light-grey;
+  scrollbar-color: $mid-grey $light-grey;
 }
 * {
   margin: 0;
@@ -18,15 +18,14 @@ body {
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 *::-webkit-scrollbar-track {
-  background: $light-grey;
+  background: $white-grey;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: $dark-grey;
+  background-color: #cececed2;
   border-radius: 20px;
-  border: 3px solid $light-grey;
 }

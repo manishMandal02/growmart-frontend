@@ -1,9 +1,8 @@
-import { React, useState } from 'react';
+/* eslint-disable no-restricted-globals */
+import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import classes from './Login.module.scss';
-import Image from '../../../Assets/Images/login-bg.png';
+import classes from './LoginPage.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   IconButton,
   InputAdornment,
@@ -11,44 +10,47 @@ import {
   Input,
   InputLabel,
   FormControl,
+  CircularProgress,
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { FcGoogle } from 'react-icons/fc';
 import { userLogin } from '../../../Store/Actions/UsersActions/UserActions';
+import { Alert } from '@material-ui/lab';
 
-// ############
-// ############
-const Login = (props) => {
-  //Handels visiblity on modal
-  const [visible, setVisible] = useState(false);
-  const visiblityHandler = () => {
-    visible ? setVisible(false) : setVisible(true);
-  };
-  //form Input
+//##########
+const LoginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [visible, setVisible] = useState(false);
 
-  const dispatch = useDispatch(props);
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.user.login);
+  const { loading, userInfo, error } = login;
+
   const redirect = history.search ? history.search.split('=')[1] : '/';
+
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [dispatch, userInfo, props.history, redirect]);
 
   const loginSubmitHandler = (e) => {
     console.log(email, password);
     e.preventDefault();
     dispatch(userLogin({ email, password }));
-    history.push(redirect);
+  };
+
+  const visiblityHandler = () => {
+    visible ? setVisible(false) : setVisible(true);
   };
 
   return (
-    <div className={classes.Login}>
-      <div className={classes.LeftContainer}>
-        <img src={Image} alt='Background' />
-      </div>
-
+    <div className={classes.LoginPage}>
       <div className={classes.RightContainer}>
-        <h1>Welcome Back</h1>
+        <h1>Welcome back</h1>
         <p>Happy Shopping...</p>
-        {/* {error ? <Alert severity='error'>{error}</Alert> : null} */}
+        {error ? <Alert severity='error'>{error}</Alert> : null}
         <form>
           <TextField
             id='standard-basic'
@@ -87,17 +89,16 @@ const Login = (props) => {
               }
             />
           </FormControl>
-          <div>
+          {/* <div>
             <Link to='#'>Forgot Your Password?</Link>
-          </div>
+          </div> */}
 
-          <button type='submit' onClick={(e) => loginSubmitHandler(e)}>
-            login
-            {/* {loading ? (
+          <button type='submit' onClick={loginSubmitHandler}>
+            {loading ? (
               <CircularProgress color='white' size={30} thickness={4} />
             ) : (
               'Login'
-            )} */}
+            )}
           </button>
           <p>-------OR-------</p>
         </form>
@@ -116,4 +117,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default LoginPage;

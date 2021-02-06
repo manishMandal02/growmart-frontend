@@ -1,18 +1,25 @@
-import * as actionTypes from '../Actions/ActionTypes';
+import {
+  FETCH_PRODUCTSLIST_ERROR,
+  FETCH_PRODUCTSLIST_REQUEST,
+  FETCH_PRODUCTSLIST_SUCCESS,
+  FETCH_PRODUCT_ERROR,
+  FETCH_PRODUCT_REQUEST,
+  FETCH_PRODUCT_SUCCESS,
+} from '../../Actions/ActionTypes';
 
 export const productsListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_PRODUCTSLIST_REQUEST:
+    case FETCH_PRODUCTSLIST_REQUEST:
       return {
         products: [],
         loading: true,
       };
-    case actionTypes.FETCH_PRODUCTSLIST_SUCCESS:
+    case FETCH_PRODUCTSLIST_SUCCESS:
       return {
         loading: false,
         products: action.payload,
       };
-    case actionTypes.FETCH_PRODUCTSLIST_ERROR:
+    case FETCH_PRODUCTSLIST_ERROR:
       return {
         loading: false,
         error: action.payload,
@@ -22,22 +29,22 @@ export const productsListReducer = (state = { products: [] }, action) => {
   }
 };
 
-export const productReducer = (
+export const getproductReducer = (
   state = { product: { reviews: [] } },
   action
 ) => {
   switch (action.type) {
-    case actionTypes.FETCH_PRODUCT_REQUEST:
+    case FETCH_PRODUCT_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case actionTypes.FETCH_PRODUCT_SUCCESS:
+    case FETCH_PRODUCT_SUCCESS:
       return {
         loading: false,
         product: action.payload,
       };
-    case actionTypes.FETCH_PRODUCT_ERROR:
+    case FETCH_PRODUCT_ERROR:
       return {
         loading: false,
         error: action.payload,

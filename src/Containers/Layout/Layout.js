@@ -1,19 +1,26 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import ProdcutPage from '../../Components/MainBody/ProdcutPage/ProdcutPage';
-
-import Footer from '../../Components/Footer/Footer';
 import Header from '../Header/Header';
+import Footer from '../../Components/Footer/Footer';
 import MainBody from '../MainBody/MainBody';
+import ProdcutPage from '../../Components/MainBody/ProdcutPage/ProdcutPage';
+import RegisterPage from '../../Components/Auth/RegisterPage/RegisterPage';
+import LoginPage from '../../Components/Auth/LoginPage/LoginPage';
+import MyAccountPage from '../../Components/Auth/MyAccountPage/MyAccountPage';
+import CartPage from '../../Components/Auth/CartPage/CartPage';
 
 const Layout = () => {
   return (
     <Router>
       <Header />
       <main>
-        <Route path='/' component={MainBody} exact />
+        <Route path='/my/:keyword' component={MyAccountPage} />
+        <Route path='/register' component={RegisterPage} />
+        <Route path='/user/cart' component={CartPage} />
+        <Route path='/login' component={LoginPage} />
         <Route path='/product/:id' component={ProdcutPage} />
+        <Route path='/' component={MainBody} exact />
       </main>
       <Footer />
     </Router>

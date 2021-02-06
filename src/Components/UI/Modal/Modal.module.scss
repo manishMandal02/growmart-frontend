@@ -12,20 +12,19 @@
 
 .Modal {
   position: fixed;
-  z-index: 500;
+  z-index: 1000;
   background-color: white;
   margin: auto auto;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  top: 25%;
   box-sizing: border-box;
   transition: all 0.2s ease-out;
 }
 
 @media (min-width: 600px) {
   .Modal {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

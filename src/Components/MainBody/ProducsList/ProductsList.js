@@ -5,12 +5,12 @@ import { Alert, AlertTitle, Pagination } from '@material-ui/lab';
 
 import classes from './ProductsList.module.scss';
 import ProductCard from './ProductCard/ProductCard.js';
-import * as actionCreators from '../../../Store/Actions/index';
+import * as actionCreators from '../../../Store/Actions/ProductsActions/ProductActions';
 
 const ProductsList = () => {
   const dispatch = useDispatch();
 
-  const productsList = useSelector((state) => state.productsList);
+  const productsList = useSelector((state) => state.product.productsList);
   const { loading, products, error } = productsList;
 
   useEffect(() => {

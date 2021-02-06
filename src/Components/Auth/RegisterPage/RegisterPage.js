@@ -1,9 +1,8 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import classes from './Login.module.scss';
-import Image from '../../../Assets/Images/login-bg.png';
+import classes from './RegisterPage.module.scss';
+// import Image from '../../../Assets/Imageslogin-bg.png';
 import {
   IconButton,
   InputAdornment,
@@ -11,45 +10,62 @@ import {
   Input,
   InputLabel,
   FormControl,
+  CircularProgress,
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { FcGoogle } from 'react-icons/fc';
-import { userLogin } from '../../../Store/Actions/UsersActions/UserActions';
+import { Alert } from '@material-ui/lab';
+import { userRegister } from '../../../Store/Actions/UsersActions/UserActions';
 
 // ############
-// ############
-const Login = (props) => {
-  //Handels visiblity on modal
+const Register = (props) => {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
+
   const visiblityHandler = () => {
     visible ? setVisible(false) : setVisible(true);
   };
-  //form Input
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const dispatch = useDispatch(props);
-  const history = useHistory();
-  const redirect = history.search ? history.search.split('=')[1] : '/';
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.user.login);
+  const { loading, userInfo, error } = login;
 
-  const loginSubmitHandler = (e) => {
+  const redirect = props.history.search
+    ? props.history.search.split('=')[1]
+    : '/';
+
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [dispatch, userInfo, props.history, redirect]);
+
+  const registerSubmitHandler = (e) => {
     console.log(email, password);
     e.preventDefault();
-    dispatch(userLogin({ email, password }));
-    history.push(redirect);
+    dispatch(userRegister({ name, email, password }));
   };
 
   return (
-    <div className={classes.Login}>
-      <div className={classes.LeftContainer}>
-        <img src={Image} alt='Background' />
-      </div>
-
+    <div className={classes.Register}>
       <div className={classes.RightContainer}>
-        <h1>Welcome Back</h1>
+        <h1>Welcome | Register here</h1>
         <p>Happy Shopping...</p>
-        {/* {error ? <Alert severity='error'>{error}</Alert> : null} */}
+        {error ? <Alert severity='error'>{error}</Alert> : null}
         <form>
+          <TextField
+            id='standard-basic'
+            label='Name'
+            required
+            autoFocus
+            type='text'
+            placeholder='Enter Your Name'
+            fullWidth
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
           <TextField
             id='standard-basic'
             label='E-mail'
@@ -87,27 +103,26 @@ const Login = (props) => {
               }
             />
           </FormControl>
-          <div>
+          {/* <div>
             <Link to='#'>Forgot Your Password?</Link>
-          </div>
+          </div> */}
 
-          <button type='submit' onClick={(e) => loginSubmitHandler(e)}>
-            login
-            {/* {loading ? (
-              <CircularProgress color='white' size={30} thickness={4} />
+          <button type='submit' onClick={(e) => registerSubmitHandler(e)}>
+            {loading ? (
+              <CircularProgress color='white' size={26} thickness={4} />
             ) : (
-              'Login'
-            )} */}
+              'Register'
+            )}
           </button>
           <p>-------OR-------</p>
         </form>
         <button>
-          <FcGoogle /> Login With Google
+          <FcGoogle /> Register With Google
         </button>
         <p>
-          Don't have an account?{' '}
-          <Link onClick={props.closeModal} to='/register'>
-            Register here
+          Already have an account?
+          <Link onClick={props.closeModal} to='/login'>
+            Login
           </Link>
         </p>
       </div>
@@ -116,4 +131,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Register;

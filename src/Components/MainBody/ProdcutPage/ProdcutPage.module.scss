@@ -116,10 +116,52 @@
       }
       .ButtonWrapper {
         display: flex;
-        padding: 1.6em 0.5em;
-        border-top: 1px solid $light-grey;
+        padding: 1.2em 0em;
+        border-top: 2px solid $light-grey;
         justify-content: flex-start;
+        .Quantity {
+          border: 3px solid $light-grey;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 10%;
+          margin-left: 0.8em;
+          margin-right: 0.6em;
+          overflow: hidden;
+          padding: 0 1.4em;
+          span {
+            margin-bottom: -0.2em;
+            svg {
+              font-size: 1.8em;
+              cursor: pointer;
+              padding: 0.11em;
+              border-radius: 1em;
+              color: $dark-grey;
+              &:hover {
+                background-color: $white-grey;
+              }
+            }
+          }
+
+          input {
+            margin-bottom: -0.1em;
+            text-align: center;
+            max-width: 50%;
+            margin: 0 0.1em;
+            font-size: 1.6em;
+            font-weight: 500;
+            height: 100%;
+            outline: none;
+            text-decoration: none;
+            border: none;
+            border-left: 3px solid $light-grey;
+            border-right: 3px solid $light-grey;
+          }
+          > svg:nth-child(2) {
+          }
+        }
         button {
+          margin-left: 2em;
           cursor: pointer;
           border: none;
           outline: none;
@@ -149,8 +191,10 @@
             color: #fff;
           }
         }
-        > button:nth-child(2) {
-          margin-left: 2em;
+        > button:nth-child(3) {
+          padding: 0.8em 0.8em;
+          margin-left: 1em;
+
           background-image: linear-gradient(
             to right,
             #f857a6 0%,

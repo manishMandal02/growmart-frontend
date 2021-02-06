@@ -1,8 +1,11 @@
 @import '../../../App.scss';
 
 .NavBar {
+  background-color: #ffffff;
+  max-width: 100%;
+  top: 0;
   display: flex;
-  padding: 0.6em 2.8em;
+  padding: 0.2em 2.8em;
   border: 0.04em solid $light-grey;
   justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
