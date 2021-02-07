@@ -20,7 +20,7 @@ const ProductCard = (props) => {
     setSnackbarOpen(false);
   };
   const handleSnackbarClose2 = () => {
-    setSnackbarOpen(false);
+    setSnackbarOpen2(false);
   };
   const dispatch = useDispatch();
 

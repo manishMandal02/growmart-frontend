@@ -9,6 +9,7 @@ import RegisterPage from '../../Components/Auth/RegisterPage/RegisterPage';
 import LoginPage from '../../Components/Auth/LoginPage/LoginPage';
 import MyAccountPage from '../../Components/Auth/MyAccountPage/MyAccountPage';
 import CartPage from '../../Components/Auth/CartPage/CartPage';
+import OrderPage from '../../Components/Auth/OrderPage/OrderPage';
 
 const Layout = () => {
   return (
@@ -16,8 +17,9 @@ const Layout = () => {
       <Header />
       <main>
         <Route path='/my/:keyword' component={MyAccountPage} />
+        <Route path='/user/order/:key?' component={OrderPage} />
+        <Route path='/user/cart' component={CartPage} exact />
         <Route path='/register' component={RegisterPage} />
-        <Route path='/user/cart' component={CartPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/product/:id' component={ProdcutPage} />
         <Route path='/' component={MainBody} exact />

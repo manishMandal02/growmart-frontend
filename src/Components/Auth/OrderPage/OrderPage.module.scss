@@ -1,0 +1,140 @@
+@import '../../../index.scss';
+
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: $white-grey;
+  max-height: 70%;
+  padding: 1.6em 1em;
+  .LeftWrapper {
+    width: 70%;
+    max-height: 75vh;
+    background-color: #ffff;
+    box-shadow: $shadow2;
+    display: flex;
+    flex-direction: column;
+    .Stepper {
+      > div {
+        > div {
+          > span {
+            > span {
+              > svg {
+                > circle {
+                  padding: 0.6em;
+                }
+                > text {
+                  fill: #ffff;
+                  font-size: 0.58em;
+                  font-weight: 600;
+                }
+              }
+            }
+            > span:nth-child(2) {
+              > span {
+                font-size: 1.1em;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+    .LeftContainer {
+      background-color: #ffff;
+      overflow-x: hidden;
+      box-shadow: $shadow2;
+      overflow-y: scroll;
+      max-height: 100%;
+    }
+  }
+  .RightWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1.5em;
+    width: 25%;
+    .RightContainer {
+      width: 100%;
+      background-color: #ffff;
+      box-shadow: $shadow2;
+      > p:nth-child(1) {
+        padding: 1em;
+        font-size: 1.2em;
+        color: $mid-grey;
+        font-weight: 600;
+        border-bottom: 1px solid $light-grey;
+      }
+      > div:nth-child(2) {
+        padding: 1em 1.6em 0.2em 1.6em;
+        p {
+          margin-bottom: 0.76em;
+          font-size: 1.16em;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          span {
+            font-weight: 600;
+            color: $primary-color;
+          }
+        }
+        > p:nth-child(4) {
+          font-size: 1.2em;
+          padding: 0.6em 0;
+          border-top: 1.6px dashed $light-grey;
+          border-bottom: 1.6px dashed $light-grey;
+          font-weight: 600;
+        }
+      }
+      button {
+        border-radius: 1px;
+        width: 100%;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: #ffff;
+        padding: 0.8em 0.8em;
+        font-size: 1.3em;
+        font-weight: 600;
+        transition: all 0.2s;
+        background-image: linear-gradient(
+          to right,
+          $primary-color 0%,
+          #93f9b9 0%,
+          #38b88b 100%
+        );
+        &:hover {
+          //   box-shadow: $shadow1;
+          transform: scale(1.016);
+          box-shadow: $shadow2;
+        }
+        &:disabled {
+          cursor: not-allowed;
+          background-color: $light-grey;
+          color: #fffefe;
+          background-image: none;
+          &:hover {
+            transform: scale(1);
+            box-shadow: none;
+          }
+        }
+      }
+    }
+    > span:nth-child(2) {
+      margin-top: 1.2em;
+      display: flex;
+      align-items: center;
+      svg {
+        font-size: 2em;
+        margin-right: 0.1em;
+        color: $mid-grey;
+      }
+      p {
+        font-size: 1em;
+        color: $mid-grey;
+        font-weight: 600;
+      }
+    }
+  }
+}

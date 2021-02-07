@@ -23,6 +23,7 @@ export const loginReducer = (state = {}, action) => {
       };
     case USER_LOGIN_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
@@ -48,6 +49,7 @@ export const updateUserReducer = (state = {}, action) => {
       };
     case UPDATE_USER_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };

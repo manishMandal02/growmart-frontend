@@ -2,51 +2,58 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import classes from './CartPage.module.scss';
-import ProductCard from './ProductCard/CartProductCard';
-import { CallMade, VerifiedUser } from '@material-ui/icons';
-import { Snackbar } from '@material-ui/core';
+import classes from './OrderPage.module.scss';
+import { VerifiedUser } from '@material-ui/icons';
+import { Snackbar, Step, StepLabel, Stepper } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 //###########
-const CartPage = ({ history }) => {
+const OrderPage = ({ history }) => {
+  //Redirect
+  const { userInfo } = useSelector((state) => state.user);
+
   //State
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  //Stepper
+  const [activeStep, setActiveStep] = useState(1);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
   // Handle snackbar state
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
-  const handleSnackbarOpen = () => {
-    setSnackbarOpen(true);
-  };
 
   const { cartItems } = useSelector((state) => state.cart);
+  //JSX return
   return (
     <div className={classes.Container}>
       <div className={classes.LeftWrapper}>
-        <div className={classes.Heading}>My Cart ({cartItems.length})</div>
+        <div className={classes.Stepper}>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            <Step>
+              <StepLabel>SignIn</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Shipping Address</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Payment Method</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Place Order</StepLabel>
+            </Step>
+          </Stepper>
+        </div>
         <span className={classes.LeftContainer}>
-          {cartItems.length !== 0 ? (
-            cartItems.map((p) => (
-              <ProductCard
-                name={p.name}
-                image={p.image}
-                brand={p.brand}
-                price={p.price}
-                quantity={p.qty}
-                id={p.product}
-                snackbar={handleSnackbarOpen}
-              />
-            ))
-          ) : (
-            <p className={classes.EmptyCartMessage}>
-              Your Shopping Cart is Empty |
-              <Link to='/'>
-                Start Shopping <CallMade />
-              </Link>
-            </p>
-          )}
+          <p>hi</p>
         </span>
       </div>
       <Snackbar
@@ -55,7 +62,7 @@ const CartPage = ({ history }) => {
         onClose={handleSnackbarClose}
       >
         <Alert severity='success' variant='filled'>
-          <strong>Item Successfully Removed from your Cart</strong>
+          <strong>Hello</strong>
         </Alert>
       </Snackbar>
       <div className={classes.RightWrapper}>
@@ -80,7 +87,7 @@ const CartPage = ({ history }) => {
           </div>
           <button
             disabled={cartItems.length <= 0}
-            onClick={() => history.push('/login?redirect=user/order')}
+            onClick={() => history.push('/user/order')}
           >
             Checkout
           </button>
@@ -94,4 +101,4 @@ const CartPage = ({ history }) => {
   );
 };
 
-export default CartPage;
+export default OrderPage;

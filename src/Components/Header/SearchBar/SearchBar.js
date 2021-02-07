@@ -10,6 +10,7 @@ import {
   AccountCircle,
   ListAlt,
   ExitToApp,
+  ShoppingCartOutlined,
 } from '@material-ui/icons';
 import { IconButton, Badge } from '@material-ui/core/';
 import Modal from '../../UI/Modal/Modal';
@@ -93,6 +94,10 @@ const SearchBar = (props) => {
                   <ListAlt />
                   My Orders
                 </Link>
+                <Link to='/user/cart'>
+                  <ShoppingCartOutlined />
+                  My cart
+                </Link>
                 <Link to='#' onClick={(e) => logoutHandler(e)}>
                   <ExitToApp />
                   Logout
@@ -121,7 +126,7 @@ const SearchBar = (props) => {
             showZero
             overlap='circle'
           >
-            <LocalMallOutlined className={classes.MenuIcons} />
+            <ShoppingCartOutlined className={classes.MenuIcons} />
           </Badge>
           <div className={classes.TextWrapper}>
             <p className={classes.MainText}>Cart</p>

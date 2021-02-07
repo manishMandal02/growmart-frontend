@@ -1,4 +1,10 @@
-import { AccountCircle, ExitToApp, ListAlt, Person } from '@material-ui/icons';
+import {
+  AccountCircle,
+  ExitToApp,
+  ListAlt,
+  Person,
+  ShoppingCartOutlined,
+} from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +21,6 @@ import { CircularProgress, Snackbar } from '@material-ui/core';
 const MyAccountPage = (props) => {
   //REDIRECT if user not loggedIn
   const history = useHistory();
-
   const { userInfo } = useSelector((state) => state.user.login);
   if (!userInfo) {
     history.push('/login');
@@ -23,18 +28,20 @@ const MyAccountPage = (props) => {
 
   //State
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [inputDisabled, setInputDisabled] = useState(true);
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
     if (userInfo) {
       setEmail(userInfo.email);
       setName(userInfo.name);
     }
-  }, [userInfo]);
+  }, [userInfo, history]);
   const dispatch = useDispatch();
   // const location = useLocation();
   const logoutHandler = () => {
@@ -57,9 +64,7 @@ const MyAccountPage = (props) => {
     }
   }, [props.match.params.keyword, userInfo]);
 
-  //edit profile button click
   const { loading, user, error } = useSelector((state) => state.user.update);
-  console.log(user);
   //handles update profile click
   const updateProfileHandler = (e) => {
     e.stopPropagation();
@@ -67,9 +72,7 @@ const MyAccountPage = (props) => {
     setInputDisabled(true);
     if (name !== userInfo.name || email !== userInfo.email || password !== '') {
       dispatch(userUpdateAction({ name, email, password }));
-      if (user) {
-        setSnackbarOpen(true);
-      }
+      setSnackbarOpen(true);
     }
   };
 
@@ -80,7 +83,7 @@ const MyAccountPage = (props) => {
           <Person />
           <span>
             <p>Hello,</p>
-            <p>{name}</p>
+            <p>{userInfo.name}</p>
           </span>
         </div>
         <div className={classes.SideMenu}>
@@ -90,6 +93,10 @@ const MyAccountPage = (props) => {
           <Link to='/my/orders' id='user-orders'>
             <ListAlt />
             My Orders
+          </Link>
+          <Link to='/user/cart' id='user-cart'>
+            <ShoppingCartOutlined />
+            My Cart
           </Link>
           <Link to='/' onClick={logoutHandler}>
             <ExitToApp />
@@ -124,7 +131,10 @@ const MyAccountPage = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {!inputDisabled ? (
-                <button onClick={(e) => updateProfileHandler(e)}>
+                <button
+                  className={classes.EditProfileButton}
+                  onClick={(e) => updateProfileHandler(e)}
+                >
                   {loading && !error ? (
                     <CircularProgress color='white' size={30} thickness={6} />
                   ) : (
@@ -145,7 +155,7 @@ const MyAccountPage = (props) => {
 
               <Snackbar
                 open={snackbarOpen}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 onClose={handleSnackbar}
               >
                 {error ? (
