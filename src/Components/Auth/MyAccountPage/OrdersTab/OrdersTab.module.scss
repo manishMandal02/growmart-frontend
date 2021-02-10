@@ -1,0 +1,59 @@
+@import '../../../../App.scss';
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  > p {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 0.8em;
+    text-decoration: underline;
+  }
+  .OrdersList {
+    color: $primary-color;
+    table {
+      border: 2px solid $primary-color;
+      thead {
+        background-color: $white-grey;
+
+        tr {
+          th {
+            background-color: $primary-color;
+            color: #ffff;
+            font-weight: 600;
+            font-size: 1.1em;
+          }
+        }
+      }
+      tbody {
+        th {
+          border-bottom: 1px solid $primary-color;
+        }
+        td {
+          border-bottom: 1px solid $primary-color;
+          font-size: 1em;
+        }
+        .DetailsButton {
+          background-color: $blue-color;
+          padding: 0.6em 0.8em;
+          color: #ffff;
+          width: 100%;
+          font-size: 0.8em;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          border-radius: 0.2em;
+          font-weight: 600;
+          transition: all 0.15s;
+          &:hover {
+            transform: scale(1.06);
+          }
+        }
+      }
+    }
+  }
+}

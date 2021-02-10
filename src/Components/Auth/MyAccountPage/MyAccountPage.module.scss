@@ -2,11 +2,13 @@
 
 .Container {
   display: flex;
-  padding: 4em 1em;
-  justify-content: center;
+  padding: 3em 1em 3em 6em;
+  justify-content: flex-start;
   background-color: $white-grey;
+  height: 70vh;
   .LeftContainer {
     display: flex;
+    width: 20%;
     flex-direction: column;
     .WelcomeCard {
       border-radius: 0.2em;
@@ -15,25 +17,25 @@
       display: flex;
       box-shadow: $shadow2;
 
-      svg {
-        font-size: 3em;
+      > svg {
+        font-size: 3.6em;
         color: $primary-color;
       }
-      span {
-        margin: 0.2em;
+      > span {
+        margin: 0.4em 0 0 0;
         > p:nth-child(1) {
-          font-size: 0.8em;
+          font-size: 1em;
           margin-bottom: -0.2em;
         }
         > p:nth-child(2) {
-          font-size: 1.2em;
+          font-size: 1.3em;
           font-weight: 600;
         }
       }
     }
     .SideMenu {
       box-shadow: $shadow2;
-      margin-top: 1em;
+      margin-top: 0.8em;
       background-color: #ffff;
       display: flex;
       flex-direction: column;
@@ -45,11 +47,11 @@
         padding: 0.8em 0.6em;
         text-decoration: none;
         color: $dark-grey;
-        font-size: 1em;
+        font-size: 1.26em;
         font-weight: 600;
         outline: none;
         svg {
-          font-size: 2em;
+          font-size: 1.7em;
           color: $primary-color;
           margin-right: 0.2em;
         }
@@ -66,17 +68,26 @@
   .RightContainer {
     margin-left: 1em;
     display: flex;
-    width: 35%;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60%;
     background-color: #ffff;
     box-shadow: $shadow2;
     border-radius: 0.2em;
-
+    padding: 0.6em;
     .AccoutTab {
       width: 90%;
       padding: 0.2em 1.5em 1em 1.5em;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
+      flex-direction: column;
+      > p:nth-child(1) {
+        text-align: center;
+        font-size: 1.6em;
+        font-weight: 600;
+        word-spacing: 0.2em;
+        letter-spacing: 0.04em;
+      }
       > span {
         display: flex;
         align-items: center;
@@ -87,7 +98,7 @@
       form {
         display: flex;
         flex-direction: column;
-
+        width: 60%;
         p {
           margin: 0.8em 0 0.3em 0;
           font-size: 1.2em;
@@ -101,10 +112,11 @@
           border: 1px solid $light-grey;
         }
         button {
-          margin: 1em 0 0.4em 0;
+          width: 50%;
+          margin: 1.6em 0 0.4em 0;
           cursor: pointer;
           outline: none;
-          padding: 0.6em 1.2em;
+          padding: 0.8em 1.2em;
           border: none;
           border-radius: 0.2em;
           font-size: 1em;
@@ -115,10 +127,49 @@
             transform: scale(1.02);
           }
         }
-        .EditProfileButton {
+        .UpdateProfileButton {
           background-color: $blue-color;
         }
       }
+    }
+
+    .AddressTab {
+      width: 100%;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      > p {
+        font-size: 1.2em;
+        font-weight: 600;
+      }
+      > button {
+        margin-top: 0.6em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0.3em;
+        background-color: #ffff;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+        outline: none;
+        cursor: not-allowed;
+        font-size: 1.1em;
+        font-weight: 600;
+        > span {
+          font-size: 1.8em;
+          margin-right: 0.2em;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .OrdersTab {
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
   }
 }

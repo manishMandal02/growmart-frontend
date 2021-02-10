@@ -28,6 +28,7 @@ const LoginPage = (props) => {
   const { loading, userInfo, error } = login;
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
+  console.log(location.search.split('=')[1]);
 
   useEffect(() => {
     if (userInfo) {

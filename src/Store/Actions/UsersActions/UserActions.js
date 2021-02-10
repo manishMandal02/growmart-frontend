@@ -51,6 +51,7 @@ export const userLogout = () => async (dispatch) => {
     type: USER_LOGOUT,
   });
   await localStorage.removeItem('userInfo');
+  await localStorage.removeItem('__paypal_storage__');
 };
 
 //User Register Action

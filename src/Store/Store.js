@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import productReducer from './Reducers/Products/index';
 import userReducer from './Reducers/UsersReducer/index';
 import { cartReducer } from './Reducers/CartReducer/CartReducer';
+import { orderReducer } from './Reducers/OrderReducers.js/index';
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -14,13 +15,19 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
   : [];
 
+const shippingAddressFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('shippingAddress'))
+  : {};
+const paymentMethodFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('paymentMethod'))
+  : {};
+
 const reducer = combineReducers({
   product: productReducer,
   user: userReducer,
   cart: cartReducer,
+  order: orderReducer,
 });
-
-console.log(cartItemsFromStorage);
 
 const initialState = {
   user: {
@@ -30,6 +37,8 @@ const initialState = {
   },
   cart: {
     cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage,
   },
 };
 const middleware = [thunk];

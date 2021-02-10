@@ -1,10 +1,15 @@
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
+  SAVE_PAYMENT_METHOD,
+  SAVE_SHIPPING_ADDRESS,
   UPDATE_CART_QTY,
 } from '../../Actions/ActionTypes';
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (
+  state = { cartItems: [], shippingAddress: {}, paymentMethod: {} },
+  action
+) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       console.log(state);
@@ -19,7 +24,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       } else {
         console.log(state.cartItems);
         return {
-          // ...state,
+          ...state,
           cartItems: [...state.cartItems, item],
         };
       }
@@ -42,6 +47,18 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter((p) => p.product !== action.payload),
+      };
+
+    case SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        shippingAddress: action.payload,
+      };
+
+    case SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload,
       };
     default:
       return state;

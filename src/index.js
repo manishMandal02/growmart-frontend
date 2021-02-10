@@ -18,6 +18,9 @@ const theme = createMuiTheme({
     secondary: {
       main: '#40add8',
     },
+    redPink: {
+      main: '#cf4826',
+    },
   },
   typography: {
     fontFamily: ['Open Sans', 'sans-serif'].join(','),

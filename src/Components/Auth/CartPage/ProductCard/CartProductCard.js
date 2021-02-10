@@ -22,10 +22,11 @@ const CartProductCard = ({
   price,
   quantity,
   id,
-  snackbar,
+  removeItem,
 }) => {
   //State
   const [qty, setQty] = useState(quantity);
+
   const dispatch = useDispatch();
   // const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -35,11 +36,11 @@ const CartProductCard = ({
   // };
 
   //item remove handler
-  const itemRemoveHandler = (e) => {
-    e.stopPropagation();
-    dispatch(removeItemFromCart(id));
-    snackbar();
-  };
+  // const itemRemoveHandler = (e) => {
+  //   e.stopPropagation();
+  //   dispatch(removeItemFromCart(id));
+  //   snackbar();
+  // };
 
   return (
     <div className={classes.Container}>
@@ -82,7 +83,11 @@ const CartProductCard = ({
         </span>
       </div>
       <span className={classes.ButtonWrapper}>
-        <button onClick={(e) => itemRemoveHandler(e)}>
+        <button
+          onClick={() => {
+            removeItem(id);
+          }}
+        >
           <Cancel /> Remove
         </button>
         <button>
