@@ -1,30 +1,39 @@
-import { React, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
 import classes from './Modal.module.scss';
 
-const Modal = (props) => {
-  useEffect(() => {
-    const modal = document.getElementById('modal');
-    if (modal && !props.show) {
-      document.body.appendChild(modal);
-    }
-  }, [props.show]);
+// const Modal = (props) => {
+//   useEffect(() => {
+//     const modal = document.getElementById('modal');
+//     // const root = document.getElementById('root');
+//     // if (props.show) {
+//     //   root.appendChild(modal);
+//     // }
+//   }, []);
 
-  return props.show ? (
-    <>
+//   return props.show ? (
+
+//   ) : null;
+// };
+
+const Modal = ({ show, updateModalState, children }) => {
+  if (!show) return null;
+  return ReactDOM.createPortal(
+    <div id='modal'>
       <div
         className={classes.Backdrop}
-        onClick={(e) => props.updateModalState()}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log('backdrop clicked');
+          updateModalState(e);
+        }}
       ></div>
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className={classes.Modal}
-        id='modal'
-      >
-        {props.children}
+      <div onClick={(e) => e.stopPropagation()} className={classes.Modal}>
+        {children}
       </div>
-    </>
-  ) : null;
+    </div>,
+    document.body
+  );
 };
 
 export default Modal;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Menu,
@@ -6,38 +7,50 @@ import {
   LibraryBooksOutlined,
 } from '@material-ui/icons';
 import classes from './NavBar.module.scss';
+import { Tooltip } from '@material-ui/core';
 
 const NavBar = () => {
   return (
     <div className={classes.NavBar}>
       <div className={classes.LeftMenu}>
-        <div className={classes.AllDepartments}>
-          <Menu />
-          <p>All Departments</p>
-        </div>
+        <Tooltip title=' feature under development' arrow placement='right'>
+          <div className={classes.AllDepartments}>
+            <Menu />
+            <p>All Departments</p>
+          </div>
+        </Tooltip>
 
         <ul className={classes.MainMenu}>
-          <a href='/'>Vegetables</a>
-          <a href='/'>Fruits</a>
-          <a href='/'>Fresh Foods</a>
-          <a href='/'>Best Seller</a>
-          <a href='/'>Trending Products</a>
+          <Link to={`/category/vegetables`}>Vegetables</Link>
+          <Link to={`/category/fruits`}>Fruits</Link>
+          <Link to={`/category/freshprepared`}>Fresh Prepared</Link>
+          <Tooltip title='page under development' placement='bottom' arrow>
+            <Link to='#'>Best Seller</Link>
+          </Tooltip>
+          <Tooltip title='page under development' placement='bottom' arrow>
+            <Link to='#'>Trending Products</Link>
+          </Tooltip>
         </ul>
       </div>
 
       <ul className={classes.RightMenu}>
-        <a href='/'>
-          <div className={classes.OffersMenu}>
-            <LocalOfferOutlined />
-            Offers
-          </div>
-        </a>
-        <a href='/'>
-          <div className={classes.OffersMenu}>
-            <LibraryBooksOutlined />
-            Recipes
-          </div>
-        </a>
+        <Tooltip title='page under development' placement='bottom' arrow>
+          <Link href='#'>
+            <div className={classes.OffersMenu}>
+              <LocalOfferOutlined />
+              Offers
+            </div>
+          </Link>
+        </Tooltip>
+
+        <Tooltip title='page under development' placement='bottom' arrow>
+          <Link href='#'>
+            <div className={classes.OffersMenu}>
+              <LibraryBooksOutlined />
+              Recipes
+            </div>
+          </Link>
+        </Tooltip>
       </ul>
     </div>
   );

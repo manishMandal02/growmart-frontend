@@ -31,6 +31,7 @@ const MainSlider = () => {
       <Swiper
         spaceBetween={10}
         slidesPerView={1}
+        loop
         navigation={{
           prevEl: '.prev',
           nextEl: '.next',

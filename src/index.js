@@ -19,7 +19,7 @@ const theme = createMuiTheme({
       main: '#40add8',
     },
     redPink: {
-      main: '#cf4826',
+      main: '#cf4826  ',
     },
   },
   typography: {

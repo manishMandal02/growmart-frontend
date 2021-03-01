@@ -179,13 +179,13 @@
           height: 66%;
           overflow-x: hidden;
           overflow-y: scroll;
-          width: 120%;
+          width: 100%;
           border: 2px solid $light-grey;
           .OrderItems {
             display: flex;
             width: 110%;
             border-bottom: 1px solid $light-grey;
-            padding: 0.6em;
+            padding: 0.2em 0.5em;
             img {
               width: 12%;
               border-radius: 0.1em;

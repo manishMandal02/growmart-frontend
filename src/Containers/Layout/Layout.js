@@ -28,6 +28,41 @@ const Layout = () => {
         <Route path='/register' component={RegisterPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/product/:id' component={ProdcutPage} />
+        <Route path='/price/:price' component={MainBody} exact />
+        <Route path='/page/:pageNumber' component={MainBody} exact />
+        <Route
+          path='/page/:pageNumber/price/:price'
+          component={MainBody}
+          exact
+        />
+        <Route path='/search/:keyword' component={MainBody} exact />
+        <Route path='/category/:category' component={MainBody} exact />
+        <Route
+          path='/category/:category/page/:pageNumber'
+          component={MainBody}
+          exact
+        />
+        <Route path='/brand/:brand' component={MainBody} exact />
+        <Route
+          path='/brand/:brand/page/:pageNumber'
+          component={MainBody}
+          exact
+        />
+        <Route
+          path='/search/:keyword/page/:pageNumber'
+          component={MainBody}
+          exact
+        />
+        <Route
+          path='/search/:keyword/price/:price'
+          component={MainBody}
+          exact
+        />
+        <Route
+          path='/search/:keyword/price/:price/page/:pageNumber'
+          component={MainBody}
+          exact
+        />
         <Route path='/' component={MainBody} exact />
       </main>
       <Footer />

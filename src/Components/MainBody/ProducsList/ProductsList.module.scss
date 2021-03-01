@@ -2,10 +2,11 @@
 
 .MainContainer {
   margin: 0 0.2em 0 0;
+  width: 100%;
   padding: 0;
   display: flex;
   flex-direction: column;
-  max-width: 80%;
+  max-width: 90%;
   .SortByWrapper {
     margin: -0.2em 0em 0.8em 0em;
     form {
@@ -37,9 +38,9 @@
   .PaginationWrapper {
     border-top: 0.04em solid $light-grey;
     padding: 0.8em 0 0 0;
-    width: 95%;
+    width: 100%;
     max-width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     display: flex;
   }

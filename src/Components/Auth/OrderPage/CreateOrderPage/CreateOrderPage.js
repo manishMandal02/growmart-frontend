@@ -224,7 +224,9 @@ const CreateOrderPage = ({ history, location }) => {
                   <div className={classes.OrderItems}>
                     <img src={p.image} alt={p.name} />
                     <Link to={`/product/${p.product}`}>{p.name}</Link>
-                    <span>{`${p.qty} x ${p.price} = ${p.qty * p.price} `}</span>
+                    <span>{`${p.qty} x ${p.price} = ${addDecimals(
+                      p.qty * p.price
+                    )} `}</span>
                   </div>
                 ))}
               </div>

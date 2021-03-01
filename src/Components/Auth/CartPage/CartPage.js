@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,7 +9,6 @@ import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 import { removeItemFromCart } from '../../../Store/Actions/CartActions/CartActions';
-import { Component } from 'react';
 
 //###########
 const CartPage = ({ history }) => {
@@ -36,9 +35,6 @@ const CartPage = ({ history }) => {
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
-  // const handleSnackbarOpen = () => {
-  //   setSnackbarOpen(true);
-  // };
 
   const dispatch = useDispatch();
 

@@ -1,43 +1,57 @@
-@import '../../../App.scss';
+@import '../../../../../App.scss';
 
-.ProdcutPage {
-  margin: 2em 0 0 0;
-  padding: 1em 0 0 0;
+.QuickVIewModal {
+  margin: 0em 0 0 0;
+  padding: 2em 1em;
   .Container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     max-width: 100%;
+    max-height: 5%;
     .ImageWrapper {
-      width: 85%;
-      max-width: 100%;
+      width: 45%;
+      // max-width: 100%;
       display: flex;
       flex-direction: column;
       img {
-        width: 80%;
+        width: 90%;
+        border: 1px solid $light-grey;
+        border-radius: 0.1em;
+        padding: 0.3em;
       }
       span {
         margin-top: 0.4em;
         img {
           border: 2px solid $mid-grey;
-          width: 15%;
+          width: 20%;
+          border-radius: 0.1em;
+          padding: 0.2em;
+          cursor: pointer;
         }
       }
     }
 
     .ProdcutInfo {
-      width: 75%;
-      > p:nth-child(1) {
-        font-size: 2.2em;
+      width: 55%;
+      max-height: 10%;
+      > a {
+        font-size: 1.9em;
         font-weight: 600;
         color: $dark-grey;
+        text-decoration: none;
+        line-height: 1.1em;
+        cursor: pointer;
+        &:hover {
+          color: #242424;
+        }
       }
       > p:nth-child(2) {
-        margin: 0em 0 0.4em 0;
+        margin: 0.2em 0 0.4em 0;
         font-size: 1.1em;
         color: $mid-grey;
         display: flex;
         align-items: center;
-        a {
+        > a {
           text-decoration: none;
           font-size: 1em;
           font-weight: 600;
@@ -53,7 +67,7 @@
         padding-bottom: 0.4em;
         margin-bottom: 0.8em;
         border-bottom: 1px solid $light-grey;
-        max-width: 30%;
+        max-width: 60%;
         display: flex;
         align-items: center;
         > span:nth-child(2) {
@@ -65,7 +79,7 @@
       }
 
       .Price {
-        padding: 0.5em 1.2em 0.5em 1.1em;
+        padding: 0.5em 1.2em 0.5em 1.2em;
         background-color: #e7ffecee;
         max-width: 12%;
         border-radius: 0.4em;
@@ -73,9 +87,9 @@
         justify-content: center;
         overflow: hidden;
         p {
-          font-size: 1.4em;
+          font-size: 1.5em;
           margin: 0;
-          color: rgb(97, 116, 98);
+          color: #617462;
           margin-right: 0.1em;
           font-weight: 600;
         }
@@ -91,42 +105,47 @@
 
       > p:nth-child(5) {
         margin: 1em 0.2em;
-        width: 70%;
+        width: 90%;
         font-size: 1em;
         font-weight: 500;
         color: $dark-grey;
       }
       > p:nth-child(6) {
         display: flex;
-        color: $mid-grey;
+        color: $dark-grey;
         margin-bottom: 1em;
+        font-weight: 600;
+        border-bottom: 2px solid $light-grey;
+        padding-bottom: 0.8em;
         span {
           display: flex;
           margin: 0 0 0 0.4em;
           a {
-            color: $dark-grey;
+            color: $primary-color;
             font-weight: 600;
             text-decoration: none;
             margin-right: 0.3em;
             &:hover {
-              color: $primary-color;
+              color: $mid-grey;
             }
           }
         }
       }
       .ButtonWrapper {
         display: flex;
-        padding: 1.2em 0em;
-        border-top: 2px solid $light-grey;
+        padding: 0em 0em;
+        // border-top: 2px solid $light-grey;
+        max-height: 12%;
         justify-content: flex-start;
         .Quantity {
           border: 3px solid $light-grey;
+          border-radius: 0.1em;
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 10%;
-          margin-left: 0.8em;
-          margin-right: 0.6em;
+          width: 20%;
+          margin-left: 0em;
+          margin-right: 0.1em;
           overflow: hidden;
           padding: 0 1.4em;
           span {
@@ -157,11 +176,11 @@
             border-left: 3px solid $light-grey;
             border-right: 3px solid $light-grey;
           }
-          > svg:nth-child(2) {
-          }
+          // > svg:nth-child(2) {
+          // }
         }
         button {
-          margin-left: 2em;
+          margin-left: 0.6em;
           cursor: pointer;
           border: none;
           outline: none;
@@ -171,18 +190,18 @@
             #73e69d 51%,
             #1d976c 100%
           );
-          padding: 0.8em 1.2em;
+          padding: 0.8em 0.6em;
           display: flex;
           align-items: center;
           transition: 0.5s;
-          font-size: 1.2em;
+          font-size: 1.06em;
           background-size: 200% auto;
           color: #ffff;
           box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
           border-radius: 0.4em;
           svg {
-            margin-right: 0.3em;
+            margin-right: 0.2em;
             font-weight: 700;
             font-size: 1.5em;
           }
@@ -192,8 +211,8 @@
           }
         }
         > button:nth-child(3) {
-          padding: 0.8em 0.8em;
-          margin-left: 1em;
+          padding: 0.8em 0.4em;
+          margin-left: 0.8em;
 
           background-image: linear-gradient(
             to right,
@@ -242,5 +261,24 @@
         }
       }
     }
+  }
+}
+
+.CloseButton {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  margin-top: 0.4em;
+  margin-right: 0.4em;
+  border-radius: 50%;
+  color: $mid-grey;
+  transform: scale(1.3);
+  background-color: transparent;
+  padding: 0.26em 0.18em 0 0.16em;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: $dark-grey;
   }
 }

@@ -2,9 +2,9 @@
 
 .Sidebar {
   border: 1px solid $light-grey;
-  width: 25vw;
+  width: 20vw;
   margin: 0em 0.5em 0em 1.2em;
-  max-width: 25vw;
+  max-width: 20vw;
   box-shadow: #0000001f 0px 1px 3px, #0000003d 0px 1px 2px;
   .AccordionSummary {
     margin: -6px -1px;
@@ -39,7 +39,7 @@
     }
   }
   .RecentlyAdded {
-    border: 0.04em solid $light-grey;
+    border-top: 2px solid $light-grey;
     margin: 0;
     ul {
       display: flex;

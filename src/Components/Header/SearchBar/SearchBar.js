@@ -1,11 +1,10 @@
 import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
 
 import {
   Search,
   PermIdentityOutlined,
-  LocalMallOutlined,
   ExpandMore,
   AccountCircle,
   ListAlt,
@@ -22,16 +21,26 @@ import { userLogout } from '../../../Store/Actions/UsersActions/UserActions';
 
 // #############
 const SearchBar = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  // const params = useParams();
+  const location = useLocation();
+  const searchKeywordIndex =
+    location.pathname.split('/').length >= 1
+      ? location.pathname.split('/').indexOf('search')
+      : '';
+  const keywordParams = searchKeywordIndex
+    ? location.pathname.split('/')[Number(searchKeywordIndex) + 1]
+    : '';
+
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [keyword, setKeyword] = useState(keywordParams ? keywordParams : '');
 
-  //get cartItmes count
   const { cartItems } = useSelector((state) => state.cart);
   const cartItemsCount = cartItems.length || 0;
-  console.log(cartItemsCount);
 
   const { userInfo } = useSelector((state) => state.user.login);
-  const dispatch = useDispatch();
 
   const logoutHandler = (e) => {
     e.stopPropagation();
@@ -44,7 +53,6 @@ const SearchBar = (props) => {
   //Handles dropdown user menu
   let userMenu;
   const handleMenuOpen = () => {
-    console.log('clicked');
     userMenu = document.getElementById('user-menu');
     if (!menuOpen) {
       userMenu.style.display = 'block';
@@ -60,15 +68,33 @@ const SearchBar = (props) => {
         <Link to='/'>
           <img src={Logo} alt='GorwMart Logo' />
         </Link>
-
-        <div className={classes.Search}>
-          <input type='text' placeholder='search...' />
-          <div className={classes.SearchIcon}>
-            <IconButton>
-              <Search />
-            </IconButton>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            !keyword ? history.push('/') : history.push(`/search/${keyword}`);
+          }}
+        >
+          <div className={classes.Search}>
+            <input
+              type='text'
+              placeholder='Search Products...'
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <div className={classes.SearchIcon}>
+              <IconButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  !keyword
+                    ? history.push('/')
+                    : history.push(`/search/${keyword}`);
+                }}
+              >
+                <Search />
+              </IconButton>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
 
       <div className={classes.RightContainer}>

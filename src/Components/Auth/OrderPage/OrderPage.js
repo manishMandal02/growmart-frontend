@@ -63,7 +63,16 @@ const OrderPage = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [orderId, order, dispatch, successPay, sdkReady]);
+  }, [
+    orderId,
+    order,
+    dispatch,
+    successPay,
+    history,
+    userInfo,
+    match.params,
+    sdkReady,
+  ]);
 
   // payment Success Handler
   const paymentSuccessHandler = (paymentResult) => {
@@ -122,13 +131,10 @@ const OrderPage = ({ match, history }) => {
                   PAYMENT METHOD:
                   <span className={classes.Content}>{order.paymentMethod}</span>
                 </p>
-                {order.isPaid ? (
+                {Boolean(order.isPaid) ? (
                   <div className={classes.Alert}>
                     <Alert severity='success'>
-                      <strong>{`Paid on ${order.paidAt.substring(
-                        0,
-                        10
-                      )} at ${order.paidAt.substring(11, 19)}`}</strong>
+                      <strong>paid</strong>
                     </Alert>
                   </div>
                 ) : (

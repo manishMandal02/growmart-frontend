@@ -35,6 +35,7 @@ const MyAccountPage = ({ match }) => {
   const [password, setPassword] = useState('');
   const [inputDisabled, setInputDisabled] = useState(true);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!userInfo) {
       history.push('/login?redirect=my/account');
@@ -55,8 +56,7 @@ const MyAccountPage = ({ match }) => {
         }
       }
     }
-  }, [userInfo, history, match.params.keyword]);
-  const dispatch = useDispatch();
+  }, [userInfo, history, match.params.keyword, dispatch]);
   // const location = useLocation();
   const logoutHandler = () => {
     dispatch(userLogout());
@@ -77,7 +77,6 @@ const MyAccountPage = ({ match }) => {
     if (name !== userInfo.name || email !== userInfo.email || password !== '') {
       dispatch(userUpdateAction({ name, email, password }));
       setSnackbarOpen(true);
-      setTimeout(() => window.location.reload(), 1000);
     }
   };
 

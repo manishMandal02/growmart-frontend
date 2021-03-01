@@ -2,27 +2,28 @@
 
 .ProductCard {
   cursor: pointer;
-
+  background-color: #ffff;
   text-decoration: none;
-  border-radius: 0.2em;
+  border-radius: 0.16em;
   display: flex;
   max-height: 40%;
   justify-content: flex-start;
   width: 18vw;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  box-shadow: $shadow2;
   transition: box-shadow 0.1s ease-in-out;
   flex-direction: column;
+  border-top: 1px solid $light-grey;
+  border-left: 1px solid $light-grey;
   &:hover .CardTopContainer > .CardTopWrapper {
     visibility: visible;
     opacity: 1;
   }
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    box-shadow: $shadow1;
   }
   .CardTopContainer {
-    height: 25vh;
-    background-size: 100%;
+    height: 28vh;
+    background-size: 85% 90%;
     background-position: center;
     background-repeat: no-repeat;
 
@@ -64,7 +65,8 @@
           border: none;
           color: #ffff;
           transition: background-color 100ms linear;
-          background-color: #6cb67edc;
+          background-color: $primary-color;
+          opacity: 0.82;
           padding: 0.75em 0.6em;
           width: 100%;
           font-size: 0.85em;
@@ -72,6 +74,7 @@
           cursor: pointer;
           &:hover {
             background-color: $primary-color;
+            opacity: 0.95;
           }
         }
       }
@@ -84,23 +87,29 @@
     display: flex;
     flex-direction: column;
     .Top {
-      margin: 0.4em 0.6em 0 0.6em;
+      margin: 0.2em 0.6em 0 0.6em;
       display: flex;
       justify-content: space-between;
       .Categories {
         display: flex;
         align-items: flex-start;
-        line-height: 0.9em;
+        // line-height: 0.9em;
         margin: 0;
         max-width: 85%;
-        p {
+        > button {
+          border: none;
+          outline: none;
+          background-color: #ffff;
           color: $dark-grey;
-          font-size: 0.85em;
-          font-weight: 400;
-          margin: 0.1em 0.25em 0em 0em;
+          font-size: 1em;
+          font-weight: 500;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          letter-spacing: 0.02em;
+          text-decoration: none;
+          margin: 0em 0.25em 0em 0em;
           cursor: pointer;
           &:hover {
-            font-weight: 500;
+            font-weight: 600;
             color: $primary-color;
           }
         }
@@ -121,7 +130,7 @@
     }
 
     .Info {
-      margin: -0.9em 0.2em 0.2em 0.8em;
+      margin: -1em 0.2em 0.2em 0.8em;
       padding: 0em 0.6em 0.8em 0em;
       p {
         margin: 0;
@@ -130,10 +139,11 @@
         font-size: 1.2em;
         font-weight: 600;
         color: $dark-grey;
+        width: 98%;
         margin: 0.2em 0em 0.3em 0em;
       }
       .Price {
-        font-size: 1.1em;
+        font-size: 1.26em;
         margin-bottom: 0.4;
         font-weight: 600;
         color: $dark-grey;

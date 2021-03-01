@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Alert, Rating, AlertTitle } from '@material-ui/lab';
 import {
   LocalMallOutlined,
@@ -10,16 +11,17 @@ import {
   Instagram,
   Add,
   Remove,
+  Close,
 } from '@material-ui/icons';
-import { CircularProgress, Snackbar } from '@material-ui/core';
+import { CircularProgress, Snackbar, Tooltip } from '@material-ui/core';
 
-import classes from './ProdcutPage.module.scss';
-import { getProduct } from '../../../Store/Actions/ProductsActions/ProductActions';
-import { addItemToCart } from '../../../Store/Actions/CartActions/CartActions';
-import RelatedProductsSlider from './RelatedProductsSlider/RelatedProductsSlider';
+import classes from './QuickViewModal.module.scss';
+import Modal from '../../../../UI/Modal/Modal';
+import { getProduct } from '../../../../..//Store/Actions/ProductsActions/ProductActions';
+import { addItemToCart } from '../../../../../Store/Actions/CartActions/CartActions';
 
 //######
-const ProdcutPage = ({ match }) => {
+const QuickViewModal = ({ product, show, closeModal }) => {
   //state
   const [qty, setQty] = useState(1);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -35,18 +37,17 @@ const ProdcutPage = ({ match }) => {
 
   const dispatch = useDispatch();
 
-  const { loading, error, product } = useSelector(
-    (state) => state.product.productDetails
-  );
-  let id = match.params.id;
+  //   const { loading, error, product } = useSelector(
+  //     (state) => state.product.productDetails
+  //   );
 
-  useEffect(() => {
-    dispatch(getProduct(match.params.id));
-  }, [match, dispatch]);
+  //   useEffect(() => {
+  //     dispatch(getProduct(id));
+  //   }, [id, dispatch]);
 
   //addItme to cart on click
   const handleAddItemToCart = () => {
-    dispatch(addItemToCart(id, qty));
+    dispatch(addItemToCart(product.id, qty));
     setSnackbarOpen(true);
   };
 
@@ -55,15 +56,13 @@ const ProdcutPage = ({ match }) => {
     setSnackbarOpen2(true);
   };
   return (
-    <div className={classes.ProdcutPage}>
-      {loading ? (
-        <CircularProgress />
-      ) : error ? (
-        <Alert severity='error'>
-          <AlertTitle>Error</AlertTitle>
-          <strong>{error}</strong>
-        </Alert>
-      ) : (
+    <>
+      <div className={classes.QuickVIewModal}>
+        <Tooltip placement='left' arrow title='Close' enterDelay={600}>
+          <button onClick={() => closeModal()} className={classes.CloseButton}>
+            <Close />
+          </button>
+        </Tooltip>
         <div className={classes.Container}>
           <div className={classes.ImageWrapper}>
             <img src={product.image} alt={`${product.name}`} />
@@ -73,9 +72,11 @@ const ProdcutPage = ({ match }) => {
           </div>
 
           <div className={classes.ProdcutInfo}>
-            <p>{product.name}</p>
+            <Link onClick={() => closeModal()} to={`/product/${product.id}`}>
+              {product.name}
+            </Link>
             <p>
-              Brand:<a href={'/#'}>{product.brand}</a>
+              Brand:<Link to={`/brand/${product.brand}`}>{product.brand}</Link>
             </p>
             <div className={classes.Rating}>
               <Rating
@@ -94,7 +95,9 @@ const ProdcutPage = ({ match }) => {
             <p>
               Categories:
               <span>
-                <a href={'/#'}>{`#${product.category}`}</a>
+                <Link
+                  to={`/category/${product.category}`}
+                >{`#${product.category}`}</Link>
               </span>
             </p>
             <div className={classes.ButtonWrapper}>
@@ -117,12 +120,17 @@ const ProdcutPage = ({ match }) => {
                   <Add />
                 </span>
               </div>
-              <button onClick={handleAddItemToCart}>
-                <LocalMallOutlined /> Add To Cart
-              </button>
-              <button onClick={handleAddToWishlish}>
-                <FavoriteBorder /> Add To Wishlist
-              </button>
+              <Tooltip placement='top' title='Add to cart' enterDelay={500}>
+                <button onClick={handleAddItemToCart}>
+                  <LocalMallOutlined /> Add To Cart
+                </button>
+              </Tooltip>
+              <Tooltip placement='top' title='Wishlist' enterDelay={500}>
+                <button onClick={handleAddToWishlish}>
+                  <FavoriteBorder />
+                  Wishlist
+                </button>
+              </Tooltip>
             </div>
             <Snackbar
               open={snackbarOpen}
@@ -130,7 +138,18 @@ const ProdcutPage = ({ match }) => {
               onClose={handleSnackbarClose}
             >
               <Alert severity='success' variant='filled'>
-                <strong>Item Added to Cart</strong>
+                <strong>
+                  Item Added to{' '}
+                  <Link
+                    style={{
+                      color: 'white',
+                      // textDecoration: 'none',
+                    }}
+                    to='/user/cart'
+                  >
+                    Cart
+                  </Link>
+                </strong>
               </Alert>
             </Snackbar>
             <Snackbar
@@ -162,15 +181,9 @@ const ProdcutPage = ({ match }) => {
             </div>
           </div>
         </div>
-      )}
-      <div>
-        <RelatedProductsSlider
-          category={product.category}
-          name={product.name}
-        />
       </div>
-    </div>
+    </>
   );
 };
 
-export default ProdcutPage;
+export default QuickViewModal;

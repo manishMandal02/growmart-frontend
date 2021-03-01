@@ -126,7 +126,6 @@ const Register = (props) => {
           </Link>
         </p>
       </div>
-      <div></div>
     </div>
   );
 };

@@ -1,30 +1,16 @@
 @import '../../../../App.scss';
 
-.ProductCard {
-  cursor: pointer;
-  padding: 0.4em 0 0 0;
+.SliderContainer {
+  // margin: 0.2em .2em 1em 1em;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  img {
-    width: 30%;
-  }
-  .Container {
-    padding: 0.4em;
-    p {
-      text-decoration: none;
-      font-size: 1.1em;
-      margin-bottom: 0.095em;
-    }
-    .Price {
-      color: $dark-grey;
-      font-size: 1.1em;
-      font-weight: 600;
-      margin: -0.6em 0 0 0;
-    }
-  }
-  &:hover {
-    .Container {
-      font-weight: 600;
-    }
-  }
+.Slides {
+  padding: 0.8em 0;
+  // margin-left: -0.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

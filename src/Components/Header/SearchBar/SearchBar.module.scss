@@ -21,50 +21,53 @@
         width: 100%;
       }
     }
-
-    .Search {
-      display: flex;
-      justify-content: space-between;
-      border: 0.1em solid $primary-color;
-      width: 50%;
-      margin-left: 2.8em;
-      border-radius: 0.4em;
-      padding: 2px 0 2px 2px;
-      height: 2.2em;
-      &:hover {
-        box-shadow: rgba(71, 150, 94, 0.342) 0px 3px 6px,
-          rgba(107, 165, 105, 0.342) 0px 3px 6px;
-      }
-      &:focus {
-        box-shadow: rgba(71, 150, 94, 0.342) 0px 3px 6px,
-          rgba(107, 165, 105, 0.342) 0px 3px 6px;
-      }
-
-      input {
-        color: $dark-grey;
-        border: none;
-        outline: none;
-        padding: 0.8em;
-        width: 80%;
-        font-size: 1.1em;
-      }
-      .SearchIcon {
-        background-color: $primary-color;
-        position: relative;
+    form {
+      width: 80%;
+      .Search {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        padding: 0;
-        border-bottom-right-radius: 0.2em;
-        border-top-right-radius: 0.2em;
-        :first-child {
+        justify-content: space-between;
+        border: 0.1em solid $primary-color;
+        width: 60%;
+        margin-left: 2.8em;
+        border-radius: 0.4em;
+        padding: 2px 0 2px 2px;
+        height: 2.2em;
+        &:hover {
+          box-shadow: rgba(71, 150, 94, 0.342) 0px 3px 6px,
+            rgba(107, 165, 105, 0.342) 0px 3px 6px;
+        }
+
+        &:focus-within {
+          box-shadow: rgba(71, 150, 94, 0.342) 0px 3px 6px,
+            rgba(115, 153, 114, 0.342) 0px 3px 6px;
+        }
+
+        input {
+          color: $dark-grey;
+          border: none;
+          outline: none;
+          padding: 0.8em;
+          width: 80%;
+          font-size: 1.1em;
+        }
+        .SearchIcon {
           background-color: $primary-color;
-          border-radius: 0;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          padding: 0;
           border-bottom-right-radius: 0.2em;
           border-top-right-radius: 0.2em;
-          color: #ffffff;
-          height: 1.76em;
+          :first-child {
+            background-color: $primary-color;
+            border-radius: 0;
+            border-bottom-right-radius: 0.2em;
+            border-top-right-radius: 0.2em;
+            color: #ffffff;
+            height: 1.76em;
+          }
         }
       }
     }

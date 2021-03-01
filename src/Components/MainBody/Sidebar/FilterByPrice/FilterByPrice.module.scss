@@ -1,22 +1,24 @@
 @import '../../../../App.scss';
 
 .FilterByPrice {
+  margin-top: -1em;
   width: 100%;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   .Root {
     color: $mid-grey;
-    height: 0.3em;
+    height: 0.1em;
     &:hover {
-      color: $dark-grey;
+      color: $mid-grey;
     }
   }
   .Thumb {
-    height: 1em;
-    width: 1em;
-    background-color: $primary-color;
-    margin-top: -7px;
+    height: 1.2em;
+    width: 1.2em;
+    background-color: $white-grey;
+    border: 1.6px solid $primary-color;
+    margin-top: -6.5px;
     margin-left: -8px;
     &:focus,
     &:hover,
@@ -31,44 +33,59 @@
     span {
       span {
         color: whitesmoke;
-        font-weight: 700;
+        font-size: 1.2em;
+        font-weight: 600;
       }
     }
   }
   .Track {
-    height: 0.2em;
+    height: 0.4em;
     border-radius: 5px;
+    background-color: $primary-color;
   }
   .Rail {
-    height: 0.2em;
+    height: 0.4em;
     border-radius: 4px;
   }
 
   .Wrapper {
     display: flex;
+    // flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1.5em;
+    margin-top: 1em;
     width: 100%;
-    p {
-      margin: 0;
-      font-size: 1.03em;
+    .PriceView {
+      display: flex;
+      align-self: flex-end;
+      > P {
+        margin: 0 0.4em;
+        font-size: 1.1em;
+      }
+      input {
+        width: 30%;
+        font-size: 1.1em;
+        text-align: center;
+        padding: 0.1em 0.1em;
+        outline: none;
+      }
     }
     button {
+      width: 100%;
       padding: 0.4em 0.8em 0.4em 0.8em;
       background-color: $primary-color;
       color: #fff;
-      border: 0.2em solid $primary-color;
-      font-size: 0.85em;
+      border: 0.16em solid $primary-color;
+      font-size: 0.88em;
       outline: none;
       border-radius: 0.2em;
       cursor: pointer;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       transition: all 0.2s;
       &:hover {
         font-weight: 500;
         color: $primary-color;
-        border: 0.2em solid $primary-color;
+        border: 0.16em solid $primary-color;
         background-color: #ffff;
       }
     }
