@@ -1,38 +1,45 @@
 @import '../../../App.scss';
 
 .ProdcutPage {
-  margin: 2em 0 0 0;
-  padding: 1em 0 0 0;
+  margin: 0em 0 0 0;
+  padding: 0em;
   .Container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     max-width: 100%;
+    padding: 2em 2em 1em 3.2em;
     .ImageWrapper {
-      width: 85%;
-      max-width: 100%;
+      width: 41%;
+      // max-width: 100%;
       display: flex;
       flex-direction: column;
       img {
-        width: 80%;
+        width: 90%;
+        padding: 1em;
+        border: 1px solid $light-grey;
+        border-radius: 0.1em;
       }
       span {
-        margin-top: 0.4em;
+        margin-top: 0.8em;
         img {
-          border: 2px solid $mid-grey;
+          cursor: pointer;
+          padding: 0.4em;
+          border-radius: 0.1em;
+          border: 1px solid $dark-grey;
           width: 15%;
         }
       }
     }
 
     .ProdcutInfo {
-      width: 75%;
+      width: 60%;
       > p:nth-child(1) {
-        font-size: 2.2em;
-        font-weight: 600;
+        font-size: 2.3em;
+        font-weight: 700;
         color: $dark-grey;
       }
       > p:nth-child(2) {
-        margin: 0em 0 0.4em 0;
+        margin: 0em 0 0.6em 0;
         font-size: 1.1em;
         color: $mid-grey;
         display: flex;
@@ -50,10 +57,11 @@
         }
       }
       .Rating {
+        cursor: pointer;
         padding-bottom: 0.4em;
         margin-bottom: 0.8em;
         border-bottom: 1px solid $light-grey;
-        max-width: 30%;
+        max-width: 25%;
         display: flex;
         align-items: center;
         > span:nth-child(2) {
@@ -100,16 +108,18 @@
         display: flex;
         color: $mid-grey;
         margin-bottom: 1em;
+        font-size: 1.1em;
         span {
           display: flex;
           margin: 0 0 0 0.4em;
           a {
-            color: $dark-grey;
+            color: $primary-color;
             font-weight: 600;
             text-decoration: none;
             margin-right: 0.3em;
+            font-size: 1.1em;
             &:hover {
-              color: $primary-color;
+              color: $mid-grey;
             }
           }
         }
@@ -242,5 +252,113 @@
         }
       }
     }
+  }
+}
+
+.Reviews {
+  // background-color: $white-grey;
+  max-width: 100%;
+  width: 100%;
+  .Heading {
+    width: 100%;
+    font-size: 1.8em;
+    padding: 0.6em 0.2em;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+      sans-serif;
+    color: $dark-grey;
+
+    > svg {
+      margin-bottom: -0.18em;
+      margin-left: -0.26em;
+      color: $dark-grey;
+      transform: scale(0.92);
+    }
+  }
+  .ReviewsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    max-height: 26em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .Review {
+      padding: 1em 0em 1em 1.6em;
+      border-bottom: 1px solid $light-grey;
+      width: 100%;
+      max-width: 100%;
+
+      .Name {
+        font-size: 1.2em;
+        font-weight: 600;
+        width: 60%;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+  form {
+    padding: 1em;
+    > p {
+      font-size: 1.2em;
+      font-weight: 600;
+
+      margin-bottom: 0.3em;
+    }
+    .Comment {
+      // font-size: 2em;
+      display: flex;
+      flex-direction: column;
+      textarea {
+        margin-left: 0.1em;
+        border: 2px solid $mid-grey;
+        border-radius: 0.2em;
+        font-size: 1.2em;
+        &:hover {
+          border: 2px solid $dark-grey;
+        }
+      }
+    }
+    > div {
+      display: flex;
+      align-items: center;
+      > button {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 1.1em;
+        margin-top: 0.1em;
+        padding: 0.4em 0.7em;
+        background-color: $primary-color;
+        color: #fff;
+        border-radius: 0.2em;
+        font-weight: 500;
+        transition: all 0.1s;
+        margin-right: 0.6em;
+        &:hover {
+          background-color: #2aad3c;
+          // transform: scale(1.01);
+        }
+      }
+    }
+  }
+}
+
+.AccordionSummary {
+  margin: 0;
+  padding: 0;
+  > div {
+    margin: 0 !important;
+  }
+}
+
+.LoginLink {
+  color: $primary-color;
+  text-decoration: none;
+  &:hover {
+    color: $dark-grey;
   }
 }

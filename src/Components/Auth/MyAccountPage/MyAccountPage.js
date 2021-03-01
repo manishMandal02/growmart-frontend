@@ -18,6 +18,7 @@ import {
   userLogout,
   userUpdateAction,
 } from '../../../Store/Actions/UsersActions/UserActions';
+import { Helmet } from 'react-helmet';
 
 //###########
 const MyAccountPage = ({ match }) => {
@@ -83,6 +84,9 @@ const MyAccountPage = ({ match }) => {
   return (
     userInfo && (
       <div className={classes.Container}>
+        <Helmet>
+          <title>{`My Account | GrowMart`}</title>
+        </Helmet>
         <div className={classes.LeftContainer}>
           <div className={classes.WelcomeCard}>
             <Person />

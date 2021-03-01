@@ -17,7 +17,7 @@
         width: 90%;
         border: 1px solid $light-grey;
         border-radius: 0.1em;
-        padding: 0.3em;
+        padding: 0.5em;
       }
       span {
         margin-top: 0.4em;
@@ -25,7 +25,7 @@
           border: 2px solid $mid-grey;
           width: 20%;
           border-radius: 0.1em;
-          padding: 0.2em;
+          padding: 0.4em;
           cursor: pointer;
         }
       }
@@ -42,7 +42,7 @@
         line-height: 1.1em;
         cursor: pointer;
         &:hover {
-          color: #242424;
+          color: $primary-color;
         }
       }
       > p:nth-child(2) {

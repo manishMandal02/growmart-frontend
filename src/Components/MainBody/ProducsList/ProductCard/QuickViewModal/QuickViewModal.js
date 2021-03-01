@@ -67,7 +67,14 @@ const QuickViewModal = ({ product, show, closeModal }) => {
           <div className={classes.ImageWrapper}>
             <img src={product.image} alt={`${product.name}`} />
             <span>
-              <img src={product.image} alt={`${product.name} overview`} />
+              <Tooltip
+                placement='top'
+                // arrow
+                title={product.name}
+                enterDelay={600}
+              >
+                <img src={product.image} alt={`${product.name} overview`} />
+              </Tooltip>
             </span>
           </div>
 
@@ -85,7 +92,9 @@ const QuickViewModal = ({ product, show, closeModal }) => {
                 value={product.rating}
                 readOnly
               />
-              <span>{`${product.numReviews} Reviews`}</span>
+              <span>{`${product.numReviews} ${
+                product.numReviews <= 1 ? `Review` : 'Reviews'
+              }`}</span>
             </div>
             <div className={classes.Price}>
               <p>$</p>

@@ -12,6 +12,9 @@ import {
   FETCH_RELATED_PRODUCTS_ERROR,
   FETCH_RELATED_PRODUCTS_REQUEST,
   FETCH_RELATED_PRODUCTS_SUCCESS,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_ERROR,
 } from '../ActionTypes';
 
 export const getProductsList = (
@@ -183,6 +186,45 @@ export const getProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FETCH_PRODUCT_ERROR,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createProductReview = (id, { rating, comment }) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_REQUEST,
+    });
+
+    const {
+      user: { login },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${login.userInfo.token}`,
+      },
+    };
+    await axios.post(
+      `/api/products/${id}/reviews`,
+      { rating, comment },
+      config
+    );
+
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_ERROR,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

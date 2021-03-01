@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { FcGoogle } from 'react-icons/fc';
 import { Alert } from '@material-ui/lab';
 import { userRegister } from '../../../Store/Actions/UsersActions/UserActions';
+import { Helmet } from 'react-helmet';
 
 // ############
 const Register = (props) => {
@@ -35,7 +36,11 @@ const Register = (props) => {
   const redirect = props.history.search
     ? props.history.search.split('=')[1]
     : '/';
-
+  const scrollToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox
+  };
+  scrollToTop();
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
@@ -50,6 +55,9 @@ const Register = (props) => {
 
   return (
     <div className={classes.Register}>
+      <Helmet>
+        <title>{`Register | GrowMart`}</title>
+      </Helmet>
       <div className={classes.RightContainer}>
         <h1>Welcome | Register here</h1>
         <p>Happy Shopping...</p>

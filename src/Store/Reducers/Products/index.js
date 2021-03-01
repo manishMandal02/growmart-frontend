@@ -5,6 +5,7 @@ import {
   getproductReducer,
   topProductsReducer,
   relatedProductsReducer,
+  createProductReviewReducer,
 } from './ProductReducers';
 
 const productReducer = combineReducers({
@@ -12,6 +13,7 @@ const productReducer = combineReducers({
   productDetails: getproductReducer,
   topProducts: topProductsReducer,
   relatedProducts: relatedProductsReducer,
+  createProductReview: createProductReviewReducer,
 });
 
 export default productReducer;

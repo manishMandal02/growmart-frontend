@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { FcGoogle } from 'react-icons/fc';
 import { userLogin } from '../../../Store/Actions/UsersActions/UserActions';
 import { Alert } from '@material-ui/lab';
+import { Helmet } from 'react-helmet';
 
 //##########
 const LoginPage = (props) => {
@@ -37,6 +38,12 @@ const LoginPage = (props) => {
     }
   }, [dispatch, userInfo, props.history, redirect]);
 
+  const scrollToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox
+  };
+  scrollToTop();
+
   const loginSubmitHandler = (e) => {
     console.log(email, password);
     e.preventDefault();
@@ -49,6 +56,9 @@ const LoginPage = (props) => {
 
   return (
     <div className={classes.LoginPage}>
+      <Helmet>
+        <title>{`Login | GrowMart`}</title>
+      </Helmet>
       <div className={classes.RightContainer}>
         <h1>Welcome back</h1>
         <p>Happy Shopping...</p>

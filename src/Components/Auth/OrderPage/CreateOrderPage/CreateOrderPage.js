@@ -38,7 +38,6 @@ const CreateOrderPage = ({ history, location }) => {
     if (cart.paymentMethod) {
       setPaymentMethod(cart.paymentMethod);
     }
-    // if(success)
   }, [cart.shippingAddress, cart.paymentMethod]);
 
   const { loading, error, success, order } = useSelector(

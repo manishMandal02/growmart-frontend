@@ -7,6 +7,7 @@ import { Alert, AlertTitle, Pagination } from '@material-ui/lab';
 import classes from './ProductsList.module.scss';
 import ProductCard from './ProductCard/ProductCard.js';
 import * as actionCreators from '../../../Store/Actions/ProductsActions/ProductActions';
+import { Helmet } from 'react-helmet';
 
 const ProductsList = () => {
   const dispatch = useDispatch();
@@ -80,6 +81,17 @@ const ProductsList = () => {
   };
   return (
     <div className={classes.MainContainer}>
+      <Helmet>
+        <title>
+          {category
+            ? `${category} | GrowMart`
+            : brand
+            ? `${brand} | GrowMart`
+            : keyword
+            ? `${keyword} - Search | GrowMart`
+            : `Fresh Groceries Online at Best Prices | GrowMart`}
+        </title>
+      </Helmet>
       <div className={classes.SortByWrapper}>
         <form action='/action_page.php'>
           <label for='cars'>Sort By:</label>

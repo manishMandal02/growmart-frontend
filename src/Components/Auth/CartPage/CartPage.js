@@ -9,6 +9,7 @@ import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 import { removeItemFromCart } from '../../../Store/Actions/CartActions/CartActions';
+import { Helmet } from 'react-helmet';
 
 //###########
 const CartPage = ({ history }) => {
@@ -38,6 +39,12 @@ const CartPage = ({ history }) => {
 
   const dispatch = useDispatch();
 
+  const scrollToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox
+  };
+  scrollToTop();
+
   //handle remove item
   const itemRemoveHandler = (id) => {
     dispatch(removeItemFromCart(id));
@@ -48,6 +55,9 @@ const CartPage = ({ history }) => {
 
   return (
     <div className={classes.Container}>
+      <Helmet>
+        <title>{`My Shopping Cart | GrowMart`}</title>
+      </Helmet>
       <div className={classes.LeftWrapper}>
         <div className={classes.Heading}>My Cart ({cartItems.length})</div>
         <span className={classes.LeftContainer}>
