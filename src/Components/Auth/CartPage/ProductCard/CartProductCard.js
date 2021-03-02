@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -22,25 +22,23 @@ const CartProductCard = ({
   price,
   quantity,
   id,
-  removeItem,
+  openSnackbar,
 }) => {
   //State
-  const [qty, setQty] = useState(quantity);
+  const [qty, setQty] = useState('');
 
   const dispatch = useDispatch();
-  // const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [itemRemoveSuccess, setItemRemoveSuccess] = useState(false);
 
-  // // Handle snackbar state
-  // const handleSnackbar = () => {
-  //   setSnackbarOpen(false);
-  // };
-
-  //item remove handler
-  // const itemRemoveHandler = (e) => {
-  //   e.stopPropagation();
-  //   dispatch(removeItemFromCart(id));
-  //   snackbar();
-  // };
+  useEffect(() => {
+    setQty(quantity);
+  }, [itemRemoveSuccess, quantity]);
+  // item remove handler
+  const itemRemoveHandler = () => {
+    openSnackbar();
+    dispatch(removeItemFromCart(id));
+    setItemRemoveSuccess(itemRemoveSuccess ? false : true);
+  };
 
   return (
     <div className={classes.Container}>
@@ -85,7 +83,7 @@ const CartProductCard = ({
       <span className={classes.ButtonWrapper}>
         <button
           onClick={() => {
-            removeItem(id);
+            itemRemoveHandler();
           }}
         >
           <Cancel /> Remove

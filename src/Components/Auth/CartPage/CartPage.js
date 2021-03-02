@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import classes from './CartPage.module.scss';
 import ProductCard from './ProductCard/CartProductCard';
@@ -8,7 +8,7 @@ import { CallMade, VerifiedUser } from '@material-ui/icons';
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-import { removeItemFromCart } from '../../../Store/Actions/CartActions/CartActions';
+// import { removeItemFromCart } from '../../../Store/Actions/CartActions/CartActions';
 import { Helmet } from 'react-helmet';
 
 //###########
@@ -37,21 +37,13 @@ const CartPage = ({ history }) => {
     setSnackbarOpen(false);
   };
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const scrollToTop = () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox
   };
   scrollToTop();
-
-  //handle remove item
-  const itemRemoveHandler = (id) => {
-    dispatch(removeItemFromCart(id));
-    //temporary solution for quantity bug (when one item is removed with updateQty the next item takes the same qty of previous item quantity)
-    window.location.reload();
-    setSnackbarOpen(true);
-  };
 
   return (
     <div className={classes.Container}>
@@ -70,7 +62,7 @@ const CartPage = ({ history }) => {
                 price={p.price}
                 quantity={p.qty}
                 id={p.product}
-                removeItem={itemRemoveHandler}
+                openSnackbar={() => setSnackbarOpen(true)}
               />
             ))
           ) : (
