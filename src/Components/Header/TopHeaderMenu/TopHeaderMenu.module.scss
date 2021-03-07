@@ -114,3 +114,14 @@
     }
   }
 }
+
+@media only screen and (max-width: 770px) {
+  .Container {
+    padding: 3.5px 32px;
+    justify-content: center;
+  }
+
+  .RightWrapper {
+    display: none;
+  }
+}

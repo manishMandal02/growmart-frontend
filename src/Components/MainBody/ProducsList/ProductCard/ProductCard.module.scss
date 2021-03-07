@@ -8,7 +8,7 @@
   display: flex;
   max-height: 40%;
   justify-content: flex-start;
-  width: 18vw;
+  width: 100%;
   box-shadow: $shadow2;
   transition: box-shadow 0.1s ease-in-out;
   flex-direction: column;
@@ -148,6 +148,14 @@
         font-weight: 600;
         color: $dark-grey;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .ProductCard {
+    &:hover {
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
   }
 }

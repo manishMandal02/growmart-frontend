@@ -3,6 +3,7 @@
 .NavBar {
   overflow: hidden;
   background-color: #ffffff;
+  width: 100%;
   max-width: 100%;
   top: 0;
   display: flex;
@@ -94,6 +95,43 @@
           transition: all 0.2s;
 
           margin-right: 0.1em;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .NavBar {
+    padding: 0.2em 0em;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    .MainMenu {
+      display: flex;
+      list-style-type: none;
+      align-items: flex-start;
+      justify-content: flex-start;
+      font-size: 1.1em;
+      font-weight: 600;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      a {
+        padding: 0.2em 0.4em;
+        transition: all 0.1s;
+        text-decoration: none;
+        color: $dark-grey;
+        &:hover {
+          cursor: pointer;
+          color: $primary-color;
         }
       }
     }

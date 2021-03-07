@@ -12,17 +12,23 @@ export const cartReducer = (
 ) => {
   switch (action.type) {
     case CART_ADD_ITEM:
-      console.log(state);
       const item = action.payload;
       const existItem = state.cartItems.find((p) => p.product === item.product);
-      console.log(existItem);
-      if (existItem) {
+      if (existItem && existItem.qty === item.qty) {
         return {
           ...state,
           cartItems: [...state.cartItems],
         };
+      } else if (existItem && existItem.qty !== item.qty) {
+        const updatedItemList = state.cartItems.filter(
+          (p) => p.product !== item.product
+        );
+
+        return {
+          ...state,
+          cartItems: [...updatedItemList, item],
+        };
       } else {
-        console.log(state.cartItems);
         return {
           ...state,
           cartItems: [...state.cartItems, item],

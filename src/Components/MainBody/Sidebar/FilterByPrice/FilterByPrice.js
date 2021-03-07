@@ -1,66 +1,84 @@
-import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import Slider from '@material-ui/core/Slider';
 import debounce from 'lodash/debounce';
+import { v4 as uuidv4 } from 'uuid';
 
 import classes from './FilterByPrice.module.scss';
-import { getProductsList } from '../../../../Store/Actions/ProductsActions/ProductActions';
-import { Pages } from '@material-ui/icons';
 
-const FilterByPrice = () => {
+const FilterByPrice = ({ priceFilterChange }) => {
   //initialize
+  const location = useLocation();
   const history = useHistory();
-  const params = useParams();
-  const dispatch = useDispatch();
 
-  const prices = params.price ? params.price.split('-') : '';
+  const urlParams = new URLSearchParams(location.search);
+  // const paramsPrice = urlParams.has('price')
+  //   ? urlParams.get('price').toString().split('to')
+  //   : '';
+  const keyword = urlParams.get('search');
   //state
-  const [priceFilter, setPriceFilter] = useState(
-    prices ? [prices[0], prices[1]] : [0, 25]
-  );
+  // const [priceFilter, setPriceFilter] = useState(
+  //   Number(paramsPrice[1])
+  //     ? [Number(paramsPrice[0]), Number(paramsPrice[1])]
+  //     : [0, 10]
+  // );
 
-  const keyword = params.keyword || '';
-  const pageNumber = params.pageNumber || 1;
-  const pageSize = 16;
+  const [priceFilter, setPriceFilter] = useState([0, 10]);
 
-  //handel pagechange
-  const handelPageChange = () => {
-    const priceFilterUrl = keyword
-      ? `/search/${keyword}/price/${priceFilter[0]}-${priceFilter[1]}`
-      : `/price/${priceFilter[0]}-${priceFilter[1]}`;
-    history.push(priceFilterUrl);
-    dispatch(
-      getProductsList(keyword, pageNumber, pageSize, 'latest', priceFilter)
-    );
+  useEffect(() => {
+    if (keyword) {
+      setPriceFilter([0, 10]);
+    }
+  }, [keyword]);
+
+  //handel on filter clickl
+  const filterHandler = () => {
+    priceFilterChange(priceFilter[0], priceFilter[1]);
+
+    urlParams.set('price', `${priceFilter[0]}to${priceFilter[1]}`);
+    urlParams.set('sortBy', `latest`);
+
+    history.push({
+      search: urlParams.toString(),
+    });
   };
+
   return (
     <div className={classes.FilterByPrice}>
       <Slider
+        key={uuidv4()}
         classes={{
           root: classes.Root,
           thumb: classes.Thumb,
-          active: {},
           valueLabel: classes.ValueLable,
           track: classes.Track,
           rail: classes.Rail,
         }}
         valueLabelDisplay='auto'
-        max={25}
-        min={1}
+        max={10}
+        min={0}
         defaultValue={[priceFilter[0], priceFilter[1]]}
         onChange={debounce(
           (event, value) => setPriceFilter([value[0], value[1]]),
           250
         )}
       />
+
       <div className={classes.Wrapper}>
         <div className={classes.PriceView}>
-          <input type='text' value={`$${priceFilter[0]}`} />
+          <input type='text' readOnly value={`$${priceFilter[0]}`} />
           <p>to</p>
-          <input type='text' value={`$${priceFilter[1]}`} />
+          <input
+            type='text'
+            readOnly
+            value={
+              priceFilter[1] >= 10
+                ? `$${priceFilter[1]}+`
+                : `$${priceFilter[1]}`
+            }
+          />
         </div>
-        <button onClick={() => handelPageChange()}>Filter</button>
+        <button onClick={() => filterHandler()}>Filter</button>
       </div>
     </div>
   );

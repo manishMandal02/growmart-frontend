@@ -15,10 +15,10 @@
     display: flex;
     flex-direction: column;
     margin: 0.8em 0 0.6em 0;
-    padding: 1em 1em 1em 1.5em;
+    padding: 2em 1.2em 1.6em 1.5em;
   }
   .Categories {
-    border: 0.04em solid $light-grey;
+    border-top: 0.04em solid $light-grey;
     margin: 0;
     ul {
       margin: 0 0 0 0.2em;
@@ -38,26 +38,21 @@
       }
     }
   }
-  .RecentlyAdded {
-    border-top: 2px solid $light-grey;
-    margin: 0;
-    ul {
-      display: flex;
-      flex-direction: column;
-      li {
-        border: none;
-        box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-        list-style-type: none;
-        margin-bottom: 0.6em;
-        &:hover {
-          box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-            rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-        }
-      }
-      :last-child {
-        border-bottom: none;
-        margin-bottom: 0.1em;
-      }
-    }
+}
+
+.RecentlyAdded {
+  margin: 0;
+  overflow: hidden;
+  width: 98%;
+  max-width: 99%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0.1em;
+  > div {
+    padding: 0.2em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 }

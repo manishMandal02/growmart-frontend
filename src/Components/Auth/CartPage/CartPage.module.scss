@@ -26,7 +26,7 @@
       background-color: #ffff;
       overflow-x: hidden;
       box-shadow: $shadow2;
-      overflow-y: scroll;
+      overflow-y: auto;
       max-height: 100%;
 
       .EmptyCartMessage {
@@ -48,18 +48,15 @@
           font-size: 1em;
           color: $primary-color;
           font-weight: 600;
-          transition: all 0.06s;
+          transition: all 0.2s;
           svg {
             font-size: 1.06em;
             margin-top: 0.26em;
-            transition: all 0.04s;
+            transition: all 0.1s;
             margin-left: 0.1em;
           }
           &:hover {
             color: $blue-color;
-            svg {
-              transform: scale(1.2);
-            }
           }
         }
       }
@@ -151,6 +148,105 @@
         font-size: 1em;
         color: $mid-grey;
         font-weight: 600;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .Container {
+    flex-direction: column;
+    padding: 0em 0em;
+    max-height: 100%;
+    .LeftWrapper {
+      width: 100%;
+      max-height: 70%;
+      .Heading {
+        padding: 0.5em 0.8em;
+        font-size: 1.16em;
+      }
+      .LeftContainer {
+        .EmptyCartMessage {
+          padding: 1.6em 0em;
+          font-size: 0.95em;
+          width: 100%;
+          a {
+          }
+        }
+      }
+    }
+    .RightWrapper {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 1em;
+      box-shadow: $shadow2;
+      .RightContainer {
+        > p:nth-child(1) {
+          color: $dark-grey;
+        }
+      }
+
+      > span:nth-child(2) {
+        width: 65%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        text-align: center;
+        svg {
+          font-size: 1.8em;
+          margin-right: 0.1em;
+        }
+        p {
+          font-size: 0.85em;
+        }
+      }
+    }
+    .PlaceOrder {
+      position: fixed;
+      padding: 0.3em 0.6em 0.22em 0.6em;
+      border-top: 1px solid $light-grey;
+      bottom: 0;
+      width: 95%;
+      background-color: #ffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 80;
+      > p {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.36em;
+        font-weight: 600;
+        margin: 0;
+        > span {
+          color: $primary-color;
+          font-size: 0.7em;
+          margin: 0;
+          padding: 0;
+        }
+      }
+      > button {
+        width: 40%;
+        outline: none;
+        height: 100%;
+        border-radius: 0.2em;
+        border: none;
+        cursor: pointer;
+        color: #ffff;
+        padding: 0.6em 0.8em;
+        font-size: 1.2em;
+        font-weight: 600;
+        transition: all 0.2s;
+        background-image: linear-gradient(
+          to right,
+          $primary-color 0%,
+          #93f9b9 0%,
+          #38b88b 100%
+        );
+        &:hover {
+          //   box-shadow: $shadow1;
+          transform: scale(1.016);
+          box-shadow: $shadow2;
+        }
       }
     }
   }

@@ -19,6 +19,7 @@ import {
   userUpdateAction,
 } from '../../../Store/Actions/UsersActions/UserActions';
 import { Helmet } from 'react-helmet';
+import { saveShippingAddress } from '../../../Store/Actions/CartActions/CartActions';
 
 //###########
 const MyAccountPage = ({ match }) => {
@@ -28,13 +29,19 @@ const MyAccountPage = ({ match }) => {
   if (!userInfo) {
     history.push('/login?redirect=my/account');
   }
+  const { shippingAddress } = useSelector((state) => state.cart);
 
   //State
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarOpen2, setSnackbarOpen2] = useState(false);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [inputDisabled, setInputDisabled] = useState(true);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [country, setCountry] = useState('');
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -57,7 +64,13 @@ const MyAccountPage = ({ match }) => {
         }
       }
     }
-  }, [userInfo, history, match.params.keyword, dispatch]);
+    if (shippingAddress) {
+      setAddress(shippingAddress.address);
+      setCity(shippingAddress.city);
+      setZipcode(shippingAddress.zipcode);
+      setCountry(shippingAddress.country);
+    }
+  }, [userInfo, history, match.params.keyword, dispatch, shippingAddress]);
   // const location = useLocation();
   const logoutHandler = () => {
     dispatch(userLogout());
@@ -68,7 +81,9 @@ const MyAccountPage = ({ match }) => {
     setSnackbarOpen(false);
   };
 
-  //get orders if keyword is orders
+  const handleSnackbar2 = () => {
+    setSnackbarOpen2(false);
+  };
 
   const { loading, error } = useSelector((state) => state.user.update);
   //handles update profile click
@@ -78,6 +93,32 @@ const MyAccountPage = ({ match }) => {
     if (name !== userInfo.name || email !== userInfo.email || password !== '') {
       dispatch(userUpdateAction({ name, email, password }));
       setSnackbarOpen(true);
+    }
+  };
+
+  //handles update profile click
+  const updateAddresseHandler = (e) => {
+    e.preventDefault();
+    setInputDisabled(true);
+    if (
+      address &&
+      city &&
+      zipcode &&
+      country &&
+      (address !== shippingAddress.address ||
+        city !== shippingAddress.city ||
+        zipcode !== shippingAddress.zipcode ||
+        country !== shippingAddress.country)
+    ) {
+      dispatch(
+        saveShippingAddress({
+          address,
+          zipcode,
+          city,
+          country,
+        })
+      );
+      setSnackbarOpen2(true);
     }
   };
 
@@ -122,27 +163,42 @@ const MyAccountPage = ({ match }) => {
               <p>UPDATE YOUR PROFILE</p>
               <form>
                 <p>Name</p>
-                <input
-                  type='text'
-                  disabled={inputDisabled}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <Tooltip
+                  title={inputDisabled ? 'Edit Profile to make changes' : ''}
+                  placement='top'
+                >
+                  <input
+                    type='text'
+                    disabled={inputDisabled}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </Tooltip>
                 <p>E-mail</p>
-                <input
-                  type='email'
-                  disabled={inputDisabled}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <Tooltip
+                  title={inputDisabled ? 'Edit Profile to make changes' : ''}
+                  placement='top'
+                >
+                  <input
+                    type='email'
+                    disabled={inputDisabled}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Tooltip>
                 <p>Password</p>
-                <input
-                  type='password'
-                  disabled={inputDisabled}
-                  value={password}
-                  placeholder={'Enter Password'}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <Tooltip
+                  title={inputDisabled ? 'Edit Profile to make changes' : ''}
+                  placement='top'
+                >
+                  <input
+                    type='password'
+                    disabled={inputDisabled}
+                    value={password}
+                    placeholder={'Enter Password'}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Tooltip>
                 {!inputDisabled ? (
                   <button
                     className={classes.UpdateProfileButton}
@@ -185,17 +241,66 @@ const MyAccountPage = ({ match }) => {
             </div>
           ) : match.params.keyword === 'address' ? (
             <div className={classes.AddressTab}>
-              <p>Manage Address</p>
+              <p>MANAGE ADDRESS</p>
               <Tooltip
                 title='This feature is currently under developemnt'
-                placement='top-end'
+                placement='bottom'
               >
                 <button>
                   <span>+</span> Add New Address
                 </button>
               </Tooltip>
+              <div className={classes.Address}>
+                <form>
+                  <p>Address</p>
 
-              <div className={classes.Addresses}></div>
+                  <input
+                    type='text'
+                    value={address}
+                    placeholder={'Enter Address'}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                  <p>City</p>
+
+                  <input
+                    type='text'
+                    value={city}
+                    placeholder={'Enter City'}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                  <p>Zipcode</p>
+                  <input
+                    type='text'
+                    value={zipcode}
+                    placeholder={'Enter Zipcode'}
+                    onChange={(e) => setZipcode(e.target.value)}
+                  />
+                  <p>Country</p>
+                  <input
+                    type='text'
+                    value={country}
+                    placeholder={'Enter Country'}
+                    onChange={(e) => setCountry(e.target.value)}
+                  />
+
+                  <button
+                    className={classes.UpdateAddressButton}
+                    onClick={(e) => updateAddresseHandler(e)}
+                  >
+                    Update Address
+                  </button>
+
+                  <Snackbar
+                    open={snackbarOpen2}
+                    autoHideDuration={3000}
+                    onClose={handleSnackbar2}
+                  >
+                    <Alert severity='success' variant='filled'>
+                      Address Updated!
+                    </Alert>
+                  </Snackbar>
+                </form>
+              </div>
             </div>
           ) : (
             <div className={classes.OrdersTab}>

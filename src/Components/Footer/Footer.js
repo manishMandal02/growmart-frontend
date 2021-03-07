@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { v4 as uuidv4 } from 'uuid';
 import classes from './Footer.module.scss';
 
 import { Facebook, Twitter, LinkedIn } from '@material-ui/icons';
@@ -9,67 +9,97 @@ import {
   FaCcVisa,
   FaCcMastercard,
 } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
+import { useWindowSize } from '../../Hooks/useWindowSize/useWindowSize';
 const Footer = () => {
+  const [width] = useWindowSize();
+
   return (
     <footer className={classes.Footer}>
       <div className={classes.FooterTop}>
         <div className={classes.FooterInfo}>
-          <h4>Customer Service</h4>
-          <ul>
-            <a href='#/'>Login</a>
-            <a href='#/'>Help /&/ FAQs</a>
-            <a href='#/'>Order Tracking</a>
-            <a href='#/'>Shipping & Delivery</a>
-            <a href='#/'>Orders History</a>
-          </ul>
-        </div>
-        <div className={classes.FooterInfo}>
           <h4>About Us</h4>
           <ul>
-            <a href='#/'>About Us</a>
-            <a href='#/'>Our Team</a>
-            <a href='#/'>Careers</a>
-            <a href='#/'>Our Stores</a>
+            <Link key={uuidv4()} to='#'>
+              About Us
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Our Team
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Careers
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Our Stores
+            </Link>
           </ul>
         </div>
         <div className={classes.FooterInfo}>
-          <h4>More Information</h4>
+          <h4>Customer Service</h4>
           <ul>
-            <a href='#/'>Affiliates</a>
-            <a href='#/'>Refer a Friend</a>
-            <a href='#/'>Git Vouchers</a>
-            <a href='#/'>Student Program</a>
+            <Link key={uuidv4()} to='#'>
+              Login
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Help /&/ FAQs
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Order Tracking
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Shipping & Delivery
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Orders History
+            </Link>
           </ul>
         </div>
+
+        {width > 770 && (
+          <div className={classes.FooterInfo}>
+            <h4>More Information</h4>
+            <ul>
+              <Link key={uuidv4()} to='#'>
+                Affiliates
+              </Link>
+              <Link key={uuidv4()} to='#'>
+                Refer Link Friend
+              </Link>
+              <Link key={uuidv4()} to='#'>
+                Git Vouchers
+              </Link>
+              <Link key={uuidv4()} to='#'>
+                Student Program
+              </Link>
+            </ul>
+          </div>
+        )}
         <div className={classes.FooterInfo}>
           <div className={classes.Container}>
-            <div>
-              <h4>Social Media</h4>
-              <div className={classes.SocialIconContainer}>
-                <a href='/'>
-                  <LinkedIn />
-                </a>
-                <a href='/'>
-                  <Twitter />
-                </a>
-                <a href='/'>
-                  <Facebook />
-                </a>
-              </div>
+            <h4>Social Media</h4>
+            <div className={classes.SocialIconContainer}>
+              <Link key={uuidv4()} to='#'>
+                <LinkedIn />
+              </Link>
+              <Link key={uuidv4()} to='#'>
+                <Twitter />
+              </Link>
+              <Link key={uuidv4()} to='#'>
+                <Facebook />
+              </Link>
             </div>
             <h4>Payment Methods</h4>
             <ul className={classes.PaymentsIcon}>
-              <li>
+              <li key={uuidv4()}>
                 <FaCcPaypal />
               </li>
-              <li>
+              <li key={uuidv4()}>
                 <FaCcStripe />
               </li>
-              <li>
+              <li key={uuidv4()}>
                 <FaCcVisa />
               </li>
-              <li>
+              <li key={uuidv4()}>
                 <FaCcMastercard />
               </li>
             </ul>

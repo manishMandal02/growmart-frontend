@@ -35,12 +35,12 @@ const TopProductsSlider = () => {
       {products && (
         <Swiper
           freeMode={true}
-          spaceBetween={10}
+          // spaceBetween={}
           slidesPerView={1}
           height={30}
           loop
           // navigation
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           // pagination={{ clickable: true, dynamicBullets: true }}
         >
           {products.map((prod) => (

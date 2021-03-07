@@ -3,23 +3,18 @@
 .Container {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 0em;
   width: 100%;
   max-width: 100%;
   align-items: center;
-  > p {
-    font-size: 1.6em;
-    font-weight: 600;
-    margin-bottom: 0.8em;
-    text-decoration: underline;
-  }
   .OrdersList {
     color: $primary-color;
+    width: 100%;
     table {
+      width: 100%;
       border: 2px solid $primary-color;
       thead {
         background-color: $white-grey;
-
         tr {
           th {
             background-color: $primary-color;
@@ -30,12 +25,13 @@
         }
       }
       tbody {
-        th {
-          border-bottom: 1px solid $primary-color;
+        tr {
+          border: 1px solid $primary-color;
         }
         td {
           border-bottom: 1px solid $primary-color;
-          font-size: 1em;
+          font-size: 1.1em;
+          font-weight: 600;
         }
         .DetailsButton {
           background-color: $blue-color;

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { VerifiedUser } from '@material-ui/icons';
 import { CircularProgress } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import { Helmet } from 'react-helmet';
 
 import classes from './OrderPage.module.scss';
 import { ORDER_PAY_RESET } from '../../../Store/Actions/ActionTypes';
@@ -44,7 +45,6 @@ const OrderPage = ({ match, history }) => {
       script.async = true;
       script.onload = () => {
         setSdkReady(true);
-        console.log('reached onload');
       };
 
       document.body.appendChild(script);
@@ -54,7 +54,6 @@ const OrderPage = ({ match, history }) => {
       dispatch({
         type: ORDER_PAY_RESET,
       });
-      console.log(sdkReady);
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -76,7 +75,6 @@ const OrderPage = ({ match, history }) => {
 
   // payment Success Handler
   const paymentSuccessHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -91,6 +89,9 @@ const OrderPage = ({ match, history }) => {
         </Alert>
       ) : order ? (
         <div className={classes.Container}>
+          <Helmet>
+            <title>{`Order ${order._id} | GrowMart`}</title>
+          </Helmet>
           <div className={classes.LeftWrapper}>
             <span className={classes.LeftContainer}>
               <div className={classes.OrderSummary}>

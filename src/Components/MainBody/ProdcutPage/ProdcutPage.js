@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Rating, AlertTitle } from '@material-ui/lab';
 import {
-  LocalMallOutlined,
   FavoriteBorder,
   LinkedIn,
   Twitter,
@@ -11,6 +10,7 @@ import {
   Add,
   Remove,
   Edit,
+  ShoppingCartOutlined,
 } from '@material-ui/icons';
 import {
   Accordion,
@@ -21,6 +21,7 @@ import {
   Tooltip,
 } from '@material-ui/core';
 
+import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
 import classes from './ProdcutPage.module.scss';
 import {
   createProductReview,
@@ -28,7 +29,10 @@ import {
 } from '../../../Store/Actions/ProductsActions/ProductActions';
 import { addItemToCart } from '../../../Store/Actions/CartActions/CartActions';
 import RelatedProductsSlider from './RelatedProductsSlider/RelatedProductsSlider';
-import { PRODUCT_CREATE_REVIEW_RESET } from '../../../Store/Actions/ActionTypes';
+import {
+  LOGIN_MOBILE_OPEN,
+  PRODUCT_CREATE_REVIEW_RESET,
+} from '../../../Store/Actions/ActionTypes';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -43,7 +47,7 @@ const ProdcutPage = ({ match }) => {
   const [snackbarOpen2, setSnackbarOpen2] = useState(false);
   const [snackbarOpenReview, setSnackbarOpenReview] = useState(false);
 
-  console.log(rating);
+  const [width] = useWindowSize();
 
   // Handle snackbar state
   const handleSnackbarClose = () => {
@@ -149,11 +153,17 @@ const ProdcutPage = ({ match }) => {
           </Helmet>
           <div className={classes.ImageWrapper}>
             <img src={product.image} alt={`${product.name}`} />
-            <span>
-              <Tooltip title={product.name} enterDelay={500} placement='top'>
-                <img src={product.image} alt={`${product.name} overview`} />
-              </Tooltip>
-            </span>
+            {width > 770 && (
+              <span>
+                <Tooltip
+                  title={product.name || ''}
+                  enterDelay={500}
+                  placement='top'
+                >
+                  <img src={product.image} alt={`${product.name} overview`} />
+                </Tooltip>
+              </span>
+            )}
           </div>
 
           <div className={classes.ProdcutInfo}>
@@ -206,14 +216,14 @@ const ProdcutPage = ({ match }) => {
               <div className={classes.Quantity}>
                 <span
                   onClick={() => {
-                    if (qty !== 0) {
+                    if (qty > 1) {
                       setQty(qty - 1);
                     }
                   }}
                 >
                   <Remove />
                 </span>
-                <input type='text' value={qty} />
+                <input readOnly type='text' value={qty} />
                 <span
                   onClick={() => {
                     setQty(qty + 1);
@@ -224,12 +234,16 @@ const ProdcutPage = ({ match }) => {
               </div>
               <Tooltip title={'Add to cart'} enterDelay={500} placement='top'>
                 <button onClick={handleAddItemToCart}>
-                  <LocalMallOutlined /> Add To Cart
+                  <ShoppingCartOutlined /> Add To Cart
                 </button>
               </Tooltip>
-              <Tooltip title={'Wishlist'} enterDelay={500} placement='top'>
+              <Tooltip
+                title={'Feature Underdevelopment'}
+                enterDelay={500}
+                placement='top'
+              >
                 <button onClick={handleAddToWishlish}>
-                  <FavoriteBorder /> Add To Wishlist
+                  <FavoriteBorder /> WishList
                 </button>
               </Tooltip>
             </div>
@@ -256,18 +270,18 @@ const ProdcutPage = ({ match }) => {
                 Share:
                 {/* <Share /> */}
               </span>
-              <a href='/#'>
+              <Link to='#'>
                 <Twitter />
-              </a>
-              <a href='/#'>
+              </Link>
+              <Link to='#'>
                 <Facebook />
-              </a>
-              <a href='/#'>
+              </Link>
+              <Link to='#'>
                 <Instagram />
-              </a>
-              <a href='/#'>
+              </Link>
+              <Link to='#'>
                 <LinkedIn />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -339,8 +353,8 @@ const ProdcutPage = ({ match }) => {
                         paddingLeft: '.2em',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'space-between',
-                        width: '15%',
+                        justifyContent: 'flex-start',
+                        width: '60%',
                         fontWeight: '600',
                         color: '#35373de5',
                       }}
@@ -401,11 +415,12 @@ const ProdcutPage = ({ match }) => {
                 Write a Review <Edit />
               </p>
             </AccordionSummary>
+
             <AccordionDetails>
               {!userInfo ? (
                 <p
                   style={{
-                    padding: '.8em',
+                    padding: '.6em',
                     fontSize: '1.2em',
                     fontWeight: '600',
                     color: '#35373de5',
@@ -413,8 +428,13 @@ const ProdcutPage = ({ match }) => {
                 >
                   Please{' '}
                   <Link
+                    onClick={() =>
+                      dispatch({
+                        type: LOGIN_MOBILE_OPEN,
+                      })
+                    }
                     className={classes.LoginLink}
-                    to={`/login?redirect=product/${id}`}
+                    to='#'
                   >
                     Login
                   </Link>{' '}

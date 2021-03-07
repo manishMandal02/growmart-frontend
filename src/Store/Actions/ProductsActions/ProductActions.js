@@ -22,33 +22,20 @@ export const getProductsList = (
   pageNumber,
   pageSize,
   sortBy,
-  priceFilter
+  priceFilterRange
 ) => async (dispatch) => {
   try {
-    // console.log(pageSize, pageNumber, keyword);
     dispatch({
       type: FETCH_PRODUCTSLIST_REQUEST,
     });
-    // console.log(priceFilter + '  hi');
-    let dataReceived;
-    if (!priceFilter) {
-      // console.log('notprice');
 
-      const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}`
-      );
-      dataReceived = data;
-    } else {
-      // console.log('price');
-      const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&price=${priceFilter[0]}-${priceFilter[1]}`
-      );
-      dataReceived = data;
-    }
+    const { data } = await axios.get(
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&priceFilter=${priceFilterRange[0]}-${priceFilterRange[1]}`
+    );
 
     dispatch({
       type: FETCH_PRODUCTSLIST_SUCCESS,
-      payload: dataReceived,
+      payload: data,
     });
   } catch (error) {
     dispatch({
@@ -115,7 +102,8 @@ export const getProductsByCategory = (
   category,
   pageNumber,
   pageSize,
-  sortBy
+  sortBy,
+  priceFilterRange
 ) => async (dispatch) => {
   try {
     dispatch({
@@ -123,7 +111,7 @@ export const getProductsByCategory = (
     });
 
     const { data } = await axios.get(
-      `/api/products/category?category=${category}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}`
+      `/api/products/category?category=${category}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&priceFilter=${priceFilterRange[0]}-${priceFilterRange[1]}`
     );
 
     dispatch({
@@ -145,7 +133,8 @@ export const getProductsByBrand = (
   brand,
   pageNumber,
   pageSize,
-  sortBy
+  sortBy,
+  priceFilterRange
 ) => async (dispatch) => {
   try {
     dispatch({
@@ -153,7 +142,7 @@ export const getProductsByBrand = (
     });
 
     const { data } = await axios.get(
-      `/api/products/brand?brand=${brand}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}`
+      `/api/products/brand?brand=${brand}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&priceFilter=${priceFilterRange[0]}-${priceFilterRange[1]}`
     );
 
     dispatch({

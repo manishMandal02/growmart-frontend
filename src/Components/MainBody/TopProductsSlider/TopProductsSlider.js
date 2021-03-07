@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
+import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
 import SwiperCore, {
   Navigation,
   Pagination,
@@ -22,6 +24,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 const TopProductsSlider = () => {
   const dispatch = useDispatch();
+  const [width] = useWindowSize();
 
   const { products } = useSelector(
     (state) => state.product.topProducts.products
@@ -39,7 +42,7 @@ const TopProductsSlider = () => {
           <Swiper
             freeMode={true}
             spaceBetween={10}
-            slidesPerView={5}
+            slidesPerView={width > 770 ? 5 : 1}
             height={30}
             loop
             // navigation
@@ -47,7 +50,7 @@ const TopProductsSlider = () => {
             // pagination={{ clickable: true, dynamicBullets: true }}
           >
             {products.map((prod) => (
-              <SwiperSlide className={classes.Slides}>
+              <SwiperSlide key={uuidv4()} className={classes.Slides}>
                 <ProductCard
                   id={prod._id}
                   img={prod.image}

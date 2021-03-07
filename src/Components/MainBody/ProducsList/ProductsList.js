@@ -1,104 +1,40 @@
-import { React, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
 import { Alert, AlertTitle, Pagination } from '@material-ui/lab';
+import { v4 as uuidv4 } from 'uuid';
 
 import classes from './ProductsList.module.scss';
 import ProductCard from './ProductCard/ProductCard.js';
-import * as actionCreators from '../../../Store/Actions/ProductsActions/ProductActions';
-import { Helmet } from 'react-helmet';
 
-const ProductsList = () => {
-  const dispatch = useDispatch();
-  const params = useParams();
-  const history = useHistory();
-  // const location = useLocation();
+const ProductsList = ({
+  products,
+  sortBy,
+  sortByChange,
+  pages,
+  error,
+  loading,
+  pageChange,
+}) => {
+  //initialize
+  const location = useLocation();
 
-  //state
-  const [sortBy, setSortBy] = useState('latest');
+  const urlParams = new URLSearchParams(location.search);
 
-  const keyword = params.keyword || '';
-  const pageNumber = params.pageNumber || 1;
-  const category = params.category || '';
-  const brand = params.brand || '';
-  const priceFilter = params.price ? params.price.split('-') : '';
-  const pageSize = 16;
+  const keyword = urlParams.has('search') ? urlParams.get('search') : '';
+  const priceFilter = urlParams.has('price')
+    ? urlParams.get('price').toString().split('to')
+    : '';
+  const pageNumber = urlParams.has('page') ? Number(urlParams.get('page')) : 1;
 
-  // console.log(pageNumber);
-
-  const productsList = useSelector((state) => state.product.productsList);
-  const { loading, products, error, pages } = productsList;
-  // console.log(page);
-  // console.log(pages);
-
-  useEffect(() => {
-    if (category) {
-      dispatch(
-        actionCreators.getProductsByCategory(
-          category,
-          pageNumber,
-          pageSize,
-          sortBy
-        )
-      );
-    }
-
-    if (brand) {
-      dispatch(
-        actionCreators.getProductsByBrand(brand, pageNumber, pageSize, sortBy)
-      );
-    }
-    if (!priceFilter && !category && !brand) {
-      dispatch(
-        actionCreators.getProductsList(keyword, pageNumber, pageSize, sortBy)
-      );
-    }
-  }, [
-    dispatch,
-    pageNumber,
-    pageSize,
-    keyword,
-    sortBy,
-    priceFilter,
-    category,
-    brand,
-  ]);
-
-  //handel pagechange
-  const handelPageChange = (value) => {
-    const pageChangeUrl =
-      keyword && !priceFilter
-        ? `/search/${keyword}/page/${value}`
-        : priceFilter && !keyword
-        ? `/price/${priceFilter[0]}-${priceFilter[1]}/page/${value}`
-        : priceFilter && keyword
-        ? `/search/${keyword}/price/${priceFilter[0]}-${priceFilter[1]}/page/${value}`
-        : category
-        ? `/category/${category}/page/${value}`
-        : `page/${value}`;
-    history.push(pageChangeUrl);
-  };
   return (
     <div className={classes.MainContainer}>
-      <Helmet>
-        <title>
-          {category
-            ? `${category} | GrowMart`
-            : brand
-            ? `${brand} | GrowMart`
-            : keyword
-            ? `${keyword} - Search | GrowMart`
-            : `Fresh Groceries Online at Best Prices | GrowMart`}
-        </title>
-      </Helmet>
       <div className={classes.SortByWrapper}>
         <form action='/action_page.php'>
-          <label for='cars'>Sort By:</label>
+          <label htmlFor='cars'>Sort By:</label>
           <select
             value={sortBy}
             onChange={(e) => {
-              setSortBy(e.target.value);
+              sortByChange(e.target.value);
             }}
           >
             <option value='latest'>Sort: by newest</option>
@@ -108,7 +44,8 @@ const ProductsList = () => {
           </select>
         </form>
       </div>
-      <Grid
+      <div
+        className={classes.MainGrid}
         classes={{
           root: classes.Grid,
         }}
@@ -118,15 +55,17 @@ const ProductsList = () => {
         alignItems='center'
       >
         {loading ? (
-          <CircularProgress color='primary'>Loading</CircularProgress>
+          <CircularProgress style={{ margin: '1em' }} color='primary'>
+            Loading
+          </CircularProgress>
         ) : error ? (
-          <Alert severity='error'>
+          <Alert style={{ margin: '1em' }} severity='error'>
             <AlertTitle>Error</AlertTitle>
             <strong>{error} </strong>
           </Alert>
         ) : products.length >= 1 ? (
           products.map((prod) => (
-            <Grid item key={prod.id}>
+            <div className={classes.ProductContainer} key={uuidv4()}>
               <ProductCard
                 id={prod._id}
                 img={prod.image}
@@ -138,10 +77,10 @@ const ProductsList = () => {
                 brand={prod.brand}
                 numReviews={prod.numReviews}
               />
-            </Grid>
+            </div>
           ))
         ) : (
-          <Grid item>
+          <div className={classes.MessageContainer}>
             <Alert severity='info' variant='filled'>
               {keyword && !priceFilter ? (
                 <>
@@ -161,15 +100,17 @@ const ProductsList = () => {
                 <>No products found</>
               )}
             </Alert>
-          </Grid>
+          </div>
         )}
-      </Grid>
+      </div>
 
       <div className={classes.PaginationWrapper}>
         <Pagination
           count={pages}
           page={pageNumber}
-          onChange={(e, value) => handelPageChange(value)}
+          onChange={(e, value) => {
+            pageChange(value);
+          }}
           color='primary'
           variant='outlined'
           shape='rounded'

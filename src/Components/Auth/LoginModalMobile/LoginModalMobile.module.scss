@@ -1,70 +1,74 @@
 @import '../../../App.scss';
 
-.Login {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  height: 60vh;
-  max-width: 80vw;
-  cursor: default;
-  .LeftContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: rgb(42, 227, 134);
-    background: linear-gradient(
-      140deg,
-      rgba(42, 227, 134, 1) 11%,
-      rgba(0, 180, 239, 1) 99%
-    );
-    // p {
-    //   width: 100%;
-    //   font-size: 1.8em;
-    //   line-height: 1.2em;
-    //   font-weight: 700;
-    //   color: #ffffffef;
-    //   margin: -3.6em 0 0 0.8em;
-    // }
-    img {
-      width: 80%;
-    }
-  }
+.Backdrop {
+  display: none;
+  position: fixed;
+  z-index: 500;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #000000;
+  opacity: 0.6;
+  background-color: #00000066;
+  -webkit-animation: fadeIn 1.2s ease-in-out;
+  animation: fadeIn 1.2s ease-in-out;
+}
 
-  .RightContainer {
-    width: 80%;
-    background-color: #ffff;
+.Container {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $primary-color;
+  overflow: hidden;
+  transition: 0.6s;
+  display: flex;
+  flex-direction: column;
+  box-shadow: #ffffff1a 0px 1px 1px 0px inset, #32325d40 0px 50px 100px -20px,
+    #0000004d 0px 30px 60px -30px;
+  .TopContainer {
+    background-color: $primary-color;
+    border-radius: 1em 2em 0 0;
+    z-index: 1000;
+
+    width: 100%;
+    padding: 0.8em 0em 0.8em 0.6em;
     display: flex;
-    flex-direction: column;
-    padding: 1.1em 2em 1.2em 2em;
-    .CloseButton {
-      position: absolute;
-      top: 0%;
-      right: 0%;
-      margin-top: 0.3em;
-      margin-right: 0.26em;
-      border-radius: 50%;
-      color: $mid-grey;
-      transform: scale(1.26);
-      background-color: transparent;
-      padding: 0.26em 0.18em 0 0.16em;
-      outline: none;
-      border: none;
-      cursor: pointer;
-      &:hover {
-        color: $dark-grey;
-      }
-    }
-    h1 {
-      font-size: 2.2em;
-    }
-    p {
-      margin-bottom: 0.6em;
-      font-size: 0.95em;
+    color: #ffff;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    > p {
+      margin: 0;
+      margin-left: 0.4em;
+      font-size: 1.26em;
       font-weight: 600;
     }
 
+    > span {
+      > svg {
+        margin: 0;
+        margin-left: -2em;
+        transform: scale(1.4);
+      }
+    }
+  }
+  .BottomContainer {
+    background-color: #ffff;
+    padding: 1em 1.6em 1.6em 1.3em;
+    border-radius: 1.2em 1.7em 0 0;
+    width: 90%;
+    height: 100%;
+    z-index: 1000;
+
     form {
+      margin-top: 0.6em;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -89,12 +93,12 @@
       }
       > button {
         margin-top: 0.6em;
-        padding: 0.6em;
+        padding: 0.5em;
         border: none;
         cursor: pointer;
         outline: none;
         color: #ffff;
-        font-size: 1.2em;
+        font-size: 1.36em;
         border-radius: 0.2em;
         transition: all 0.2s;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -126,7 +130,8 @@
     .GoogleSignIn {
       cursor: not-allowed;
       margin-top: 0.6em;
-      padding: 0.4em;
+      width: 100%;
+      padding: 0.5em;
       border: none;
       outline: none;
       color: #ffff;
@@ -154,8 +159,8 @@
       }
     }
     .RegisterHere {
-      font-size: 0.92em;
-      margin-top: 0.4em;
+      font-size: 1em;
+      margin-top: 0.6em;
       a {
         text-decoration: none;
         color: #2b9ace;

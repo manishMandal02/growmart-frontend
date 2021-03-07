@@ -6,6 +6,7 @@ import productReducer from './Reducers/Products/index';
 import userReducer from './Reducers/UsersReducer/index';
 import { cartReducer } from './Reducers/CartReducer/CartReducer';
 import { orderReducer } from './Reducers/OrderReducers.js/index';
+import { UIReducer } from './Reducers/UIReducer';
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   order: orderReducer,
+  UI: UIReducer,
 });
 
 const initialState = {

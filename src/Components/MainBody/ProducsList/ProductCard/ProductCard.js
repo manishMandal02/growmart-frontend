@@ -2,21 +2,15 @@ import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import {
-  LocalMallOutlined,
-  FavoriteBorderOutlined,
-  OpenInNew,
-  MissedVideoCall,
-  MissedVideoCallOutlined,
-} from '@material-ui/icons';
+import { LocalMallOutlined, FavoriteBorderOutlined } from '@material-ui/icons';
 import { Snackbar, Tooltip } from '@material-ui/core';
 import { Alert, Rating } from '@material-ui/lab';
 
+import { useWindowSize } from '../../../../Hooks/useWindowSize/useWindowSize';
 import classes from './ProductCard.module.scss';
 import { addItemToCart } from '../../../../Store/Actions/CartActions/CartActions';
 import QuickViewModal from './QuickViewModal/QuickViewModal';
 import Modal from '../../../UI/Modal/Modal';
-import Login from '../../../Auth/Login/Login';
 
 //#############
 const ProductCard = (props) => {
@@ -25,6 +19,8 @@ const ProductCard = (props) => {
   const [snackbarOpen2, setSnackbarOpen2] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
   const [quickViewModalShow, setQuickViewModalShow] = useState(false);
+
+  const [width] = useWindowSize();
 
   // Handle snackbar state
   const handleSnackbarClose = () => {
@@ -78,27 +74,29 @@ const ProductCard = (props) => {
               </div>
             </Tooltip>
           </div>
-          <div className={classes.QuickView}>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedProduct({
-                  id: props.id,
-                  image: props.img,
-                  name: props.title,
-                  category: props.category,
-                  price: props.price,
-                  rating: props.rating,
-                  description: props.description,
-                  brand: props.brand,
-                  numReviews: props.numReviews,
-                });
-                setQuickViewModalShow(true);
-              }}
-            >
-              Quick View
-            </button>
-          </div>
+          {width > 770 && (
+            <div className={classes.QuickView}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedProduct({
+                    id: props.id,
+                    image: props.img,
+                    name: props.title,
+                    category: props.category,
+                    price: props.price,
+                    rating: props.rating,
+                    description: props.description,
+                    brand: props.brand,
+                    numReviews: props.numReviews,
+                  });
+                  setQuickViewModalShow(true);
+                }}
+              >
+                Quick View
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -127,11 +125,19 @@ const ProductCard = (props) => {
               title={props.title.length > 20 ? props.title : ''}
               placement='top'
             >
-              <p className={classes.Title}>
-                {props.title.length > 20
-                  ? `${props.title.substring(0, 20)}...`
-                  : props.title}
-              </p>
+              {width > 770 ? (
+                <p className={classes.Title}>
+                  {props.title.length > 20
+                    ? `${props.title.substring(0, 20)}...`
+                    : props.title}
+                </p>
+              ) : (
+                <p className={classes.Title}>
+                  {props.title.length > 25
+                    ? `${props.title.substring(0, 27)}...`
+                    : props.title}
+                </p>
+              )}
             </Tooltip>
             <div>
               <Rating
@@ -154,15 +160,14 @@ const ProductCard = (props) => {
         <Alert severity='success' variant='filled'>
           {props.title}{' '}
           <strong>
-            Added to{' '}
             <Link
               style={{
                 color: 'white',
-                // textDecoration: 'none',
+                textDecoration: 'none',
               }}
               to='/user/cart'
             >
-              Cart
+              Added to Cart
             </Link>
           </strong>
         </Alert>

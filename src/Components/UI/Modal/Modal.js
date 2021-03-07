@@ -24,7 +24,6 @@ const Modal = ({ show, updateModalState, children }) => {
         className={classes.Backdrop}
         onClick={(e) => {
           e.stopPropagation();
-          console.log('backdrop clicked');
           updateModalState(e);
         }}
       ></div>

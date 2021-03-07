@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import classes from './CartPage.module.scss';
 import ProductCard from './ProductCard/CartProductCard';
-import { CallMade, VerifiedUser } from '@material-ui/icons';
+import { OpenInNew, VerifiedUser } from '@material-ui/icons';
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
 
-// import { removeItemFromCart } from '../../../Store/Actions/CartActions/CartActions';
 import { Helmet } from 'react-helmet';
+import { LOGIN_MOBILE_OPEN } from '../../../Store/Actions/ActionTypes';
 
 //###########
 const CartPage = ({ history }) => {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.user.login);
   //State
   const { cartItems } = useSelector((state) => state.cart);
-
+  const [width] = useWindowSize();
+  useEffect(() => {}, [cartItems]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   //price calculations
@@ -27,7 +32,7 @@ const CartPage = ({ history }) => {
     cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
   const taxPrice = addDecimals(Number((0.15 * itemsPrice).toFixed(2)));
-  const shippingPrice = addDecimals(itemsPrice > 100 ? 0 : 100);
+  const shippingPrice = addDecimals(itemsPrice > 10 ? 0 : 10);
   const totalPrice = addDecimals(
     Number(itemsPrice) + Number(taxPrice) + Number(shippingPrice)
   );
@@ -39,11 +44,31 @@ const CartPage = ({ history }) => {
 
   // const dispatch = useDispatch();
 
+  //scroll to top on render
   const scrollToTop = () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox
   };
   scrollToTop();
+  // handle View Price Details
+  const handleViewPriceDetails = () => {
+    document.getElementById('priceDetails').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest',
+    });
+  };
+
+  // handel CheckOut
+  const handelCheckOut = () => {
+    if (userInfo) {
+      history.push('/user/create-order?shippping-address');
+    } else {
+      dispatch({
+        type: LOGIN_MOBILE_OPEN,
+      });
+    }
+  };
 
   return (
     <div className={classes.Container}>
@@ -56,6 +81,7 @@ const CartPage = ({ history }) => {
           {cartItems.length !== 0 ? (
             cartItems.map((p) => (
               <ProductCard
+                key={uuidv4()}
                 name={p.name}
                 image={p.image}
                 brand={p.brand}
@@ -69,7 +95,7 @@ const CartPage = ({ history }) => {
             <p className={classes.EmptyCartMessage}>
               Your Shopping Cart is Empty |
               <Link to='/'>
-                Start Shopping <CallMade />
+                Start Shopping <OpenInNew />
               </Link>
             </p>
           )}
@@ -84,42 +110,61 @@ const CartPage = ({ history }) => {
           <strong>Item Successfully Removed from your Cart</strong>
         </Alert>
       </Snackbar>
-      <div className={classes.RightWrapper}>
-        <div className={classes.RightContainer}>
-          <p>Price Details</p>
-          <div>
-            <p>
-              {`Price (${cartItems.length}) ${
-                cartItems.length >= 0 ? 'items' : 'item'
-              }`}{' '}
-              <span>${itemsPrice}</span>
-            </p>
-            <p>
-              Tax % <span>${taxPrice}</span>
-            </p>
-            <p>
-              Shipping Charges <span>{shippingPrice}</span>
-            </p>
-            <p>
-              Total Amount <span>${totalPrice}</span>
-            </p>
+      {cartItems.length > 0 && (
+        <div className={classes.RightWrapper}>
+          <div className={classes.RightContainer}>
+            <p id='priceDetails'>Price Details</p>
+            <div>
+              <p>
+                {`Price (${cartItems.length}) ${
+                  cartItems.length >= 0 ? 'items' : 'item'
+                }`}{' '}
+                <span>${itemsPrice}</span>
+              </p>
+              <p>
+                Tax % <span>${taxPrice}</span>
+              </p>
+              <p>
+                Shipping Charges <span>{shippingPrice}</span>
+              </p>
+              <p>
+                Total Amount <span>${totalPrice}</span>
+              </p>
+            </div>
+            {width > 700 && (
+              <button
+                disabled={cartItems.length <= 0}
+                onClick={() =>
+                  history.push(
+                    '/login?redirect=user/create-order?shippping-address'
+                  )
+                }
+              >
+                Checkout
+              </button>
+            )}
           </div>
+          <span>
+            <VerifiedUser />{' '}
+            <p>
+              Safe and Secure Payments.Easy returns.100% Authentic products.
+            </p>
+          </span>
+        </div>
+      )}
+      {width <= 770 && cartItems.length > 0 && (
+        <div className={classes.PlaceOrder}>
+          <p onClick={handleViewPriceDetails}>
+            ${totalPrice} <span>View price details</span>
+          </p>
           <button
-            disabled={cartItems.length <= 0}
-            onClick={() =>
-              history.push(
-                '/login?redirect=user/create-order?shippping-address'
-              )
-            }
+            style={!userInfo ? { width: '50%' } : { width: '40%' }}
+            onClick={handelCheckOut}
           >
-            Checkout
+            {userInfo ? `Checkout` : `Login & Checkout`}
           </button>
         </div>
-        <span>
-          <VerifiedUser />{' '}
-          <p>Safe and Secure Payments.Easy returns.100% Authentic products.</p>
-        </span>
-      </div>
+      )}
     </div>
   );
 };

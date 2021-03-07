@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { FaShippingFast } from 'react-icons/fa';
 import {
@@ -18,7 +19,7 @@ const TopHeaderMenu = () => {
       <div className={classes.Leftwrapper}>
         <div className={classes.LeftInfo}>
           <FaShippingFast className={classes.FastShippingIcon} />
-          <p>FREE Express Shipping On Orders $99+</p>
+          <p>FREE Express Shipping on Orders Above $10</p>
         </div>
       </div>
 
@@ -41,30 +42,30 @@ const TopHeaderMenu = () => {
           variant='fullWidth'
         /> */}
         <div className={classes.TopMenuItemContainer}>
-          <a href='/'>
+          <Link to='#'>
             <LocationOnOutlined className={classes.MapIcon} />
             <p>Our Stores</p>
-          </a>
-          <a href='/'>
+          </Link>
+          <Link to='#'>
             <LocalShippingOutlined />
             <p>Track Your Order</p>
-          </a>
-          <a href='/'>
+          </Link>
+          <Link to='#'>
             <LiveHelpOutlined />
             <p>FAQ</p>
-          </a>
+          </Link>
         </div>
         <div className={classes.Divider}></div>
         <div className={classes.SocialIconContainer}>
-          <a href='/'>
+          <Link to='#'>
             <LinkedIn />
-          </a>
-          <a href='/'>
+          </Link>
+          <Link to='#'>
             <Twitter />
-          </a>
-          <a href='/'>
+          </Link>
+          <Link to='#'>
             <Facebook />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

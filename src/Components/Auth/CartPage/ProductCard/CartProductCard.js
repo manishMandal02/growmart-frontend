@@ -8,11 +8,13 @@ import {
   Remove,
 } from '@material-ui/icons';
 
+import { useWindowSize } from '../../../../Hooks/useWindowSize/useWindowSize';
 import classes from './CartProductCard.module.scss';
 import {
   updateCartQty,
   removeItemFromCart,
 } from '../../../../Store/Actions/CartActions/CartActions';
+import { Tooltip } from '@material-ui/core';
 
 //######
 const CartProductCard = ({
@@ -27,6 +29,8 @@ const CartProductCard = ({
   //State
   const [qty, setQty] = useState('');
 
+  const [width] = useWindowSize();
+
   const dispatch = useDispatch();
   const [itemRemoveSuccess, setItemRemoveSuccess] = useState(false);
 
@@ -40,15 +44,75 @@ const CartProductCard = ({
     setItemRemoveSuccess(itemRemoveSuccess ? false : true);
   };
 
-  return (
+  return width <= 770 ? (
+    <div className={classes.MobileContainer}>
+      <div className={classes.LeftContainer}>
+        <Link to={`/product/${id}`}>
+          {name.length < 25 ? name : `${name.substring(0, 25)}...`}
+        </Link>
+        <p className={classes.Brand}>
+          Brand: <Link to={`/brand/${brand}`}>{brand}</Link>
+        </p>
+        <div className={classes.Price}>
+          <p>$</p>
+          <div>{price}</div>
+        </div>
+      </div>
+      <div className={classes.RightContainer}>
+        <Link to={`/product/${id}`}>
+          <img src={image} alt={name} />
+        </Link>
+        <div className={classes.Quantity}>
+          <span
+            onClick={() => {
+              if (qty > 1) {
+                setQty(qty - 1);
+                dispatch(updateCartQty(id, qty - 1));
+              }
+            }}
+          >
+            <Remove />
+          </span>
+          <input readOnly type='text' value={qty} />
+          <span
+            onClick={() => {
+              setQty(qty + 1);
+              dispatch(updateCartQty(id, qty + 1));
+            }}
+          >
+            <Add />
+          </span>
+        </div>
+      </div>
+
+      <div className={classes.ButtonWrapper}>
+        <Tooltip title='feature underdevelopment' placement='top'>
+          <button>
+            <FavoriteBorderOutlined /> WishList
+          </button>
+        </Tooltip>
+        <button
+          onClick={() => {
+            itemRemoveHandler();
+          }}
+        >
+          <Cancel /> Remove
+        </button>
+      </div>
+    </div>
+  ) : (
     <div className={classes.Container}>
       <Link to={`/product/${id}`}>
         <img src={image} alt={name} />
       </Link>
       <span>
-        <Link to={`/product/${id}`}>{name}</Link>
+        <Tooltip enterDelay={500} title={name} placement='top' arrow>
+          <Link to={`/product/${id}`}>
+            {name.length < 30 ? name : `${name.substring(0, 23)}...`}
+          </Link>
+        </Tooltip>
         <p>
-          Brand: <Link to='#'>{brand}</Link>
+          Brand: <Link to={`/brand/${brand}`}>{brand}</Link>
         </p>
       </span>
       <div className={classes.Price}>
@@ -58,7 +122,7 @@ const CartProductCard = ({
       <div className={classes.Quantity}>
         <span
           onClick={() => {
-            if (qty !== 0) {
+            if (qty > 1) {
               setQty(qty - 1);
               dispatch(updateCartQty(id, qty - 1));
             }
@@ -66,11 +130,7 @@ const CartProductCard = ({
         >
           <Remove />
         </span>
-        <input
-          type='text'
-          value={qty}
-          onChange={(e) => setQty(e.target.value)}
-        />
+        <input readOnly type='text' value={qty} />
         <span
           onClick={() => {
             setQty(qty + 1);
@@ -81,16 +141,20 @@ const CartProductCard = ({
         </span>
       </div>
       <span className={classes.ButtonWrapper}>
-        <button
-          onClick={() => {
-            itemRemoveHandler();
-          }}
-        >
-          <Cancel /> Remove
-        </button>
-        <button>
-          <FavoriteBorderOutlined /> WishList
-        </button>
+        <Tooltip enterDelay={500} title='Remove item' placement='top'>
+          <button
+            onClick={() => {
+              itemRemoveHandler();
+            }}
+          >
+            <Cancel /> Remove
+          </button>
+        </Tooltip>
+        <Tooltip title='feature underdevelopment' placement='top'>
+          <button>
+            <FavoriteBorderOutlined /> WishList
+          </button>
+        </Tooltip>
       </span>
     </div>
   );

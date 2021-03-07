@@ -95,3 +95,69 @@
     font-weight: lighter;
   }
 }
+
+@media only screen and (max-width: 770px) {
+  .Footer {
+    .FooterTop {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2em 2em;
+      .FooterInfo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        > ul {
+          justify-content: center;
+          align-items: center;
+          margin: 0.1em 0 0 0.28em;
+          > a {
+            font-size: 1.1em;
+            margin-bottom: 0.2em;
+          }
+        }
+        .Container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          .SocialIconContainer {
+            width: 100%;
+            justify-content: center;
+            margin: 0.2em 0 1em 0 !important;
+            > a {
+              border: none;
+              margin-right: 1.2em;
+              outline: none;
+              &:hover {
+                color: $dark-grey;
+                background-color: #ffffff21;
+              }
+              > svg {
+                transform: scale(2);
+              }
+            }
+            :nth-child(2) {
+              &:hover {
+                background-color: #ffffff21;
+              }
+            }
+            :nth-child(3) {
+              margin-right: -0.8em;
+              &:hover {
+                background-color: #ffffff21;
+              }
+            }
+          }
+          .PaymentsIcon {
+            font-size: 4em;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

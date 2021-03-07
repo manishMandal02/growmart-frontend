@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { v4 as uuidv4 } from 'uuid';
 import SwiperCore, {
   Navigation,
   Pagination,
@@ -39,14 +39,14 @@ const MainSlider = () => {
         autoplay={{ delay: 2000, disableOnInteraction: false }}
         pagination={{ clickable: true, dynamicBullets: true }}
       >
-        <SwiperSlide>
-          <Slide />
+        <SwiperSlide key={uuidv4()}>
+          <Slide key={uuidv4()} />
         </SwiperSlide>
-        <SwiperSlide>
-          <Slide />
+        <SwiperSlide key={uuidv4()}>
+          <Slide key={uuidv4()} />
         </SwiperSlide>
-        <SwiperSlide>
-          <Slide />
+        <SwiperSlide key={uuidv4()}>
+          <Slide key={uuidv4()} />
         </SwiperSlide>
       </Swiper>
     </div>

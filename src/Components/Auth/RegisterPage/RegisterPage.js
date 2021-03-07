@@ -48,7 +48,6 @@ const Register = (props) => {
   }, [dispatch, userInfo, props.history, redirect]);
 
   const registerSubmitHandler = (e) => {
-    console.log(email, password);
     e.preventDefault();
     dispatch(userRegister({ name, email, password }));
   };

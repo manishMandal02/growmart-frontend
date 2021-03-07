@@ -34,3 +34,14 @@
     padding: 0.6em 0;
   }
 }
+
+@media only screen and (max-width: 770px) {
+  .Container {
+    .Heading {
+      margin-left: 0em;
+    }
+    .SubHeading {
+      margin-left: 0.1em;
+    }
+  }
+}

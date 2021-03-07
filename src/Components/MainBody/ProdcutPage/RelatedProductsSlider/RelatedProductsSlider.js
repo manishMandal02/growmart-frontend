@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
+import { v4 as uuidv4 } from 'uuid';
 import SwiperCore, {
   Navigation,
   Pagination,
@@ -15,6 +14,7 @@ import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 
+import { useWindowSize } from '../../../../Hooks/useWindowSize/useWindowSize';
 import classes from './RelatedProductsSlider.module.scss';
 import ProductCard from '../../ProducsList/ProductCard/ProductCard';
 import { getRelatedProducts } from '../../../../Store/Actions/ProductsActions/ProductActions';
@@ -29,6 +29,8 @@ const RelatedProductsSlider = ({ category, name }) => {
     (state) => state.product.relatedProducts.products
   );
 
+  const [width] = useWindowSize();
+
   useEffect(() => {
     dispatch(getRelatedProducts(category));
   }, [dispatch, category]);
@@ -36,7 +38,8 @@ const RelatedProductsSlider = ({ category, name }) => {
     <div className={classes.Container}>
       <p className={classes.Heading}>RELATED PRODUCTS</p>
       <p className={classes.SubHeading}>
-        More products like - {name}
+        More products like -{' '}
+        {name && name.length > 20 ? `${name.substring(0, 20)}...` : name}
         {/* <Link to={`/category/${category}`}>#{category}</Link> */}
       </p>
       <div className={classes.SliderContainer}>
@@ -46,7 +49,7 @@ const RelatedProductsSlider = ({ category, name }) => {
           <Swiper
             freeMode={true}
             spaceBetween={10}
-            slidesPerView={5}
+            slidesPerView={width > 770 ? 5 : 1}
             height={30}
             loop
             // navigation
@@ -54,7 +57,7 @@ const RelatedProductsSlider = ({ category, name }) => {
             // pagination={{ clickable: true, dynamicBullets: true }}
           >
             {products.map((prod) => (
-              <SwiperSlide className={classes.Slides}>
+              <SwiperSlide key={uuidv4()} className={classes.Slides}>
                 <ProductCard
                   id={prod._id}
                   img={prod.image}

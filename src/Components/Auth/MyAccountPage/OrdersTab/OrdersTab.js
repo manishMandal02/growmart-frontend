@@ -27,7 +27,6 @@ const OrdersTab = ({ history }) => {
 
   return (
     <div className={classes.Container}>
-      <p>MY ORDERS</p>
       <div className={classes.OrdersList}>
         {loadingOrder ? (
           <CircularProgress size={30} />
@@ -50,16 +49,14 @@ const OrdersTab = ({ history }) => {
             <TableBody>
               {orders.map((p) => (
                 <TableRow key={p._id}>
-                  <TableCell component='th' scope='row'>
+                  <TableCell component='td' scope='row'>
                     {p._id}
                   </TableCell>
                   <TableCell align='left'>{`${p.createdAt.substring(
                     0,
                     10
                   )} at ${p.createdAt.substring(11, 16)}`}</TableCell>
-                  <TableCell align='left'>
-                    <strong>{p.totalPrice}</strong>
-                  </TableCell>
+                  <TableCell align='left'>{p.totalPrice}</TableCell>
                   <TableCell align='center'>
                     {p.isPaid ? (
                       <CheckCircle color='primary' />

@@ -2,12 +2,11 @@
 
 .Container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding: 0.8em 1em;
+  padding: 0.2em 1em;
   border-bottom: 1px solid $light-grey;
-  margin-top: 0.2em;
   max-width: 100%;
   a {
     text-decoration: none;
@@ -33,15 +32,15 @@
       }
     }
     > p:nth-child(2) {
+      margin: 0;
       margin-top: -0.2em;
-      font-size: 0.85em;
+      font-size: 1em;
       font-weight: 600;
       color: $mid-grey;
-
       a {
         text-decoration: none;
         cursor: pointer;
-        font-size: 1em;
+        font-size: 1.1em;
         color: $primary-color;
         &:hover {
           color: $mid-grey;
@@ -50,7 +49,7 @@
     }
   }
   .Price {
-    padding: 0.2em 0.3em 0.1em 0.6em;
+    padding: 0.2em 0.3em 0.1em 0.2em;
     background-color: #e7ffecee;
     width: 8%;
     border-radius: 0.4em;
@@ -60,8 +59,7 @@
     margin-left: 0.8em;
     p {
       font-size: 1em;
-      margin-right: 0.1em;
-
+      margin-right: 0.16em;
       color: rgb(97, 116, 98);
       font-weight: 600;
     }
@@ -149,6 +147,8 @@
       }
     }
     > button:nth-child(2) {
+      cursor: not-allowed;
+
       border: 2px solid $primary-color;
       color: $primary-color;
       &:hover {
@@ -159,6 +159,173 @@
       }
       &:focus {
         box-shadow: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .MobileContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: 0.4em;
+    flex-wrap: wrap;
+    border-bottom: 2px solid $light-grey;
+    max-width: 100%;
+    .LeftContainer {
+      width: 70%;
+      padding-left: 0.4em;
+      > a {
+        width: 100%;
+        margin-top: 0.8em;
+        text-decoration: none;
+        font-size: 1.22em;
+        color: $dark-grey;
+        font-weight: 600;
+      }
+      .Brand {
+        color: $dark-grey;
+        > a {
+          text-decoration: none;
+          color: $primary-color;
+        }
+      }
+      .Price {
+        padding: 0.4em 0.3em 0.2em 0.2em;
+        background-color: #e7ffecee;
+        width: 30%;
+        border-radius: 0.4em;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        margin-left: 0em;
+        margin-top: 0.2em;
+        p {
+          font-size: 1.2em;
+          margin-right: 0.16em;
+          color: rgb(97, 116, 98);
+          font-weight: 600;
+        }
+        div {
+          font-size: 1.5em;
+          margin: 0;
+          font-weight: 600;
+          color: $primary-color;
+          overflow-wrap: break-word;
+          margin-right: 0.2em;
+        }
+      }
+    }
+    .RightContainer {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 25%;
+      > a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 0.2em;
+        > img {
+          width: 90%;
+        }
+      }
+
+      .Quantity {
+        height: 2.2em;
+        border: 1px solid $light-grey;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        margin-right: 0.8em;
+        margin-top: 0.2em;
+        margin-bottom: 0.4em;
+        overflow: hidden;
+        padding: 0 0.7em;
+        span {
+          margin-bottom: -0.2em;
+          svg {
+            cursor: pointer;
+            padding: 0.11em;
+            border-radius: 1em;
+            color: $mid-grey;
+            &:hover {
+              background-color: $white-grey;
+            }
+          }
+        }
+
+        input {
+          margin-bottom: -0.1em;
+          text-align: center;
+          max-width: 50%;
+          margin: 0 0.1em;
+          font-size: 1.1em;
+          font-weight: 600;
+          height: 100%;
+          outline: none;
+          text-decoration: none;
+          border: none;
+          border-left: 1px solid $light-grey;
+          border-right: 1px solid $light-grey;
+        }
+        > svg:nth-child(2) {
+        }
+      }
+    }
+    .ButtonWrapper {
+      width: 100%;
+      display: flex;
+      border-top: 2px solid $light-grey;
+      border-left: 1px solid $light-grey;
+      border-right: 1px solid $light-grey;
+      padding: 0 0em;
+      button {
+        width: 50%;
+        font-weight: 600;
+        cursor: pointer;
+        margin-left: 0;
+        border: none;
+        outline: none;
+        padding: 0.4em 0.4em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1em;
+        background-color: #ffff;
+        color: $secondary-color;
+        box-shadow: $shadow3;
+        svg {
+          margin-right: 0.14em;
+        }
+        &:hover {
+          border: 2px solid $secondary-color;
+          background-color: $secondary-color;
+          color: #ffffff;
+          box-shadow: $shadow1;
+        }
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      > button:nth-child(1) {
+        cursor: not-allowed;
+        border-right: 2px solid $light-grey;
+        color: $primary-color;
+        &:hover {
+          background-color: $primary-color;
+          border: 2px solid $primary-color;
+
+          color: #ffffff;
+          box-shadow: $shadow1;
+        }
+        &:focus {
+          box-shadow: none;
+        }
       }
     }
   }

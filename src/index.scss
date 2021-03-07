@@ -1,4 +1,7 @@
 @import './App.scss';
+html {
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -10,6 +13,7 @@ body {
 
   scrollbar-width: thin;
   scrollbar-color: $mid-grey $light-grey;
+  height: 100%;
 }
 * {
   margin: 0;

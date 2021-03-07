@@ -21,7 +21,7 @@ const CreateOrderPage = ({ history, location }) => {
 
   //State
   const [address, setAddress] = useState(' ');
-  const [postalCode, setPostalCode] = useState(' ');
+  const [zipcode, setZipcode] = useState(' ');
   const [city, setCity] = useState(' ');
   const [country, setCountry] = useState(' ');
   const [paymentMethod, setPaymentMethod] = useState('Paypal');
@@ -31,7 +31,7 @@ const CreateOrderPage = ({ history, location }) => {
   useEffect(() => {
     if (cart.shippingAddress) {
       setAddress(cart.shippingAddress.address);
-      setPostalCode(cart.shippingAddress.postalCode);
+      setZipcode(cart.shippingAddress.zipcode);
       setCity(cart.shippingAddress.city);
       setCountry(cart.shippingAddress.country);
     }
@@ -125,11 +125,11 @@ const CreateOrderPage = ({ history, location }) => {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 />
-                <label>Postal Code</label>
+                <label>Zipcode</label>
                 <input
                   type='text'
-                  value={postalCode}
-                  onChange={(e) => setPostalCode(e.target.value)}
+                  value={zipcode}
+                  onChange={(e) => setZipcode(e.target.value)}
                 />
                 <label>Country</label>
                 <input
@@ -144,7 +144,7 @@ const CreateOrderPage = ({ history, location }) => {
                     dispatch(
                       saveShippingAddress({
                         address,
-                        postalCode,
+                        zipcode,
                         city,
                         country,
                       })
@@ -153,9 +153,7 @@ const CreateOrderPage = ({ history, location }) => {
                       search: '?payment-method',
                     });
                   }}
-                  disabled={Boolean(
-                    !address || !postalCode || !city || !country
-                  )}
+                  disabled={Boolean(!address || !zipcode || !city || !country)}
                 >
                   Continue
                 </button>
@@ -212,7 +210,7 @@ const CreateOrderPage = ({ history, location }) => {
               <p>
                 Shipping Address:
                 <p>{`${cart.shippingAddress.address} 
-                 ${cart.shippingAddress.city}, ${cart.shippingAddress.postalCode}, ${cart.shippingAddress.country}.`}</p>
+                 ${cart.shippingAddress.city}, ${cart.shippingAddress.zipcode}, ${cart.shippingAddress.country}.`}</p>
               </p>
               <p>
                 Payment Method: <span>{cart.paymentMethod}</span>

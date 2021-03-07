@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Alert, Rating, AlertTitle } from '@material-ui/lab';
+import { Alert, Rating } from '@material-ui/lab';
 import {
   LocalMallOutlined,
   FavoriteBorder,
@@ -13,15 +13,13 @@ import {
   Remove,
   Close,
 } from '@material-ui/icons';
-import { CircularProgress, Snackbar, Tooltip } from '@material-ui/core';
+import { Snackbar, Tooltip } from '@material-ui/core';
 
 import classes from './QuickViewModal.module.scss';
-import Modal from '../../../../UI/Modal/Modal';
-import { getProduct } from '../../../../..//Store/Actions/ProductsActions/ProductActions';
 import { addItemToCart } from '../../../../../Store/Actions/CartActions/CartActions';
 
 //######
-const QuickViewModal = ({ product, show, closeModal }) => {
+const QuickViewModal = ({ product, closeModal }) => {
   //state
   const [qty, setQty] = useState(1);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -37,21 +35,13 @@ const QuickViewModal = ({ product, show, closeModal }) => {
 
   const dispatch = useDispatch();
 
-  //   const { loading, error, product } = useSelector(
-  //     (state) => state.product.productDetails
-  //   );
-
-  //   useEffect(() => {
-  //     dispatch(getProduct(id));
-  //   }, [id, dispatch]);
-
-  //addItme to cart on click
+  //addItem to cart on click
   const handleAddItemToCart = () => {
     dispatch(addItemToCart(product.id, qty));
     setSnackbarOpen(true);
   };
 
-  //addItme to cart on click
+  //wishlist
   const handleAddToWishlish = () => {
     setSnackbarOpen2(true);
   };
@@ -102,7 +92,7 @@ const QuickViewModal = ({ product, show, closeModal }) => {
             </div>
             <p>{product.description}</p>
             <p>
-              Categories:
+              Category:
               <span>
                 <Link
                   to={`/category/${product.category}`}
@@ -120,7 +110,7 @@ const QuickViewModal = ({ product, show, closeModal }) => {
                 >
                   <Remove />
                 </span>
-                <input type='text' value={qty} />
+                <input readOnly type='text' value={qty} />
                 <span
                   onClick={() => {
                     setQty(qty + 1);
@@ -134,7 +124,11 @@ const QuickViewModal = ({ product, show, closeModal }) => {
                   <LocalMallOutlined /> Add To Cart
                 </button>
               </Tooltip>
-              <Tooltip placement='top' title='Wishlist' enterDelay={500}>
+              <Tooltip
+                placement='top'
+                title='feature underdevelopment'
+                enterDelay={200}
+              >
                 <button onClick={handleAddToWishlish}>
                   <FavoriteBorder />
                   Wishlist
@@ -175,18 +169,18 @@ const QuickViewModal = ({ product, show, closeModal }) => {
                 Share:
                 {/* <Share /> */}
               </span>
-              <a href='/#'>
+              <Link to='#'>
                 <Twitter />
-              </a>
-              <a href='/#'>
+              </Link>
+              <Link to='#'>
                 <Facebook />
-              </a>
-              <a href='/#'>
+              </Link>
+              <Link to='#'>
                 <Instagram />
-              </a>
-              <a href='/#'>
+              </Link>
+              <Link to='#'>
                 <LinkedIn />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@
     width: 75%;
     color: $dark-grey;
     p {
-      font-size: 1.4em;
+      font-size: 1.8em;
       color: $mid-grey;
     }
     h2 {
@@ -52,6 +52,40 @@
         padding: 0.1em;
         color: #ffff;
         background-color: black;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .Slide {
+    background-size: 130%;
+    height: 18vh;
+    padding: 0.8em 0.5em 0.8em 0.2em;
+    .SlideContent {
+      width: 80%;
+      p {
+        font-size: 1em;
+        margin-top: -0.66em;
+      }
+      h2 {
+        font-size: 1.4em;
+        margin-left: -1.2em;
+      }
+      h6 {
+        font-size: 1em;
+        margin-left: -1.6em;
+        p {
+          font-size: 1.12em;
+          margin-left: 0.1em;
+        }
+      }
+      h1 {
+        font-size: 1em;
+        margin: 1em 0 0 0em;
+        p {
+          font-size: 1.4em;
+        }
       }
     }
   }
