@@ -1,0 +1,84 @@
+@import '../../../../index.scss';
+
+.Container {
+  .AccoutTab {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 1em 0.4em;
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 2.6em;
+      p {
+        margin: 0.8em 0 0.1em 0;
+        font-size: 1em;
+        font-weight: 600;
+        color: $dark-grey;
+      }
+      input {
+        font-size: 1em;
+        padding: 0.4em 0.6em;
+        outline: none;
+        width: 90%;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $light-grey;
+        &:disabled {
+          cursor: not-allowed;
+          background-color: $white-grey;
+        }
+      }
+      button {
+        width: 50%;
+        margin: 1.6em 0 0.4em 5em;
+        cursor: pointer;
+        outline: none;
+        padding: 0.8em 1.2em;
+        border: none;
+        border-radius: 0.2em;
+        font-size: 1em;
+        font-weight: 600;
+        color: #ffff;
+        background-color: #1cc576;
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+      .UpdateProfileButton {
+        background-color: $primary-color;
+      }
+    }
+  }
+  .TopHeading {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $primary-color;
+    padding: 0.8em 0.8em;
+    margin-bottom: 0em;
+    color: #ffff;
+    display: flex;
+    justify-content: space-between;
+
+    > p {
+      margin: 0;
+      font-size: 1.2em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      > svg {
+        transform: scale(1.1);
+        margin-right: 0.3em;
+        &:hover {
+          background-color: #eeeeee59;
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+}

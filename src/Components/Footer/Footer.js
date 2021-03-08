@@ -10,10 +10,7 @@ import {
   FaCcMastercard,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useWindowSize } from '../../Hooks/useWindowSize/useWindowSize';
 const Footer = () => {
-  const [width] = useWindowSize();
-
   return (
     <footer className={classes.Footer}>
       <div className={classes.FooterTop}>
@@ -55,25 +52,24 @@ const Footer = () => {
           </ul>
         </div>
 
-        {width > 770 && (
-          <div className={classes.FooterInfo}>
-            <h4>More Information</h4>
-            <ul>
-              <Link key={uuidv4()} to='#'>
-                Affiliates
-              </Link>
-              <Link key={uuidv4()} to='#'>
-                Refer Link Friend
-              </Link>
-              <Link key={uuidv4()} to='#'>
-                Git Vouchers
-              </Link>
-              <Link key={uuidv4()} to='#'>
-                Student Program
-              </Link>
-            </ul>
-          </div>
-        )}
+        <div className={classes.FooterInfo}>
+          <h4>More Information</h4>
+          <ul>
+            <Link key={uuidv4()} to='#'>
+              Affiliates
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Refer Link Friend
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Git Vouchers
+            </Link>
+            <Link key={uuidv4()} to='#'>
+              Student Program
+            </Link>
+          </ul>
+        </div>
+
         <div className={classes.FooterInfo}>
           <div className={classes.Container}>
             <h4>Social Media</h4>

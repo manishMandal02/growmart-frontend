@@ -121,7 +121,6 @@ export const userUpdateAction = ({ name, email, password }) => async (
       type: UPDATE_USER_SUCCESS,
       payload: data,
     });
-
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({

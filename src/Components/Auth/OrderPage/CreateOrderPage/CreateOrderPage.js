@@ -2,22 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { VerifiedUser } from '@material-ui/icons';
+import { ArrowBack, VerifiedUser } from '@material-ui/icons';
 import { CircularProgress, Step, StepLabel, Stepper } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import { v4 as uuidv4 } from 'uuid';
 
+import ProductCard from '../../CartPage/ProductCard/CartProductCard';
+import { useWindowSize } from '../../../../Hooks/useWindowSize/useWindowSize';
 import classes from './CreateOrderPage.module.scss';
 import {
   saveShippingAddress,
   savePaymentMethod,
 } from '../../../../Store/Actions/CartActions/CartActions';
 import { createOrder } from '../../../../Store/Actions/OrderActions/OrderActions';
+import { Helmet } from 'react-helmet';
 
 //###########
 const CreateOrderPage = ({ history, location }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const { cartItems } = cart;
+
+  //url params
+  const urlParams = new URLSearchParams(location.search);
+
+  const stepParams = urlParams.get('step');
+
+  const [width] = useWindowSize();
 
   //State
   const [address, setAddress] = useState(' ');
@@ -38,7 +49,16 @@ const CreateOrderPage = ({ history, location }) => {
     if (cart.paymentMethod) {
       setPaymentMethod(cart.paymentMethod);
     }
-  }, [cart.shippingAddress, cart.paymentMethod]);
+    if (stepParams) {
+      stepParams === 'payment'
+        ? setActiveStep(4)
+        : stepParams === 'payment-method'
+        ? setActiveStep(2)
+        : stepParams === 'order-summary'
+        ? setActiveStep(3)
+        : setActiveStep(1);
+    }
+  }, [cart.shippingAddress, cart.paymentMethod, stepParams]);
 
   const { loading, error, success, order } = useSelector(
     (state) => state.order.orderCreate
@@ -65,7 +85,7 @@ const CreateOrderPage = ({ history, location }) => {
   );
 
   cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 10 ? 0 : 10);
   cart.totalPrice = addDecimals(
     Number(cart.itemsPrice) + Number(cart.taxPrice) + Number(cart.shippingPrice)
   );
@@ -86,8 +106,11 @@ const CreateOrderPage = ({ history, location }) => {
   };
 
   //JSX return
-  return (
+  return width > 900 ? (
     <div className={classes.Container}>
+      <Helmet>
+        <title>{`Checkout | GrowMart`}</title>
+      </Helmet>
       <div className={classes.LeftWrapper}>
         <div className={classes.Stepper}>
           <Stepper activeStep={activeStep} alternativeLabel>
@@ -103,9 +126,10 @@ const CreateOrderPage = ({ history, location }) => {
             <Step>
               <StepLabel>Order Summary</StepLabel>
             </Step>
+            {width <= 900}
           </Stepper>
         </div>
-        <span className={classes.LeftContainer}>
+        <div className={classes.LeftContainer}>
           {activeStep === 1 ||
           location.search.split('=')[1] === 'shipping-address' ? (
             <div className={classes.Address}>
@@ -229,7 +253,7 @@ const CreateOrderPage = ({ history, location }) => {
               </div>
             </div>
           ) : null}
-        </span>
+        </div>
       </div>
 
       <div className={classes.RightWrapper}>
@@ -269,6 +293,245 @@ const CreateOrderPage = ({ history, location }) => {
           <VerifiedUser />{' '}
           <p>Safe and Secure Payments.Easy returns.100% Authentic products.</p>
         </span>
+      </div>
+    </div>
+  ) : (
+    <div className={classes.MobileContainer}>
+      <Helmet>
+        <title>{`Checkout | GrowMart`}</title>
+      </Helmet>
+      <div className={classes.TopHeading}>
+        <p>
+          {' '}
+          <ArrowBack onClick={() => history.goBack()} />{' '}
+          {activeStep === 4
+            ? 'payment'
+            : activeStep === 2
+            ? 'Payment Method'
+            : activeStep === 3
+            ? 'Order Summary'
+            : 'Select Address'}
+        </p>
+      </div>
+      <div className={classes.BottomContainer}>
+        {stepParams === 'shipping-address' ? (
+          <div className={classes.Address}>
+            <form>
+              <label>Address</label>
+              <input
+                maxLength='60'
+                type='text'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+
+              <label>City</label>
+              <input
+                type='text'
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+              <label>Zipcode</label>
+              <input
+                type='text'
+                value={zipcode}
+                onChange={(e) => setZipcode(e.target.value)}
+              />
+              <label>Country</label>
+              <input
+                type='text'
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+              <div className={classes.Continue}>
+                <p>
+                  ${cart.totalPrice} <span>Orer Total Price</span>
+                </p>
+                <button
+                  onClick={() => {
+                    urlParams.set('step', 'payment-method');
+                    history.push({
+                      search: urlParams.toString(),
+                    });
+                  }}
+                >
+                  {'Continue'}
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : stepParams === 'payment-method' ? (
+          <div className={classes.PaymentMethod}>
+            <form>
+              <div className={classes.Paypal}>
+                <input
+                  type='radio'
+                  id='paypal'
+                  value='Paypal'
+                  checked={paymentMethod === 'Paypal'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <label htmlFor='paypal'>Paypal</label>
+                <img
+                  src='https://cdn.iconscout.com/icon/free/png-512/paypal-4-226455.png'
+                  alt='paypal'
+                />
+              </div>
+              <div className={classes.Stripe}>
+                <input
+                  type='radio'
+                  id='stripe'
+                  value='Stripe'
+                  checked={paymentMethod === 'Stripe'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <label htmlFor='stripe'>Stripe </label>
+                <i className='fab fa-stripe '></i>
+              </div>
+            </form>
+            <div className={classes.Continue}>
+              <p>
+                ${cart.totalPrice} <span>Orer Total Price</span>
+              </p>
+              <button
+                onClick={() => {
+                  urlParams.set('step', 'order-summary');
+                  dispatch(savePaymentMethod(paymentMethod));
+                  history.push({
+                    search: urlParams.toString(),
+                  });
+                }}
+              >
+                {'Continue'}
+              </button>
+            </div>
+          </div>
+        ) : stepParams === 'order-summary' ? (
+          <div className={classes.OrderSummary}>
+            {/* <p>Your Order Summary</p> */}
+            <div className={classes.Address}>
+              <p>{userInfo.name}</p>
+              <p>{userInfo.email}</p>
+              <p>
+                {cart.shippingAddress.address.length < 45
+                  ? cart.shippingAddress.address
+                  : `${cart.shippingAddress.address.substring(0, 45)}...`}
+              </p>
+              <p>
+                {cart.shippingAddress.city} - {cart.shippingAddress.zipcode}{' '}
+                {cart.shippingAddress.country}
+              </p>
+              <button
+                onClick={() => {
+                  urlParams.set('step', 'shipping-address');
+                  history.push({
+                    search: urlParams.toString(),
+                  });
+                }}
+              >
+                Update Address
+              </button>
+            </div>
+            <div className={classes.PaymentMethod}>
+              <span>
+                {cart.paymentMethod === 'Paypal' ? (
+                  <div className={classes.Paypal}>
+                    <img
+                      src='https://cdn.iconscout.com/icon/free/png-512/paypal-4-226455.png'
+                      alt='paypal'
+                    />
+                    <p>PayPal </p>
+                  </div>
+                ) : (
+                  <div className={classes.Stripe}>
+                    <i className='fab fa-stripe '></i>
+                    <p>Stripe </p>
+                  </div>
+                )}
+              </span>
+              <button
+                onClick={() => {
+                  urlParams.set('step', 'payment-method');
+                  history.push({
+                    search: urlParams.toString(),
+                  });
+                }}
+              >
+                Update Payment Method
+              </button>
+            </div>
+            {cartItems.map((p) => (
+              <div key={uuidv4()} className={classes.Product}>
+                <ProductCard
+                  name={p.name}
+                  image={p.image}
+                  brand={p.brand}
+                  price={p.price}
+                  quantity={p.qty}
+                  id={p.product}
+                />
+              </div>
+            ))}
+
+            <div className={classes.RightWrapper}>
+              <div className={classes.RightContainer}>
+                {!error ? null : (
+                  <Alert severity='error' variant='filled'>
+                    <strong>{error}</strong>
+                  </Alert>
+                )}
+                <p id='priceDetails'>Price Details</p>
+                <div>
+                  <p>
+                    {`Price (${cartItems.length}) ${
+                      cartItems.length >= 0 ? 'items' : 'item'
+                    }`}{' '}
+                    <span>${cart.itemsPrice}</span>
+                  </p>
+                  <p>
+                    Tax % <span>${cart.taxPrice}</span>
+                  </p>
+                  <p>
+                    Shipping Charges <span>${cart.shippingPrice}</span>
+                  </p>
+                  <p>
+                    Total Amount <span>${cart.totalPrice}</span>
+                  </p>
+                </div>
+              </div>
+              <span>
+                <VerifiedUser />{' '}
+                <p>
+                  Safe and Secure Payments.Easy returns.100% Authentic products.
+                </p>
+              </span>
+            </div>
+            <div className={classes.Continue}>
+              <p
+                onClick={() => {
+                  document.getElementById('priceDetails').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'nearest',
+                  });
+                }}
+              >
+                ${cart.totalPrice} <span>View Price Details</span>
+              </p>
+              <button
+                onClick={() => {
+                  urlParams.set('step', 'order-summary');
+                  dispatch(savePaymentMethod(paymentMethod));
+                  history.push({
+                    search: urlParams.toString(),
+                  });
+                }}
+              >
+                {'Continue'}
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

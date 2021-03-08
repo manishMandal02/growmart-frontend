@@ -3,6 +3,8 @@ import { CircularProgress } from '@material-ui/core';
 import { Alert, AlertTitle, Pagination } from '@material-ui/lab';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
+
 import classes from './ProductsList.module.scss';
 import ProductCard from './ProductCard/ProductCard.js';
 
@@ -26,11 +28,12 @@ const ProductsList = ({
     : '';
   const pageNumber = urlParams.has('page') ? Number(urlParams.get('page')) : 1;
 
+  const [width] = useWindowSize();
   return (
     <div className={classes.MainContainer}>
       <div className={classes.SortByWrapper}>
         <form action='/action_page.php'>
-          <label htmlFor='cars'>Sort By:</label>
+          {width > 900 && <label htmlFor='cars'>Sort By:</label>}
           <select
             value={sortBy}
             onChange={(e) => {
@@ -49,10 +52,6 @@ const ProductsList = ({
         classes={{
           root: classes.Grid,
         }}
-        container
-        spacing={2}
-        justify={products && products.length >= 1 ? 'flex-start' : 'center'}
-        alignItems='center'
       >
         {loading ? (
           <CircularProgress style={{ margin: '1em' }} color='primary'>

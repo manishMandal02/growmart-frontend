@@ -38,7 +38,7 @@
     justify-content: space-evenly;
     .ProductContainer {
       width: 23%;
-      margin-top: 1em;
+      margin-top: 0.6em;
     }
     .MessageContainer {
       margin: 0.6em;
@@ -59,8 +59,19 @@
 @media only screen and (max-width: 770px) {
   .MainContainer {
     .SortByWrapper {
-      text-align: right;
-      margin: 0em 0.3em 0 0em;
+      width: 100%;
+      text-align: center;
+      form {
+        select {
+          font-size: 1.2em;
+          background-color: $white-grey;
+          border: none;
+          box-shadow: $shadow2;
+          margin-top: -0.4em;
+          width: 85%;
+          padding: 0.6em 1em;
+        }
+      }
     }
     .MainGrid {
       padding: 0 0 0.8em 0;

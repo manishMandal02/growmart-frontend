@@ -153,7 +153,7 @@
   }
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 900px) {
   .Container {
     flex-direction: column;
     padding: 0em 0em;
@@ -161,11 +161,38 @@
     .LeftWrapper {
       width: 100%;
       max-height: 70%;
+      box-shadow: none;
       .Heading {
-        padding: 0.5em 0.8em;
-        font-size: 1.16em;
+        display: flex;
+        align-items: center;
+        padding: 0.6em 0.5em;
+        font-size: 1.3em;
+        background-color: $primary-color;
+        color: #ffff;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        z-index: 100;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        > svg {
+          margin-right: 0.4em;
+          transform: scale(1.1);
+          &:hover {
+            background-color: #eeeeee59;
+            opacity: 0.2;
+          }
+        }
       }
       .LeftContainer {
+        margin-top: 3.2em;
+        background-color: $white-grey;
+        padding: 0.6 0em;
+        // padding-right: 0.6em;
+        box-shadow: none;
+        .Product {
+          margin-top: 0.7em;
+        }
         .EmptyCartMessage {
           padding: 1.6em 0em;
           font-size: 0.95em;

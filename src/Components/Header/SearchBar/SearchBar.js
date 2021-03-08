@@ -98,7 +98,7 @@ const SearchBar = () => {
 
   return (
     <div className={classes.NavBar}>
-      {width > 770 && (
+      {width > 900 && (
         <>
           <div className={classes.LeftContainer}>
             <Link to='/'>
@@ -187,7 +187,7 @@ const SearchBar = () => {
           </div>
         </>
       )}
-      {width <= 770 && (
+      {width <= 900 && (
         <>
           <div className={classes.TopContainer}>
             <SideMenu

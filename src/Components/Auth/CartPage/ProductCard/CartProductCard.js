@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Add,
   Cancel,
@@ -31,6 +31,7 @@ const CartProductCard = ({
 
   const [width] = useWindowSize();
 
+  const location = useLocation();
   const dispatch = useDispatch();
   const [itemRemoveSuccess, setItemRemoveSuccess] = useState(false);
 
@@ -47,11 +48,27 @@ const CartProductCard = ({
   return width <= 770 ? (
     <div className={classes.MobileContainer}>
       <div className={classes.LeftContainer}>
-        <Link to={`/product/${id}`}>
-          {name.length < 25 ? name : `${name.substring(0, 25)}...`}
+        <Link
+          to={
+            location.pathname === '/user/cart'
+              ? `/product/${id}`
+              : '/user/create-order?step=order-summary'
+          }
+        >
+          {/* {name.length > 25 ? name : `${name.substring(0, 25)}...`} */}
+          {name}
         </Link>
         <p className={classes.Brand}>
-          Brand: <Link to={`/brand/${brand}`}>{brand}</Link>
+          Brand:{' '}
+          <Link
+            to={
+              location.pathname === '/user/cart'
+                ? `/brand/${brand}`
+                : '/user/create-order?step=order-summary'
+            }
+          >
+            {brand}
+          </Link>
         </p>
         <div className={classes.Price}>
           <p>$</p>
@@ -62,43 +79,47 @@ const CartProductCard = ({
         <Link to={`/product/${id}`}>
           <img src={image} alt={name} />
         </Link>
-        <div className={classes.Quantity}>
-          <span
-            onClick={() => {
-              if (qty > 1) {
-                setQty(qty - 1);
-                dispatch(updateCartQty(id, qty - 1));
-              }
-            }}
-          >
-            <Remove />
-          </span>
-          <input readOnly type='text' value={qty} />
-          <span
-            onClick={() => {
-              setQty(qty + 1);
-              dispatch(updateCartQty(id, qty + 1));
-            }}
-          >
-            <Add />
-          </span>
-        </div>
+        {location.pathname === '/user/cart' && (
+          <div className={classes.Quantity}>
+            <span
+              onClick={() => {
+                if (qty > 1) {
+                  setQty(qty - 1);
+                  dispatch(updateCartQty(id, qty - 1));
+                }
+              }}
+            >
+              <Remove />
+            </span>
+            <input readOnly type='text' value={qty} />
+            <span
+              onClick={() => {
+                setQty(qty + 1);
+                dispatch(updateCartQty(id, qty + 1));
+              }}
+            >
+              <Add />
+            </span>
+          </div>
+        )}
       </div>
 
-      <div className={classes.ButtonWrapper}>
-        <Tooltip title='feature underdevelopment' placement='top'>
-          <button>
-            <FavoriteBorderOutlined /> WishList
+      {location.pathname === '/user/cart' && (
+        <div className={classes.ButtonWrapper}>
+          <Tooltip title='feature underdevelopment' placement='top'>
+            <button>
+              <FavoriteBorderOutlined /> WishList
+            </button>
+          </Tooltip>
+          <button
+            onClick={() => {
+              itemRemoveHandler();
+            }}
+          >
+            <Cancel /> Remove
           </button>
-        </Tooltip>
-        <button
-          onClick={() => {
-            itemRemoveHandler();
-          }}
-        >
-          <Cancel /> Remove
-        </button>
-      </div>
+        </div>
+      )}
     </div>
   ) : (
     <div className={classes.Container}>

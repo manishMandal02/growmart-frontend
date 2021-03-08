@@ -35,9 +35,9 @@ const TopProductsSlider = () => {
       {products && (
         <Swiper
           freeMode={true}
-          // spaceBetween={}
+          spaceBetween={8}
           slidesPerView={1}
-          height={30}
+          height={20}
           loop
           // navigation
           autoplay={{ delay: 3000, disableOnInteraction: false }}

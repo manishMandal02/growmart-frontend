@@ -37,11 +37,13 @@
 
 @media only screen and (max-width: 770px) {
   .Container {
+    padding: 0.2em;
     .Heading {
-      margin-left: 0em;
+      margin-left: 0.2em;
+      font-size: 1.46em;
     }
     .SubHeading {
-      margin-left: 0.1em;
+      margin-left: 0.3em;
     }
   }
 }

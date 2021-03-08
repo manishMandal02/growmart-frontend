@@ -64,8 +64,8 @@
   .RightMenu {
     margin-right: 3.5em;
     display: flex;
-    width: 16vw;
-    justify-content: flex-end;
+    width: 20%;
+    justify-content: flex-start;
     border-left: 0.04em solid $light-grey;
     margin: -0.6em -1em -0.6em 1em;
     a {
@@ -101,7 +101,7 @@
   }
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 900px) {
   .NavBar {
     padding: 0.2em 0em;
     border: none;

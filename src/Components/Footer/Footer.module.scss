@@ -96,8 +96,10 @@
   }
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 870px) {
   .Footer {
+    bottom: 0;
+    overflow: hidden;
     .FooterTop {
       flex-direction: column;
       align-items: center;
@@ -154,7 +156,8 @@
           }
           .PaymentsIcon {
             font-size: 4em;
-            width: 100%;
+            width: 90%;
+            max-width: 90%;
           }
         }
       }

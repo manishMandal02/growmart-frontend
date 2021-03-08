@@ -2,19 +2,19 @@
 
 .SliderContainer {
   // margin: 0.2em .2em 1em 1em;
-  // padding: 0em 0.2em;
+  // padding: 0em 0.6em;
   margin: 0;
-  // max-width: 95%;
+  width: 100%;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .Slides {
   margin: 0;
-  // width: 12em;
+  width: 120%;
   margin-bottom: 0.1em;
-  margin-right: -0 1em;
+  margin-right: -0.1em;
   // padding-right: 0.1em
   // padding: 0 0.2em;
   // display: flex;

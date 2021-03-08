@@ -126,7 +126,7 @@ const Register = (props) => {
         <button>
           <FcGoogle /> Register With Google
         </button>
-        <p>
+        <p className={classes.LoginHere}>
           Already have an account?
           <Link onClick={props.closeModal} to='/login'>
             Login

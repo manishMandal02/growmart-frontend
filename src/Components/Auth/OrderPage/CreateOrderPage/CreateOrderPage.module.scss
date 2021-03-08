@@ -306,3 +306,364 @@
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .MobileContainer {
+    .TopHeading {
+      z-index: 100;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: $primary-color;
+      padding: 1.06em 0.8em;
+      margin-bottom: 0em;
+      color: #ffff;
+      display: flex;
+      justify-content: space-between;
+
+      > p {
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        > svg {
+          transform: scale(1.1);
+          margin-right: 0.3em;
+        }
+      }
+    }
+    .BottomContainer {
+      padding: 0.6em 0em;
+      background-color: #ffff;
+      width: 100%;
+      margin-top: 3.6em;
+      overflow-x: hidden;
+      .Address {
+        width: 90%;
+        margin-left: 0.55em;
+        > form {
+          display: flex;
+          flex-direction: column;
+          > label {
+            font-size: 1.1em;
+            margin: 0.66em 0 0.2em 0;
+            font-weight: 600;
+            color: $dark-grey;
+          }
+          > input {
+            width: 100%;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid$light-grey;
+            background-color: rgb(248, 248, 248);
+            font-size: 1em;
+            padding: 0.6em 0.6em;
+          }
+        }
+      }
+      .PaymentMethod {
+        width: 89%;
+        margin-left: 0.5em;
+        > form {
+          margin-top: 0.6em;
+          font-size: 1.2em;
+          width: 96%;
+          > div {
+            // box-shadow: $shadow2;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            > input {
+            }
+            > label {
+              font-size: 1em;
+              margin-left: 0.2em;
+              font-weight: 600;
+              margin-left: 0.4em;
+              width: 100%;
+              color: $dark-grey;
+            }
+
+            > i {
+              font-size: 1.6em;
+            }
+            &:focus &:hover {
+              border: 1px solid $dark-grey;
+            }
+          }
+          .Paypal {
+            padding: 0.8em 1em 0.8em 0.8em;
+            margin-bottom: 0.6em;
+            > input {
+            }
+            > label {
+            }
+            > img {
+              width: 8%;
+            }
+          }
+          .Stripe {
+            padding: 0.56em 1em 0.56em 0.8em;
+
+            > input {
+            }
+            > label {
+            }
+            > i {
+              font-size: 2em;
+              color: #646ede;
+            }
+          }
+        }
+
+        > button {
+          outline: none;
+          border: none;
+          border-radius: 0.1em;
+          width: 25%;
+          margin-top: 0.6em;
+          padding: 0.4em;
+          font-size: 1.1em;
+          background-color: $primary-color;
+          color: #ffff;
+          cursor: pointer;
+          transition: all 0.1s;
+
+          &:hover {
+            box-shadow: $shadow2;
+          }
+        }
+        .BackButton {
+          background-color: $dark-grey;
+          font-size: 1em;
+          color: #fff;
+          margin-right: 0.6em;
+        }
+      }
+      .OrderSummary {
+        width: 100%;
+        margin-top: 0.4em;
+        margin: 0;
+        .Address {
+          width: 98%;
+          padding: 1em 0.7em;
+          margin: 0;
+          margin-bottom: 0.4em;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          p:nth-child(1) {
+            color: $dark-grey;
+            font-weight: 600;
+          }
+          p:nth-child(2) {
+            color: $dark-grey;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+          }
+          p:nth-child(3) {
+            color: $dark-grey;
+          }
+          p:nth-child(4) {
+            color: $dark-grey;
+          }
+          > button {
+            width: 96%;
+            padding: 0.7em 0;
+            margin-top: 0.8em;
+            font-size: 1em;
+            letter-spacing: 0.016em;
+            font-weight: 600;
+            color: #ffff;
+            outline: none;
+            border: none;
+            border-radius: 0.1em;
+            background-color: $primary-color;
+            box-shadow: $shadow2;
+            &:hover {
+              //temporary
+              opacity: 0.8;
+            }
+          }
+        }
+        .PaymentMethod {
+          width: 98%;
+          padding: 1em 0.7em;
+          margin: 0;
+          margin-bottom: 0.4em;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          > span {
+            // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0.1em 0.8em;
+            > div {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              > p {
+                font-size: 1.2em;
+                font-weight: 600;
+                color: $dark-grey;
+                margin-left: 0.5em;
+              }
+            }
+          }
+          .Paypal {
+            margin-bottom: 0.6em;
+
+            > img {
+              width: 8%;
+            }
+          }
+          .Stripe {
+            p {
+              font-size: 1.24em;
+            }
+            > i {
+              font-size: 2.4em;
+              color: #646ede;
+            }
+          }
+          > button {
+            width: 96%;
+            padding: 0.7em 0;
+            margin-top: 0.8em;
+            font-size: 1em;
+            letter-spacing: 0.016em;
+            font-weight: 600;
+            color: #ffff;
+            outline: none;
+            border: none;
+            border-radius: 0.1em;
+            background-color: $primary-color;
+            box-shadow: $shadow2;
+            &:hover {
+              //temporary
+              opacity: 0.9;
+            }
+          }
+        }
+        .Product {
+          width: 100%;
+          padding: 0em 0 0.4em 0;
+          margin-top: 0.8em;
+          margin-left: 0.2em;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+        .RightWrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin: 0;
+          margin-top: 1em;
+          .RightContainer {
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 100%;
+            background-color: #ffff;
+
+            > p:nth-child(1) {
+              padding: 0.4em 0.8em;
+              font-size: 1.2em;
+              color: $dark-grey;
+              font-weight: 600;
+              border-bottom: 1px solid $light-grey;
+            }
+            > div:nth-child(2) {
+              padding: 1em 1.6em 0.2em 1.6em;
+              p {
+                margin-bottom: 0.76em;
+                font-size: 1.16em;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                span {
+                  font-weight: 600;
+                  color: $primary-color;
+                }
+              }
+              > p:nth-child(4) {
+                font-size: 1.2em;
+                padding: 0.6em 0;
+                border-top: 1.6px dashed $light-grey;
+                border-bottom: 1.6px dashed $light-grey;
+                font-weight: 600;
+              }
+            }
+          }
+          > span:nth-child(2) {
+            margin-top: 1.2em;
+            display: flex;
+            align-items: center;
+            svg {
+              font-size: 2em;
+              margin-right: 0.1em;
+              color: $mid-grey;
+            }
+            p {
+              font-size: 1em;
+              color: $mid-grey;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+  .Continue {
+    position: fixed;
+    padding: 0.4em 0.6em 0.4em 0.6em;
+    border-top: 1px solid $light-grey;
+    bottom: 0;
+    width: 95%;
+    background-color: #ffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 80;
+    > p {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.36em;
+      font-weight: 600;
+      margin: 0;
+      > span {
+        color: $primary-color;
+        font-size: 0.66em;
+        margin: 0;
+        margin-top: -0.15em;
+        padding: 0;
+      }
+    }
+    > button {
+      width: 40%;
+      outline: none;
+      height: 100%;
+      border-radius: 0.2em;
+      border: none;
+      margin-right: 0.3em;
+      cursor: pointer;
+      color: #ffff;
+      padding: 0.6em 0.8em;
+      font-size: 1.2em;
+      font-weight: 600;
+      transition: all 0.2s;
+      background-image: linear-gradient(
+        to right,
+        $primary-color 0%,
+        #40df7a 0%,
+        #38b88b 100%
+      );
+      &:hover {
+        //   box-shadow: $shadow1;
+        transform: scale(1.016);
+        box-shadow: $shadow2;
+        opacity: 0.9;
+      }
+    }
+  }
+}

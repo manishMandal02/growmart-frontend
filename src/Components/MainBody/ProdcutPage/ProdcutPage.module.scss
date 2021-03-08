@@ -372,19 +372,24 @@
       overflow-x: hidden;
       .ImageWrapper {
         max-width: 100%;
-        width: 95%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 2px solid $light-grey;
         img {
           border: none;
-          width: 100%;
-          padding: 0.2em 1em 0.2em 0.6em;
-          border-bottom: 2px solid $light-grey;
+          width: 60%;
+          padding: 0.2em 0;
+          // padding: 0em 0.4em 0em 2.6em;
         }
       }
       .ProdcutInfo {
         width: 100%;
-        padding: 0.3em 0em;
+        padding: 0.4em 0em;
         > p:nth-child(1) {
-          font-size: 1.7em;
+          width: 92%;
+          font-size: 1.4em;
           line-height: 1.26em;
           margin-left: 0.2em;
         }
@@ -455,7 +460,7 @@
             width: 25%;
             height: 30%;
             margin-left: 7em;
-            margin-bottom: 0.6em;
+            margin-bottom: 0.8em;
             > span {
               padding: 0 0.2em;
               > svg {
@@ -480,7 +485,7 @@
             border-radius: 0.2em;
             box-shadow: $shadow1;
             justify-content: center;
-            font-size: 1.4em;
+            font-size: 1.3em;
             padding: 0.5em 0;
             font-weight: 500;
             > svg {
@@ -510,7 +515,7 @@
 
   .Reviews {
     .Heading {
-      font-size: 1.6em;
+      font-size: 1.4em;
       padding: 0.2em 0.2em;
     }
     .ReviewsContainer {
@@ -518,7 +523,7 @@
         padding: 0.6em 0 0.6em 1em;
         .Name {
           width: 100%;
-          > p {
+          > span {
             margin-left: 0.2em;
           }
         }

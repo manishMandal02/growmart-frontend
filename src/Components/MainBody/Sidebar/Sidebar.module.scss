@@ -43,16 +43,18 @@
 .RecentlyAdded {
   margin: 0;
   overflow: hidden;
-  width: 98%;
-  max-width: 99%;
+  width: 95%;
+  max-width: 90%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0.1em;
+  padding: 0.5em 0.4em 0.6em 0.6em;
   > div {
     padding: 0.2em;
+    width: 98%;
+    max-width: 100%;
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
   }
 }

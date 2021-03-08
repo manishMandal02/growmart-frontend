@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import classes from './CartPage.module.scss';
 import ProductCard from './ProductCard/CartProductCard';
-import { OpenInNew, VerifiedUser } from '@material-ui/icons';
+import { ArrowBack, OpenInNew, VerifiedUser } from '@material-ui/icons';
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
@@ -17,6 +17,10 @@ import { LOGIN_MOBILE_OPEN } from '../../../Store/Actions/ActionTypes';
 const CartPage = ({ history }) => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user.login);
+
+  //url params
+  const urlParams = new URLSearchParams();
+
   //State
   const { cartItems } = useSelector((state) => state.cart);
   const [width] = useWindowSize();
@@ -62,7 +66,11 @@ const CartPage = ({ history }) => {
   // handel CheckOut
   const handelCheckOut = () => {
     if (userInfo) {
-      history.push('/user/create-order?shippping-address');
+      urlParams.set('step', 'shipping-address');
+      history.push({
+        pathname: '/user/create-order',
+        search: urlParams.toString(),
+      });
     } else {
       dispatch({
         type: LOGIN_MOBILE_OPEN,
@@ -76,20 +84,24 @@ const CartPage = ({ history }) => {
         <title>{`My Shopping Cart | GrowMart`}</title>
       </Helmet>
       <div className={classes.LeftWrapper}>
-        <div className={classes.Heading}>My Cart ({cartItems.length})</div>
+        <div className={classes.Heading}>
+          {width <= 900 && <ArrowBack onClick={() => history.goBack()} />} My
+          Cart ({cartItems.length})
+        </div>
         <span className={classes.LeftContainer}>
           {cartItems.length !== 0 ? (
             cartItems.map((p) => (
-              <ProductCard
-                key={uuidv4()}
-                name={p.name}
-                image={p.image}
-                brand={p.brand}
-                price={p.price}
-                quantity={p.qty}
-                id={p.product}
-                openSnackbar={() => setSnackbarOpen(true)}
-              />
+              <div key={uuidv4()} className={classes.Product}>
+                <ProductCard
+                  name={p.name}
+                  image={p.image}
+                  brand={p.brand}
+                  price={p.price}
+                  quantity={p.qty}
+                  id={p.product}
+                  openSnackbar={() => setSnackbarOpen(true)}
+                />
+              </div>
             ))
           ) : (
             <p className={classes.EmptyCartMessage}>
@@ -131,7 +143,7 @@ const CartPage = ({ history }) => {
                 Total Amount <span>${totalPrice}</span>
               </p>
             </div>
-            {width > 700 && (
+            {width > 900 && (
               <button
                 disabled={cartItems.length <= 0}
                 onClick={() =>
@@ -152,7 +164,7 @@ const CartPage = ({ history }) => {
           </span>
         </div>
       )}
-      {width <= 770 && cartItems.length > 0 && (
+      {width <= 900 && cartItems.length > 0 && (
         <div className={classes.PlaceOrder}>
           <p onClick={handleViewPriceDetails}>
             ${totalPrice} <span>View price details</span>
