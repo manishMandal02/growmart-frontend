@@ -23,7 +23,6 @@ import Logo from '../../../Assets/Images/main-logo.png';
 import { userLogout } from '../../../Store/Actions/UsersActions/UserActions';
 import { LOGIN_MOBILE_OPEN } from '../../../Store/Actions/ActionTypes';
 import SideMenu from '../../UI/SideMenu/SideMenu';
-import LoginModalMobile from '../../Auth/LoginModalMobile/LoginModalMobile';
 
 // #############
 const SearchBar = () => {
@@ -199,7 +198,7 @@ const SearchBar = () => {
                 })
               }
             />
-            <LoginModalMobile />
+
             <div className={classes.LeftContainer}>
               <Menu onClick={() => setSideMenuOpen(true)} />
 
@@ -212,7 +211,6 @@ const SearchBar = () => {
                   onClick={(e) => history.push('/my/account')}
                 >
                   <Person />
-                  <p>{userInfo.name.split(' ')[0]} </p>
                 </div>
               ) : (
                 <div

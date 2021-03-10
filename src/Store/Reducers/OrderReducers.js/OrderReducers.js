@@ -1,6 +1,7 @@
 import {
   CREATE_ORDER_ERROR,
   CREATE_ORDER_REQUEST,
+  CREATE_ORDER_RESET,
   CREATE_ORDER_SUCCESS,
   GET_MY_ORDERS_FAIL,
   GET_MY_ORDERS_REQUEST,
@@ -33,7 +34,8 @@ export const createOrderReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
-
+    case CREATE_ORDER_RESET:
+      return {};
     default:
       return state;
   }

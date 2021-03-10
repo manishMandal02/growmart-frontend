@@ -229,3 +229,267 @@
   align-items: center;
   overflow: hidden;
 }
+
+@media only screen and (max-width: 900px) {
+  .MobileContainer {
+    width: 100%;
+    overflow: hidden;
+    .TopHeading {
+      z-index: 100;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: $primary-color;
+      padding: 0.9em 0.8em;
+      margin-bottom: 0em;
+      box-shadow: $shadow2;
+      color: #ffff;
+      display: flex;
+      justify-content: space-between;
+
+      > p {
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        > svg {
+          transform: scale(1.1);
+          margin-right: 0.3em;
+          &:hover {
+            background-color: #eeeeee59;
+            opacity: 0.2;
+          }
+        }
+      }
+    }
+    .OrderContainer {
+      margin-top: 3.4em;
+      background-color: $white-grey;
+
+      .Order {
+        background-color: $white-grey;
+        width: 99%;
+        margin: 0;
+        padding: 0.4em 0;
+        .StatusMobile {
+          display: flex;
+          align-items: center;
+          width: 98%;
+          padding: 0.6em 0.7em;
+          margin: 0;
+          margin-bottom: 0.4em;
+          background-color: #ffff;
+          > p {
+            font-weight: 600;
+            color: $dark-grey;
+            margin-right: 0.4em;
+            font-size: 1em;
+          }
+          .OrderDelivered {
+            font-weight: 700;
+            font-size: 0.8em;
+            color: #ffff;
+            background-color: $primary-color;
+            border-radius: 0.46em;
+            padding: 0.3em 0.7em;
+
+            text-align: center;
+          }
+          .PaymentPending {
+            font-weight: 700;
+            font-size: 0.8em;
+            color: #ffff;
+            background-color: #f5b428;
+            border-radius: 0.46em;
+            padding: 0.3em 0.7em;
+            text-align: center;
+          }
+          .OrderProcessing {
+            font-weight: 700;
+            font-size: 0.8em;
+            color: #ffff;
+            background-color: #2393d3;
+            border-radius: 0.46em;
+            padding: 0.3em 0.7em;
+            text-align: center;
+          }
+        }
+        .Address {
+          width: 98%;
+          padding: 0.6em 0.7em;
+          margin: 0;
+          margin-bottom: 0.4em;
+          background-color: #ffff;
+          // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          p:nth-child(1) {
+            color: $dark-grey;
+            font-weight: 600;
+            font-size: 1.12em;
+            padding: 0.3em 0.7em;
+            margin-left: -0.7em;
+            border-bottom: 1.2px solid $light-grey;
+          }
+          p:nth-child(2) {
+            color: $dark-grey;
+            font-weight: 600;
+            margin-top: 0.2em;
+          }
+          p:nth-child(3) {
+            color: $dark-grey;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+          }
+          p:nth-child(4) {
+            color: $dark-grey;
+          }
+          p:nth-child(5) {
+            color: $dark-grey;
+          }
+          > button {
+            width: 96%;
+            padding: 0.7em 0;
+            margin-top: 0.8em;
+            font-size: 1em;
+            letter-spacing: 0.016em;
+            font-weight: 600;
+            color: #ffff;
+            outline: none;
+            border: none;
+            border-radius: 0.1em;
+            background-color: $primary-color;
+            box-shadow: $shadow2;
+            &:hover {
+              //temporary
+              opacity: 0.8;
+            }
+          }
+        }
+        .PaymentMethod {
+          background-color: #ffff;
+          width: 98%;
+          padding: 0.1em 0.7em;
+          margin: 0;
+          margin-bottom: 0.4em;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          > p {
+            color: $dark-grey;
+            font-weight: 600;
+            font-size: 1.12em;
+            padding: 0.3em 0.7em;
+            // padding-bottom: 0.2em;
+            margin-left: -0.7em;
+            border-bottom: 1.2px solid $light-grey;
+          }
+          > span {
+            // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-top: 0.6em;
+            padding: 0em 0.8em;
+            > div {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              > p {
+                font-size: 1.2em;
+                font-weight: 600;
+                color: $dark-grey;
+                margin-left: 0.5em;
+              }
+            }
+          }
+          .Paypal {
+            margin-bottom: 0.6em;
+
+            > img {
+              width: 8%;
+            }
+          }
+          .Stripe {
+            p {
+              font-size: 1.24em;
+            }
+            > i {
+              font-size: 2.4em;
+              color: #646ede;
+            }
+          }
+          > button {
+            width: 96%;
+            padding: 0.7em 0;
+            margin-top: 0.8em;
+            font-size: 1em;
+            letter-spacing: 0.016em;
+            font-weight: 600;
+            color: #ffff;
+            outline: none;
+            border: none;
+            border-radius: 0.1em;
+            background-color: $primary-color;
+            box-shadow: $shadow2;
+            &:hover {
+              //temporary
+              opacity: 0.9;
+            }
+          }
+        }
+        .Product {
+          width: 100%;
+          padding: 0em 0 0.3em 0;
+          background-color: #ffff;
+          margin-top: 0.8em;
+          margin-left: 0.2em;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+        .RightWrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin: 0;
+          margin-top: 1em;
+          margin-bottom: 2em;
+          .RightContainer {
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 100%;
+            background-color: #ffff;
+
+            > p:nth-child(1) {
+              padding: 0.4em 0.8em;
+              font-size: 1.2em;
+              color: $dark-grey;
+              font-weight: 600;
+              border-bottom: 1px solid $light-grey;
+            }
+            > div:nth-child(2) {
+              padding: 1em 1.6em 0.2em 1.6em;
+              p {
+                margin-bottom: 0.76em;
+                font-size: 1.16em;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                span {
+                  font-weight: 600;
+                  color: $primary-color;
+                }
+              }
+              > p:nth-child(4) {
+                font-size: 1.2em;
+                padding: 0.6em 0;
+                border-top: 1.6px dashed $light-grey;
+                border-bottom: 1.6px dashed $light-grey;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

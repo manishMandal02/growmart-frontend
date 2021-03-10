@@ -25,6 +25,8 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
 
+  const [demoUser, setDemoUser] = useState(false);
+
   const dispatch = useDispatch();
   const login = useSelector((state) => state.user.login);
   const { loading, userInfo, error } = login;
@@ -47,7 +49,17 @@ const LoginPage = (props) => {
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
+    setDemoUser(false);
     dispatch(userLogin({ email, password }));
+  };
+
+  const loginSubmitHandlerDemo = (e) => {
+    e.preventDefault();
+    setDemoUser(true);
+    dispatch(userLogin({ email: 'demo@example.com', password: 'demo123' }));
+    if (userInfo) {
+      setTimeout(() => props.closeModal(), 1000);
+    }
   };
 
   const visiblityHandler = () => {
@@ -106,16 +118,31 @@ const LoginPage = (props) => {
           </div> */}
 
           <button type='submit' onClick={loginSubmitHandler}>
-            {loading ? (
-              <CircularProgress color='white' size={30} thickness={4} />
+            {loading && !demoUser ? (
+              <CircularProgress
+                color='white'
+                size={26}
+                style={{ padding: '0', margin: '0' }}
+              />
             ) : (
-              'Login'
+              `Login`
             )}
           </button>
           <p>-------OR-------</p>
         </form>
-        <button>
-          <FcGoogle /> Login With Google
+        <button
+          className={classes.GoogleSignIn}
+          onClick={(e) => loginSubmitHandlerDemo(e)}
+        >
+          {loading && demoUser ? (
+            <CircularProgress
+              color='white'
+              size={30}
+              style={{ padding: '0', margin: '0' }}
+            />
+          ) : (
+            `Demo Login`
+          )}
         </button>
         <p>
           Don't have an account?{' '}

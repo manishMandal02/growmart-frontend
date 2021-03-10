@@ -258,79 +258,54 @@
           }
         }
       }
-      .ShoppingCart {
-        margin-right: 0.7em;
-        margin-left: 0.6em;
-        margin-top: 0.2em;
-        display: flex;
-        align-items: center;
-        color: $dark-grey;
-        text-decoration: none;
-        color: #ffffff;
-        cursor: pointer;
-        border-radius: 50%;
-        .MenuIcons {
-          font-size: 2em;
-          transition: all 0.2s;
-          color: #ffffff;
-        }
-        &:hover {
-          background-color: #ffffff1f;
-        }
-        .CartBadge {
-          span {
-            border: 2px solid #ffff;
-            padding: 0.58em 0.3em 0.6em 0.3em;
-            font-weight: 700;
-            background-color: $blue-color;
-            font-size: 1em;
-            color: #ffffff;
-          }
-        }
-      }
     }
     .User {
       padding-top: 4em;
       padding-bottom: 0.7em;
       background-color: $primary-color;
+      box-shadow: $shadow2;
       color: #ffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      > p:nth-child(1) {
-        font-weight: 600;
-        font-size: 2.6em;
-        border: 2px solid #ffff;
-        background-color: $white-grey;
+      > .LetterAvatar {
+        justify-content: center;
+        align-content: center;
+        display: inline-flex;
         border-radius: 50%;
+        padding: 1px;
+        font-size: 2.2em;
+        line-height: 1.7em;
+        width: 1.7em;
+        height: 1.7em;
         box-shadow: $shadow2;
         color: $primary-color;
-        padding: 0.15em 0.35em;
-        margin-top: 0.2em;
-        margin-bottom: 0.2em;
-        font-family: Arial, Helvetica, sans-serif;
+        background-color: white;
+        font-weight: bold;
+        border: 1px #ffffff solid;
+        margin-bottom: 0.3em;
       }
 
       > p:nth-child(2) {
-        font-size: 1.3em;
+        font-size: 1.4em;
         font-weight: 600;
         margin-bottom: 0em;
       }
       > p:nth-child(3) {
-        font-size: 0.95em;
+        font-size: 1em;
         font-weight: 600;
       }
       .Edit {
         position: relative;
-        right: -44%;
+        right: -45%;
         z-index: 100;
-        > svg {
+        > i {
           transform: scale(1.1);
-          opacity: 0.8;
+          opacity: 0.9;
           &:hover {
             background-color: #eeeeee59;
-            opacity: 0.2;
+            opacity: 0.6;
           }
         }
       }
@@ -338,21 +313,26 @@
     .UserOptions {
       display: flex;
       flex-direction: column;
-      padding: 0.8em;
-      width: 92%;
-
-      a {
-        border: 1px solid $light-grey;
+      // align-items: center;
+      // justify-content: center;
+      padding: 1em 0.55em;
+      width: 95%;
+      background-color: $white-grey;
+      height: 60vh;
+      > a {
+        background-color: #ffffff;
         display: flex;
         box-shadow: $shadow2;
+        // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         width: 100%;
         align-items: flex-start;
-        padding: 0.6em 0em;
+        padding: 0.5em 0em;
         text-decoration: none;
         margin-bottom: 0.4em;
         color: $dark-grey;
         font-size: 1.2em;
         font-weight: 600;
+        border-radius: 0.1em;
         outline: none;
         display: flex;
         justify-content: flex-start;
@@ -361,7 +341,7 @@
         > p {
           display: flex;
           align-items: center;
-          padding-bottom: 0.4em;
+          padding-bottom: 0.2em;
           margin-left: 0.3em;
           font-size: 1em;
           margin-bottom: 0.2em;
@@ -376,18 +356,18 @@
         > span {
           width: 100%;
           text-align: center;
-          padding-top: 0.2em;
+          padding-top: 0.4em;
           padding-right: 4em;
           font-size: 0.9em;
           color: $primary-color;
-          border-top: 1px solid $light-grey;
+          border-top: 1.1px solid $light-grey;
         }
 
         &:hover {
-          background-color: #f8f8f8;
+          opacity: 0.9;
         }
         &:focus {
-          background-color: #f8f8f8;
+          opacity: 0.9;
         }
       }
     }

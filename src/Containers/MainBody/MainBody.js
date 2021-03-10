@@ -15,6 +15,8 @@ import {
   getProductsByCategory,
   getProductsList,
 } from '../../Store/Actions/ProductsActions/ProductActions';
+import { CircularProgress } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const MainBody = () => {
   const location = useLocation();
@@ -112,37 +114,56 @@ const MainBody = () => {
         </title>
       </Helmet>
       {location.pathname === '/' ? <MainSlider /> : null}
-      <div className={classes.MainBodyWrapper}>
-        {width > 770 && (
-          <>
-            <Sidebar
-              priceFilterChange={(p1, p2) => setPriceFilterRange([p1, p2])}
-            />
-          </>
-        )}
-        <ProductsList
-          products={products}
-          pages={pages}
-          sortBy={sortBy}
-          sortByChange={(sort) => {
-            setSortBy(sort);
-            urlParams.set('sortBy', sort);
-            history.push({
-              search: urlParams.toString(),
-            });
-          }}
-          error={error}
-          loading={loading}
-          pageChange={(value) => {
-            handelPageChange(value);
-            urlParams.set('page', value);
-            history.push({
-              search: urlParams.toString(),
-            });
-          }}
+      {loading ? (
+        <CircularProgress
+          style={
+            width <= 900
+              ? { position: 'absolute', top: '55%', left: '45%' }
+              : { position: 'relative', left: '50%', margin: '2em 0' }
+          }
+          color='primary'
         />
-      </div>
-      <TopProductsSlider />
+      ) : error ? (
+        <Alert style={{ margin: '1em' }} severity='error'>
+          <AlertTitle>Error</AlertTitle>
+          <strong>{error} </strong>
+        </Alert>
+      ) : (
+        <>
+          <div className={classes.MainBodyWrapper}>
+            {width > 900 && (
+              <>
+                <Sidebar
+                  priceFilterChange={(p1, p2) => setPriceFilterRange([p1, p2])}
+                />
+              </>
+            )}
+
+            <ProductsList
+              products={products}
+              pages={pages}
+              sortBy={sortBy}
+              sortByChange={(sort) => {
+                setSortBy(sort);
+                urlParams.set('sortBy', sort);
+                history.push({
+                  search: urlParams.toString(),
+                });
+              }}
+              error={error}
+              loading={loading}
+              pageChange={(value) => {
+                handelPageChange(value);
+                urlParams.set('page', value);
+                history.push({
+                  search: urlParams.toString(),
+                });
+              }}
+            />
+          </div>
+          <TopProductsSlider />
+        </>
+      )}
     </div>
   );
 };

@@ -9,11 +9,12 @@
   max-height: 40%;
   justify-content: flex-start;
   width: 100%;
-  box-shadow: $shadow2;
+  // box-shadow: $shadow2;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   transition: box-shadow 0.1s ease-in-out;
   flex-direction: column;
-  border-top: 1px solid $light-grey;
-  border-left: 1px solid $light-grey;
+  // border-top: 1px solid $light-grey;
+  // border-left: 1px solid $light-grey;
   &:hover .CardTopContainer > .CardTopWrapper {
     visibility: visible;
     opacity: 1;

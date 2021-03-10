@@ -365,11 +365,84 @@
 @media only screen and (max-width: 770px) {
   .ProdcutPage {
     max-width: 100%;
+    .TopHeading {
+      z-index: 100;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: $primary-color;
+      padding: 0.8em 0.7em;
+      margin-bottom: 0em;
+      color: #ffff;
+      display: flex;
+      justify-content: space-between;
+
+      > p {
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        > svg {
+          transform: scale(1.1);
+          margin-right: 0.3em;
+        }
+      }
+      .RightContainer {
+        width: 36%;
+        justify-content: flex-end;
+        display: flex;
+        align-items: center;
+        // align-items: center;
+        .LoggedUser {
+          display: flex;
+          align-items: flex-end;
+          margin-right: 0.6em;
+
+          > svg {
+            color: #ffff;
+            transform: scale(1.6);
+          }
+        }
+
+        .ShoppingCart {
+          margin-right: 0.4em;
+          margin-left: 0.6em;
+          margin-top: 0.2em;
+          display: flex;
+          align-items: center;
+          color: $dark-grey;
+          text-decoration: none;
+          cursor: pointer;
+          border-radius: 50%;
+          .MenuIcons {
+            font-size: 2em;
+            transition: all 0.2s;
+            color: #ffffff;
+          }
+          &:hover {
+            background-color: #ffffff1f;
+          }
+          .CartBadge {
+            span {
+              border: 2px solid #ffff;
+              padding: 0.58em 0.3em 0.55em 0.3em;
+              font-weight: 700;
+              background-color: $blue-color;
+              font-size: 1em;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
     .Container {
       flex-direction: column;
       padding: 0;
       width: 100%;
       overflow-x: hidden;
+      margin-top: 3.4em;
       .ImageWrapper {
         max-width: 100%;
         width: 100%;
@@ -380,7 +453,7 @@
         img {
           border: none;
           width: 60%;
-          padding: 0.2em 0;
+          padding: 0.6em 0;
           // padding: 0em 0.4em 0em 2.6em;
         }
       }

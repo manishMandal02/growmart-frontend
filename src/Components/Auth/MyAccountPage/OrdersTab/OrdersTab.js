@@ -12,7 +12,8 @@ import { Alert } from '@material-ui/lab';
 
 import classes from './OrdersTab.module.scss';
 import { getMyOrdersList } from '../../../../Store/Actions/OrderActions/OrderActions';
-import { Cancel, CheckCircle } from '@material-ui/icons';
+import { Cancel, CheckCircle, OpenInNew } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 //###########
 const OrdersTab = ({ history }) => {
@@ -29,7 +30,14 @@ const OrdersTab = ({ history }) => {
     <div className={classes.Container}>
       <div className={classes.OrdersList}>
         {loadingOrder ? (
-          <CircularProgress size={30} />
+          <CircularProgress
+            style={{
+              position: 'absolute',
+              top: '40%',
+              left: '50%',
+            }}
+            size={36}
+          />
         ) : errorOrder ? (
           <Alert severity='error' variant='filled'>
             <strong>{errorOrder}</strong>
@@ -47,6 +55,18 @@ const OrdersTab = ({ history }) => {
               </TableRow>
             </TableHead>
             <TableBody>
+              <TableCell colSpan='6' style={{ textAlign: 'center' }}>
+                {orders.length <= 0 && (
+                  <p>
+                    No Orders{' '}
+                    <Link style={{ textDecoration: 'none' }} to='/'>
+                      {' '}
+                      Contine Shopping
+                      <OpenInNew />
+                    </Link>
+                  </p>
+                )}
+              </TableCell>
               {orders.map((p) => (
                 <TableRow key={p._id}>
                   <TableCell component='td' scope='row'>

@@ -30,13 +30,25 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [demoUser, setDemoUser] = useState(false);
+
   const { loading, error, userInfo } = useSelector((state) => state.user.login);
 
   const dispatch = useDispatch();
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
+    setDemoUser(false);
     dispatch(userLogin({ email, password }));
+    if (userInfo) {
+      setTimeout(() => props.closeModal(), 1000);
+    }
+  };
+
+  const loginSubmitHandlerDemo = (e) => {
+    e.preventDefault();
+    setDemoUser(true);
+    dispatch(userLogin({ email: 'demo@example.com', password: 'demo123' }));
     if (userInfo) {
       setTimeout(() => props.closeModal(), 1000);
     }
@@ -109,11 +121,13 @@ const Login = (props) => {
             />
           </FormControl>
           <div>
-            <Link to='#'>Forgot Your Password?</Link>
+            <Tooltip title='Feature Underdevelopment' placement='left'>
+              <Link to='#'>Forgot Your Password?</Link>
+            </Tooltip>
           </div>
 
           <button type='submit' onClick={(e) => loginSubmitHandler(e)}>
-            {loading ? (
+            {loading && !demoUser ? (
               <CircularProgress
                 color='white'
                 size={26}
@@ -125,11 +139,20 @@ const Login = (props) => {
           </button>
           <p>-------OR-------</p>
         </form>
-        <Tooltip title='Feature Underdevelopment' placement='top' arrow>
-          <button className={classes.GoogleSignIn}>
-            <FcGoogle /> Login With Google
-          </button>
-        </Tooltip>
+        <button
+          className={classes.GoogleSignIn}
+          onClick={(e) => loginSubmitHandlerDemo(e)}
+        >
+          {loading && demoUser ? (
+            <CircularProgress
+              color='white'
+              size={30}
+              style={{ padding: '0', margin: '0' }}
+            />
+          ) : (
+            `Demo Login`
+          )}
+        </button>
         <p className={classes.RegisterHere}>
           Don't have an account?{' '}
           <Link onClick={() => props.closeModal()} to='/register'>

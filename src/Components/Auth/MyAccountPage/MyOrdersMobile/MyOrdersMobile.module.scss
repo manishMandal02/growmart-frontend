@@ -11,12 +11,10 @@
     right: 0;
     background-color: $primary-color;
     padding: 0.8em 0.8em;
-    margin-bottom: 0em;
     box-shadow: $shadow2;
     color: #ffff;
     display: flex;
     justify-content: space-between;
-
     > p {
       margin: 0;
       font-size: 1.2em;
@@ -38,72 +36,72 @@
     margin-top: 3.8em;
 
     .Order {
-      padding: 0.4em;
-      border-bottom: 1px solid $light-grey;
-      background-color: $white-grey;
+      padding: 0.4em 0em;
+      // border-bottom: 1px solid $light-grey;
       margin-bottom: 0.6em;
-
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
       > p:nth-child(1) {
         font-size: 1em;
-        // border-top: 1px solid $mid-grey;
-        border-bottom: 1px solid $light-grey;
+        padding-left: 0.3em;
+        border-bottom: 1.4px solid $light-grey;
       }
       > p:nth-child(2) {
         color: $dark-grey;
         font-weight: 600;
         padding: 0.1em;
         margin-top: 0.2em;
+        margin-left: 0.3em;
       }
       > p:nth-child(3) {
         color: $dark-grey;
         font-weight: 700;
+        margin-left: 0.3em;
+
         // color: $primary-color;
         font-size: 1.1em;
         padding: 0.1em;
         padding-bottom: 0.2em;
-        border-bottom: 1px solid $light-grey;
+        border-bottom: 1.1px solid $light-grey;
       }
 
       .OrderDelivered {
         font-weight: 700;
-        font-size: 1em;
+        font-size: 0.8em;
         color: #ffff;
-        margin-top: 0.4em;
+        margin-top: 0.5em;
         background-color: $primary-color;
         position: relative;
-        margin-right: 0.2em;
-        width: 40%;
-        left: 60%;
-        border-radius: 0.8em;
-        padding: 0.2em 0;
+        width: 25%;
+        left: 72%;
+        border-radius: 0.46em;
+        padding: 0.25em 0;
         text-align: center;
       }
       .PaymentPending {
         font-weight: 700;
-        font-size: 1em;
+        font-size: 0.8em;
         color: #ffff;
-        margin-top: 0.4em;
+        margin-top: 0.5em;
         background-color: #f5b428;
         position: relative;
-        margin-right: 0.8em;
-        width: 40%;
-        left: 58%;
-        border-radius: 0.8em;
-        padding: 0.2em 0.2em;
+        width: 25%;
+        left: 72%;
+        border-radius: 0.46em;
+        padding: 0.25em 0.2em;
         text-align: center;
       }
       .OrderProcessing {
         font-weight: 700;
-        font-size: 1em;
+        font-size: 0.8em;
         color: #ffff;
-        margin-top: 0.4em;
+        margin-top: 0.5em;
         background-color: #2393d3;
         position: relative;
-        margin-right: 0.8em;
-        width: 40%;
-        left: 58%;
-        border-radius: 0.8em;
-        padding: 0.2em 0.2em;
+        width: 25%;
+        left: 72%;
+        border-radius: 0.46em;
+        padding: 0.25em 0.2em;
         text-align: center;
       }
     }

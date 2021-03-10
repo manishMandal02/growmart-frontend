@@ -13,8 +13,6 @@ const ProductsList = ({
   sortBy,
   sortByChange,
   pages,
-  error,
-  loading,
   pageChange,
 }) => {
   //initialize
@@ -53,16 +51,7 @@ const ProductsList = ({
           root: classes.Grid,
         }}
       >
-        {loading ? (
-          <CircularProgress style={{ margin: '1em' }} color='primary'>
-            Loading
-          </CircularProgress>
-        ) : error ? (
-          <Alert style={{ margin: '1em' }} severity='error'>
-            <AlertTitle>Error</AlertTitle>
-            <strong>{error} </strong>
-          </Alert>
-        ) : products.length >= 1 ? (
+        {products.length >= 1 ? (
           products.map((prod) => (
             <div className={classes.ProductContainer} key={uuidv4()}>
               <ProductCard

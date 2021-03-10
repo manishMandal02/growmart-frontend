@@ -58,18 +58,20 @@ const CartProductCard = ({
           {/* {name.length > 25 ? name : `${name.substring(0, 25)}...`} */}
           {name}
         </Link>
-        <p className={classes.Brand}>
-          Brand:{' '}
-          <Link
-            to={
-              location.pathname === '/user/cart'
-                ? `/brand/${brand}`
-                : '/user/create-order?step=order-summary'
-            }
-          >
-            {brand}
-          </Link>
-        </p>
+        {brand && (
+          <p className={classes.Brand}>
+            Brand:{' '}
+            <Link
+              to={
+                location.pathname === '/user/cart'
+                  ? `/brand/${brand}`
+                  : '/user/create-order?step=order-summary'
+              }
+            >
+              {brand}
+            </Link>
+          </p>
+        )}
         <div className={classes.Price}>
           <p>$</p>
           <div>{price}</div>

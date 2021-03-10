@@ -57,6 +57,17 @@ const MyOrdersMobilePage = ({ match }) => {
           >
             {error}
           </Alert>
+        ) : orders.length <= 0 ? (
+          <p
+            style={{
+              position: 'absolute',
+              left: '36%',
+              top: '20%',
+              fontSize: '1.4em',
+            }}
+          >
+            No Orders
+          </p>
         ) : (
           orders.map((order) => (
             <div
@@ -66,17 +77,15 @@ const MyOrdersMobilePage = ({ match }) => {
               <p>Order #{order._id}</p>
               <p>{order.createdAt.substring(0, 10)}</p>
               <p>${order.totalPrice}</p>
-              <dev>
+              <div>
                 {order.isPaid && order.isDelivered ? (
-                  <div className={classes.OrderDelivered}>Order Delivered</div>
+                  <div className={classes.OrderDelivered}>Delivered</div>
                 ) : !order.isPaid && !order.isDelivered ? (
-                  <div className={classes.PaymentPending}>Payment Pending</div>
+                  <div className={classes.PaymentPending}>Not Paid</div>
                 ) : (
-                  <div className={classes.OrderProcessing}>
-                    Order Processing
-                  </div>
+                  <div className={classes.OrderProcessing}>Processing</div>
                 )}
-              </dev>
+              </div>
             </div>
           ))
         )}

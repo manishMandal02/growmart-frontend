@@ -13,11 +13,16 @@ import {
   Remove,
   Edit,
   ShoppingCartOutlined,
+  ArrowBack,
+  Storefront,
+  ShoppingCart,
+  Person,
 } from '@material-ui/icons';
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Badge,
   CircularProgress,
   Snackbar,
   Tooltip,
@@ -65,6 +70,10 @@ const ProdcutPage = ({ match }) => {
   };
 
   const dispatch = useDispatch();
+
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const cartItemsCount = cartItems.length;
 
   const { loading, error, product } = useSelector(
     (state) => state.product.productDetails
@@ -154,10 +163,54 @@ const ProdcutPage = ({ match }) => {
         </Alert>
       ) : (
         <>
+          {width <= 900 && (
+            <div className={classes.TopHeading}>
+              <p>
+                {' '}
+                <ArrowBack onClick={() => history.goBack()} />
+              </p>
+              <div className={classes.RightContainer}>
+                {userInfo ? (
+                  <div
+                    className={classes.LoggedUser}
+                    onClick={(e) => history.push('/my/account')}
+                  >
+                    <Person />
+                  </div>
+                ) : (
+                  <div
+                    className={classes.SingIn}
+                    onClick={() =>
+                      dispatch({
+                        type: LOGIN_MOBILE_OPEN,
+                      })
+                    }
+                  >
+                    <div className={classes.TextWrapper}>
+                      <p className={classes.MainText}>Login</p>
+                    </div>
+                  </div>
+                )}
+
+                <Link to='/user/cart' className={classes.ShoppingCart}>
+                  <Badge
+                    color='secondary'
+                    className={classes.CartBadge}
+                    badgeContent={cartItemsCount}
+                    showZero
+                    overlap='circle'
+                  >
+                    <ShoppingCart className={classes.MenuIcons} />
+                  </Badge>
+                </Link>
+              </div>
+            </div>
+          )}
           <div className={classes.Container}>
             <Helmet>
               <title>{`${product.name} | GrowMart`}</title>
             </Helmet>
+
             <div className={classes.ImageWrapper}>
               <img src={product.image} alt={`${product.name}`} />
               {width > 770 && (

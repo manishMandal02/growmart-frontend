@@ -1,18 +1,16 @@
 import {
   AccountCircle,
   ArrowBack,
-  Edit,
   ExitToApp,
   HomeWork,
   ListAlt,
   Person,
-  ShoppingCart,
   ShoppingCartOutlined,
 } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Badge, CircularProgress, Snackbar, Tooltip } from '@material-ui/core';
+import { CircularProgress, Snackbar, Tooltip } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
@@ -115,8 +113,6 @@ const MyAccountPage = ({ match }) => {
       setSnackbarOpen(true);
     }
   };
-  const { cartItems } = useSelector((state) => state.cart);
-  const cartItemsCount = cartItems.length || 0;
 
   //handles update profile click
   const updateAddresseHandler = (e) => {
@@ -353,61 +349,43 @@ const MyAccountPage = ({ match }) => {
           {' '}
           <ArrowBack onClick={() => history.goBack()} /> My Account
         </p>
-        <Link to='/user/cart' className={classes.ShoppingCart}>
-          <Badge
-            color='secondary'
-            className={classes.CartBadge}
-            badgeContent={cartItemsCount}
-            showZero
-            overlap='circle'
-          >
-            <ShoppingCart className={classes.MenuIcons} />
-          </Badge>
-        </Link>
       </div>
       <div className={classes.User}>
         {/* <AccountCircle /> */}
-        <p>{userInfo.name.trim().substring(0, 1)}</p>
+        {/* <div> */}
+        <p className={classes.LetterAvatar}>
+          {userInfo.name.trim().substring(0, 1)}
+        </p>
+        {/* </div> */}
         <p>{userInfo.name}</p>
         <p>{userInfo.email}</p>
         <span className={classes.Edit}>
-          <Edit onClick={() => history.push('/my/profile')} />
+          <i
+            onClick={() => history.push('/my/profile')}
+            className='fas fa-pen'
+          ></i>
         </span>
       </div>
       <div className={classes.UserOptions}>
         <Link to='/my/profile'>
-          <p>
-            <AccountCircle />
-            My Profile
-          </p>
+          <p>My Profile</p>
           <span>View Profile</span>
         </Link>
         <Link to='/my/address'>
-          <p>
-            <HomeWork /> My Address
-          </p>
+          <p>My Address</p>
           <span>View Address</span>
         </Link>
 
         <Link to='/my/orders'>
-          <p>
-            <ListAlt />
-            My Orders
-          </p>
+          <p>My Orders</p>
           <span>View Orders</span>
         </Link>
         <Link to='/user/cart'>
-          <p>
-            <ShoppingCartOutlined />
-            My Cart
-          </p>
-          <span>View Orders</span>
+          <p>My Cart</p>
+          <span>Shopping Cart</span>
         </Link>
         <Link to='/' onClick={logoutHandler}>
-          <p>
-            <ExitToApp />
-            Logout
-          </p>
+          <p>Logout</p>
           <span>Logout from this browser</span>
         </Link>
       </div>

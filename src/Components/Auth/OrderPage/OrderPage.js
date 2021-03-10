@@ -3,82 +3,87 @@ import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { VerifiedUser } from '@material-ui/icons';
+import { ArrowBack, VerifiedUser } from '@material-ui/icons';
 import { CircularProgress } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { Helmet } from 'react-helmet';
+import { v4 as uuidv4 } from 'uuid';
 
+import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
 import classes from './OrderPage.module.scss';
 import { ORDER_PAY_RESET } from '../../../Store/Actions/ActionTypes';
 import {
   getOrderDetails,
   payOrder,
 } from '../../../Store/Actions/OrderActions/OrderActions';
+import CartProductCard from '../CartPage/ProductCard/CartProductCard';
 
 //###########
 const OrderPage = ({ match, history }) => {
   const orderId = match.params.id;
-
-  const [sdkReady, setSdkReady] = useState(false);
-
   const dispatch = useDispatch();
-
-  const orderPay = useSelector((state) => state.order.orderPay);
-
-  const { loading: loadingPay, success: successPay } = orderPay;
 
   const { loading, error, order } = useSelector(
     (state) => state.order.orderDetails
   );
 
+  const [width] = useWindowSize();
   const { userInfo } = useSelector((state) => state.user.login);
-
   useEffect(() => {
-    if (!userInfo) {
-      history.push(`/login?redirect=user/order/${match.params.id}`);
-    }
-    const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get('/api/config/paypal');
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
+    dispatch(getOrderDetails(orderId));
+  }, [dispatch, orderId]);
+  // const [sdkReady, setSdkReady] = useState(false);
 
-      document.body.appendChild(script);
-    };
+  // const orderPay = useSelector((state) => state.order.orderPay);
 
-    if (!order || successPay || order._id !== orderId) {
-      dispatch({
-        type: ORDER_PAY_RESET,
-      });
-      dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPaypalScript();
-      } else {
-        setSdkReady(true);
-      }
-    }
-  }, [
-    orderId,
-    order,
-    dispatch,
-    successPay,
-    history,
-    userInfo,
-    match.params,
-    sdkReady,
-  ]);
+  // const { loading: loadingPay, success: successPay } = orderPay;
 
-  // payment Success Handler
-  const paymentSuccessHandler = (paymentResult) => {
-    dispatch(payOrder(orderId, paymentResult));
-  };
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     history.push(`/login?redirect=user/order/${match.params.id}`);
+  //   }
+  //   const addPaypalScript = async () => {
+  //     const { data: clientId } = await axios.get('/api/config/paypal');
+  //     const script = document.createElement('script');
+  //     script.type = 'text/javascript';
+  //     script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+  //     script.async = true;
+  //     script.onload = () => {
+  //       setSdkReady(true);
+  //     };
 
-  return (
+  //     document.body.appendChild(script);
+  //   };
+
+  //   if (!order || successPay || order._id !== orderId) {
+  //     dispatch(getOrderDetails(orderId));
+  //     dispatch({
+  //       type: ORDER_PAY_RESET,
+  //     });
+  //   } else if (!order.isPaid) {
+  //     if (!window.paypal) {
+  //       addPaypalScript();
+  //     } else {
+  //       setSdkReady(true);
+  //     }
+  //   }
+  // }, [
+  //   orderId,
+  //   order,
+  //   dispatch,
+  //   successPay,
+  //   history,
+  //   userInfo,
+  //   match.params,
+  //   sdkReady,
+  // ]);
+
+  // // payment Success Handler
+  // const paymentSuccessHandler = (paymentResult) => {
+  //   dispatch(payOrder(orderId, paymentResult));
+  // };
+
+  return width > 900 ? (
     <>
       {loading ? (
         <CircularProgress size={60} />
@@ -197,7 +202,7 @@ const OrderPage = ({ match, history }) => {
                 </p>
               </div>
 
-              {!order.isPaid && (
+              {/* {!order.isPaid && (
                 <div className={classes.PayButton}>
                   {loadingPay && <CircularProgress size={30} />}
                   {!sdkReady ? (
@@ -209,7 +214,7 @@ const OrderPage = ({ match, history }) => {
                     />
                   )}
                 </div>
-              )}
+              )} */}
             </div>
             <span>
               <VerifiedUser />
@@ -221,6 +226,117 @@ const OrderPage = ({ match, history }) => {
         </div>
       ) : null}
     </>
+  ) : (
+    <div className={classes.MobileContainer}>
+      <div className={classes.TopHeading}>
+        <p>
+          <ArrowBack onClick={() => history.goBack()} />
+          Order
+        </p>
+      </div>
+      <div className={classes.OrderContainer}>
+        {loading ? (
+          <CircularProgress
+            style={{ position: 'absolute', left: '45%', top: '15%' }}
+          />
+        ) : error ? (
+          <Alert
+            style={{ position: 'absolute', left: '45%', top: '20%' }}
+            severity='error'
+            variant='filled'
+          >
+            {error}
+          </Alert>
+        ) : order ? (
+          <div className={classes.Order}>
+            <div className={classes.StatusMobile}>
+              <p>Order Status : </p>
+              {order.isPaid && order.isDelivered ? (
+                <div className={classes.OrderDelivered}> Delivered</div>
+              ) : !order.isPaid && !order.isDelivered ? (
+                <div className={classes.PaymentPending}>Not Paid</div>
+              ) : (
+                <div className={classes.OrderProcessing}> Processing</div>
+              )}
+            </div>
+
+            <div className={classes.Address}>
+              <p>Shipping Address</p>
+              <p>{userInfo.name}</p>
+              <p>{userInfo.email}</p>
+              <p>
+                {order.shippingAddress.address.length < 45
+                  ? order.shippingAddress.address
+                  : `${order.shippingAddress.address.substring(0, 45)}...`}
+              </p>
+              <p>
+                {order.shippingAddress.city} - {order.shippingAddress.zipcode}{' '}
+                {order.shippingAddress.country}
+              </p>
+            </div>
+            <div className={classes.PaymentMethod}>
+              <p>Payment Method</p>
+              <span>
+                {order.paymentMethod === 'Paypal' ? (
+                  <div className={classes.Paypal}>
+                    <img
+                      src='https://cdn.iconscout.com/icon/free/png-512/paypal-4-226455.png'
+                      alt='paypal'
+                    />
+                    <p>PayPal </p>
+                  </div>
+                ) : (
+                  <div className={classes.Stripe}>
+                    <i className='fab fa-stripe '></i>
+                    <p>Stripe </p>
+                  </div>
+                )}
+              </span>
+            </div>
+            {order.orderItems.map((p) => (
+              <div key={uuidv4()} className={classes.Product}>
+                <CartProductCard
+                  name={p.name}
+                  image={p.image}
+                  brand={p.brand}
+                  price={p.price}
+                  quantity={p.qty}
+                  id={p.product}
+                />
+              </div>
+            ))}
+
+            <div className={classes.RightWrapper}>
+              <div className={classes.RightContainer}>
+                {!error ? null : (
+                  <Alert severity='error' variant='filled'>
+                    <strong>{error}</strong>
+                  </Alert>
+                )}
+                <p id='priceDetails'>Price Details</p>
+                <div>
+                  <p>
+                    {`Price (${order.orderItems.length}) ${
+                      order.orderItems.length >= 0 ? 'items' : 'item'
+                    }`}{' '}
+                    <span>${order.itemsPrice}</span>
+                  </p>
+                  <p>
+                    Tax % <span>${order.taxPrice}</span>
+                  </p>
+                  <p>
+                    Shipping Charges <span>${order.shippingPrice}</span>
+                  </p>
+                  <p>
+                    Total Amount <span>${order.totalPrice}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </div>
   );
 };
 

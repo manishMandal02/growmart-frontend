@@ -59,14 +59,14 @@
 
 @media only screen and (max-width: 770px) {
   .Slide {
-    background-size: 130%;
+    background-size: 150%;
     height: 18vh;
     padding: 0.8em 0.5em 0.8em 0.2em;
     .SlideContent {
       width: 80%;
       p {
         font-size: 1em;
-        margin-top: -0.66em;
+        margin-top: -0.86em;
       }
       h2 {
         font-size: 1.4em;
@@ -74,7 +74,7 @@
       }
       h6 {
         font-size: 1em;
-        margin-left: -1.6em;
+        margin-left: em;
         p {
           font-size: 1.12em;
           margin-left: 0.1em;

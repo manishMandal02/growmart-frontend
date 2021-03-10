@@ -252,7 +252,7 @@
   background-color: #ffff;
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 900px) {
   .NavBar {
     padding: 0.5em 0.2em;
     margin: 0;
@@ -296,7 +296,7 @@
         .LoggedUser {
           display: flex;
           align-items: flex-end;
-          margin-top: 0;
+          margin-right: 0.2em;
 
           > svg {
             color: #ffff;
@@ -308,17 +308,11 @@
             color: #ffff;
           }
         }
-      }
-      .SingIn {
-        .TextWrapper {
+        .SingIn {
           color: #ffffff;
-          .MainText {
-            color: #ffffff;
-            margin: 0 i !important;
-            font-weight: 600;
-          }
         }
       }
+
       .ShoppingCart {
         margin-right: 0.7em;
         margin-left: 0.6em;

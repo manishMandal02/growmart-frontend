@@ -62,11 +62,22 @@ const LoginModalMobile = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [demoUser, setDemoUser] = useState(false);
+
   const { loading, error } = useSelector((state) => state.user.login);
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(userLogin({ email, password }));
+    if (!error) {
+      setTimeout(() => closeModal(), 1000);
+    }
+  };
+
+  const loginSubmitHandlerDemo = (e) => {
+    e.preventDefault();
+    setDemoUser(true);
+    dispatch(userLogin({ email: 'demo@example.com', password: 'demo123' }));
     if (!error) {
       setTimeout(() => closeModal(), 1000);
     }
@@ -148,7 +159,7 @@ const LoginModalMobile = () => {
             </div>
 
             <button type='submit' onClick={(e) => loginSubmitHandler(e)}>
-              {loading ? (
+              {loading && !demoUser ? (
                 <CircularProgress
                   color='white'
                   size={26}
@@ -160,11 +171,20 @@ const LoginModalMobile = () => {
             </button>
             <p>-------OR-------</p>
           </form>
-          <Tooltip title='Feature Underdevelopment' placement='top' arrow>
-            <button className={classes.GoogleSignIn}>
-              <FcGoogle /> Login With Google
-            </button>
-          </Tooltip>
+          <button
+            className={classes.GoogleSignIn}
+            onClick={(e) => loginSubmitHandlerDemo(e)}
+          >
+            {loading && demoUser ? (
+              <CircularProgress
+                color='white'
+                size={30}
+                style={{ padding: '0', margin: '0' }}
+              />
+            ) : (
+              `Demo Login`
+            )}
+          </button>
           <p className={classes.RegisterHere}>
             Don't have an account?{' '}
             <Link onClick={() => closeModal()} to='/register'>

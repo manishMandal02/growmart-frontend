@@ -27,14 +27,20 @@ const Header = () => {
         (location.pathname === '/my/address' ||
         location.pathname === '/my/profile' ||
         location.pathname === '/my/account' ||
+        location.pathname.split('/')[1] === 'product' ||
         location.pathname === '/my/orders' ||
+        (location.pathname.split('/')[1] === 'user' &&
+          location.pathname.split('/')[2] === 'order') ||
         location.pathname === '/user/create-order' ||
         location.pathname === '/user/cart' ? null : (
-          <SearchBar />
+          <>
+            <SearchBar />
+            <NavBar />
+          </>
         ))}
 
       {width > 900 && <NavBar />}
-      {width <= 900 &&
+      {/* {width <= 900 &&
         (location.pathname === '/my/address' ||
         location.pathname === '/my/profile' ||
         location.pathname === '/my/account' ||
@@ -42,8 +48,7 @@ const Header = () => {
         location.pathname === '/my/orders' ||
         location.pathname === '/user/create-order' ||
         location.pathname === '/user/cart' ? null : (
-          <NavBar />
-        ))}
+        ))} */}
     </header>
   );
 };

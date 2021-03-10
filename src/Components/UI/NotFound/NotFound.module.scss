@@ -1,0 +1,47 @@
+@import '../../../App.scss';
+
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 60vh;
+  background-color: $white-grey;
+  p:nth-child(1) {
+    font-size: 6em;
+    color: $dark-grey;
+
+    font-weight: 700;
+  }
+  p:nth-child(2) {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: $dark-grey;
+  }
+  > button {
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    padding: 0.6em 2.2em;
+    margin-top: 0.4em;
+    border-radius: 0.2em;
+    // width: 40%;
+    background-color: $primary-color;
+    color: #ffff;
+    font-weight: 600;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .Container {
+    height: 80vh;
+    p:nth-child(1) {
+      font-size: 5em;
+    }
+  }
+}

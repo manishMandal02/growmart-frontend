@@ -334,11 +334,48 @@
         }
       }
     }
+    .Stepper {
+      width: 100%;
+      margin: 0;
+      margin-top: 3.6em;
+      // margin-bottom: 0.em;
+      margin-bottom: 0.4em;
+      // box-shadow: $shadow2;
+      z-index: 20;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+      padding: 0;
+      > div {
+        padding: 0.6em 0;
+        > div {
+          > span {
+            > span {
+              > svg {
+                > circle {
+                  padding: 0.6em;
+                }
+                > text {
+                  fill: #ffff;
+                  font-size: 0.58em;
+                  font-weight: 600;
+                }
+              }
+            }
+            > span:nth-child(2) {
+              > span {
+                font-size: 0.6em;
+                width: 100%;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
     .BottomContainer {
-      padding: 0.6em 0em;
+      padding: 0em 0em 2em 0;
       background-color: #ffff;
       width: 100%;
-      margin-top: 3.6em;
       overflow-x: hidden;
       .Address {
         width: 90%;
@@ -347,8 +384,8 @@
           display: flex;
           flex-direction: column;
           > label {
-            font-size: 1.1em;
-            margin: 0.66em 0 0.2em 0;
+            font-size: 1em;
+            margin: 0.7em 0 0.4em 0;
             font-weight: 600;
             color: $dark-grey;
           }
@@ -445,7 +482,7 @@
       }
       .OrderSummary {
         width: 100%;
-        margin-top: 0.4em;
+        // margin-top: 0.4em;
         margin: 0;
         .Address {
           width: 98%;
@@ -560,6 +597,7 @@
           width: 100%;
           margin: 0;
           margin-top: 1em;
+          margin-bottom: 2em;
           .RightContainer {
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             width: 100%;
@@ -595,19 +633,68 @@
               }
             }
           }
-          > span:nth-child(2) {
-            margin-top: 1.2em;
-            display: flex;
-            align-items: center;
-            svg {
-              font-size: 2em;
-              margin-right: 0.1em;
-              color: $mid-grey;
-            }
-            p {
-              font-size: 1em;
-              color: $mid-grey;
+        }
+      }
+      .Payment {
+        .RightWrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin: 0;
+          margin-top: 1em;
+          .RightContainer {
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 90%;
+            background-color: #ffff;
+
+            > p:nth-child(1) {
+              padding: 0.4em 0.8em;
+              font-size: 1.2em;
+              color: $dark-grey;
               font-weight: 600;
+              border-bottom: 1px solid $light-grey;
+            }
+            > div:nth-child(2) {
+              padding: 1em 1.6em 0.2em 1.6em;
+              p {
+                margin-bottom: 0.76em;
+                font-size: 1.16em;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                span {
+                  font-weight: 600;
+                  color: $primary-color;
+                }
+              }
+              > p:nth-child(4) {
+                font-size: 1.2em;
+                padding: 0.6em 0;
+                border-top: 1.6px dashed $light-grey;
+                border-bottom: 1.6px dashed $light-grey;
+                font-weight: 600;
+              }
+            }
+            .PaypalButton {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              > div {
+                width: 90%;
+              }
+            }
+          }
+          .PaypalSecured {
+            margin-top: 1.6em;
+            position: absolute;
+            bottom: -1%;
+            width: 100%;
+            > img {
+              width: 100%;
+              height: 5.2em;
             }
           }
         }

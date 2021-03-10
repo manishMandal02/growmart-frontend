@@ -14,8 +14,11 @@ import {
   saveShippingAddress,
   savePaymentMethod,
 } from '../../../../Store/Actions/CartActions/CartActions';
+import { CREATE_ORDER_RESET } from '../../../../Store/Actions/ActionTypes';
 import { createOrder } from '../../../../Store/Actions/OrderActions/OrderActions';
 import { Helmet } from 'react-helmet';
+import { PayPalButton } from 'react-paypal-button-v2';
+import axios from 'axios';
 
 //###########
 const CreateOrderPage = ({ history, location }) => {
@@ -36,7 +39,30 @@ const CreateOrderPage = ({ history, location }) => {
   const [city, setCity] = useState(' ');
   const [country, setCountry] = useState(' ');
   const [paymentMethod, setPaymentMethod] = useState('Paypal');
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const [sdkReady, setSdkReady] = useState(false);
+
+  const addPaypalScript = async () => {
+    const { data: clientId } = await axios.get('/api/config/paypal');
+    const script = document.createElement('script');
+    script.id = 'paypalScript';
+    script.type = 'text/javascript';
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+    script.async = true;
+    script.onload = () => {
+      setSdkReady(true);
+    };
+    document.body.appendChild(script);
+  };
+
+  const removePaypalScript = () => {
+    const paypalScript = document.getElementById('paypalScript');
+    if (paypalScript) {
+      paypalScript.remove();
+      setSdkReady(false);
+    }
+  };
 
   //set address from the saved address
   useEffect(() => {
@@ -51,14 +77,21 @@ const CreateOrderPage = ({ history, location }) => {
     }
     if (stepParams) {
       stepParams === 'payment'
-        ? setActiveStep(4)
-        : stepParams === 'payment-method'
-        ? setActiveStep(2)
-        : stepParams === 'order-summary'
         ? setActiveStep(3)
-        : setActiveStep(1);
+        : stepParams === 'payment-method'
+        ? setActiveStep(1)
+        : stepParams === 'order-summary'
+        ? setActiveStep(2)
+        : setActiveStep(0);
     }
-  }, [cart.shippingAddress, cart.paymentMethod, stepParams]);
+    if (stepParams === 'payment') {
+      if (!sdkReady) {
+        addPaypalScript();
+      }
+    } else {
+      removePaypalScript();
+    }
+  }, [cart.shippingAddress, cart.paymentMethod, stepParams, sdkReady]);
 
   const { loading, error, success, order } = useSelector(
     (state) => state.order.orderCreate
@@ -72,6 +105,9 @@ const CreateOrderPage = ({ history, location }) => {
     }
     if (success) {
       history.push(`/user/order/${order._id}`);
+      dispatch({
+        type: CREATE_ORDER_RESET,
+      });
     }
   });
 
@@ -91,7 +127,7 @@ const CreateOrderPage = ({ history, location }) => {
   );
 
   //handle place order click
-  const handlePlaceOrder = () => {
+  const paypalPaymentSuccessHandler = (paymentResult) => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -101,6 +137,7 @@ const CreateOrderPage = ({ history, location }) => {
         taxPrice: cart.taxPrice,
         shippingPrice: cart.shippingPrice,
         totalPrice: cart.totalPrice,
+        paymentResult,
       })
     );
   };
@@ -126,7 +163,6 @@ const CreateOrderPage = ({ history, location }) => {
             <Step>
               <StepLabel>Order Summary</StepLabel>
             </Step>
-            {width <= 900}
           </Stepper>
         </div>
         <div className={classes.LeftContainer}>
@@ -281,7 +317,10 @@ const CreateOrderPage = ({ history, location }) => {
               Total Amount <span>${cart.totalPrice}</span>
             </p>
           </div>
-          <button disabled={activeStep < 3} onClick={handlePlaceOrder}>
+          <button
+            disabled={activeStep < 3}
+            onClick={paypalPaymentSuccessHandler}
+          >
             {loading ? (
               <CircularProgress color='white' size={35} />
             ) : (
@@ -296,6 +335,7 @@ const CreateOrderPage = ({ history, location }) => {
       </div>
     </div>
   ) : (
+    //************** */
     <div className={classes.MobileContainer}>
       <Helmet>
         <title>{`Checkout | GrowMart`}</title>
@@ -304,14 +344,30 @@ const CreateOrderPage = ({ history, location }) => {
         <p>
           {' '}
           <ArrowBack onClick={() => history.goBack()} />{' '}
-          {activeStep === 4
-            ? 'payment'
-            : activeStep === 2
+          {activeStep === 3
+            ? 'Payment'
+            : activeStep === 1
             ? 'Payment Method'
-            : activeStep === 3
+            : activeStep === 2
             ? 'Order Summary'
             : 'Select Address'}
         </p>
+      </div>
+      <div className={classes.Stepper}>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          <Step>
+            <StepLabel>Shipping Address</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Payment Method</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Order Summary</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Payment</StepLabel>
+          </Step>
+        </Stepper>
       </div>
       <div className={classes.BottomContainer}>
         {stepParams === 'shipping-address' ? (
@@ -499,12 +555,6 @@ const CreateOrderPage = ({ history, location }) => {
                   </p>
                 </div>
               </div>
-              <span>
-                <VerifiedUser />{' '}
-                <p>
-                  Safe and Secure Payments.Easy returns.100% Authentic products.
-                </p>
-              </span>
             </div>
             <div className={classes.Continue}>
               <p
@@ -520,8 +570,8 @@ const CreateOrderPage = ({ history, location }) => {
               </p>
               <button
                 onClick={() => {
-                  urlParams.set('step', 'order-summary');
-                  dispatch(savePaymentMethod(paymentMethod));
+                  urlParams.set('step', 'payment');
+                  setActiveStep(3);
                   history.push({
                     search: urlParams.toString(),
                   });
@@ -529,6 +579,51 @@ const CreateOrderPage = ({ history, location }) => {
               >
                 {'Continue'}
               </button>
+            </div>
+          </div>
+        ) : stepParams === 'payment' ? (
+          <div className={classes.Payment}>
+            <div className={classes.RightWrapper}>
+              <div className={classes.RightContainer}>
+                <p id='priceDetails'>Price Details</p>
+                <div>
+                  <p>
+                    {`Price (${cartItems.length}) ${
+                      cartItems.length >= 0 ? 'items' : 'item'
+                    }`}{' '}
+                    <span>${cart.itemsPrice}</span>
+                  </p>
+                  <p>
+                    Tax % <span>${cart.taxPrice}</span>
+                  </p>
+                  <p>
+                    Shipping Charges <span>${cart.shippingPrice}</span>
+                  </p>
+                  <p>
+                    Total Amount <span>${cart.totalPrice}</span>
+                  </p>
+                </div>
+
+                <div className={classes.PaypalButton}>
+                  {/* {loadingPay && <CircularProgress size={30} />} */}
+                  {!sdkReady ? (
+                    <CircularProgress size={30} />
+                  ) : loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <PayPalButton
+                      amount={cart.totalPrice}
+                      onSuccess={paypalPaymentSuccessHandler}
+                    />
+                  )}
+                </div>
+              </div>
+              <div className={classes.PaypalSecured}>
+                <img
+                  src='https://res.cloudinary.com/vastia/image/upload/v1615363765/growmart/Credit-Card-Icons_krwery.jpg'
+                  alt='paypalSecure'
+                />
+              </div>
             </div>
           </div>
         ) : null}

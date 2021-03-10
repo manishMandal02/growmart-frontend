@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
 import { Provider } from 'react-redux';
+import axios from 'axios';
 
+import App from './App';
+import './index.scss';
 import store from './Store/Store';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 // npm install react-router react-redux redux redux-saga @material-ui/core @material-ui/icons @material-ui/styles @material-ui/lab
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+axios.defaults.baseURL = 'https://growmart.herokuapp.com/';
 
 const theme = createMuiTheme({
   palette: {
