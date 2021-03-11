@@ -13,7 +13,6 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { FcGoogle } from 'react-icons/fc';
 import { userLogin } from '../../../Store/Actions/UsersActions/UserActions';
 import { Alert } from '@material-ui/lab';
 import { Helmet } from 'react-helmet';

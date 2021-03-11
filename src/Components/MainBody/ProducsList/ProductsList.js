@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
-import { Alert, AlertTitle, Pagination } from '@material-ui/lab';
+import { Alert, Pagination } from '@material-ui/lab';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';

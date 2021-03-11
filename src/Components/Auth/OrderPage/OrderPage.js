@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { PayPalButton } from 'react-paypal-button-v2';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ArrowBack, VerifiedUser } from '@material-ui/icons';
@@ -11,10 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useWindowSize } from '../../../Hooks/useWindowSize/useWindowSize';
 import classes from './OrderPage.module.scss';
-import { ORDER_PAY_RESET } from '../../../Store/Actions/ActionTypes';
 import {
   getOrderDetails,
-  payOrder,
 } from '../../../Store/Actions/OrderActions/OrderActions';
 import CartProductCard from '../CartPage/ProductCard/CartProductCard';
 
@@ -32,56 +28,7 @@ const OrderPage = ({ match, history }) => {
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
   }, [dispatch, orderId]);
-  // const [sdkReady, setSdkReady] = useState(false);
 
-  // const orderPay = useSelector((state) => state.order.orderPay);
-
-  // const { loading: loadingPay, success: successPay } = orderPay;
-
-  // useEffect(() => {
-  //   if (!userInfo) {
-  //     history.push(`/login?redirect=user/order/${match.params.id}`);
-  //   }
-  //   const addPaypalScript = async () => {
-  //     const { data: clientId } = await axios.get('/api/config/paypal');
-  //     const script = document.createElement('script');
-  //     script.type = 'text/javascript';
-  //     script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-  //     script.async = true;
-  //     script.onload = () => {
-  //       setSdkReady(true);
-  //     };
-
-  //     document.body.appendChild(script);
-  //   };
-
-  //   if (!order || successPay || order._id !== orderId) {
-  //     dispatch(getOrderDetails(orderId));
-  //     dispatch({
-  //       type: ORDER_PAY_RESET,
-  //     });
-  //   } else if (!order.isPaid) {
-  //     if (!window.paypal) {
-  //       addPaypalScript();
-  //     } else {
-  //       setSdkReady(true);
-  //     }
-  //   }
-  // }, [
-  //   orderId,
-  //   order,
-  //   dispatch,
-  //   successPay,
-  //   history,
-  //   userInfo,
-  //   match.params,
-  //   sdkReady,
-  // ]);
-
-  // // payment Success Handler
-  // const paymentSuccessHandler = (paymentResult) => {
-  //   dispatch(payOrder(orderId, paymentResult));
-  // };
 
   return width > 900 ? (
     <>

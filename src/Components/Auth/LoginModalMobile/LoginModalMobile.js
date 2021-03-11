@@ -5,12 +5,10 @@ import {
   Input,
   InputAdornment,
   InputLabel,
-  Tooltip,
   TextField,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { Close, Visibility, VisibilityOff } from '@material-ui/icons';
-import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';

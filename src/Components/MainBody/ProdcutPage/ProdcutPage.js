@@ -14,7 +14,6 @@ import {
   Edit,
   ShoppingCartOutlined,
   ArrowBack,
-  Storefront,
   ShoppingCart,
   Person,
 } from '@material-ui/icons';

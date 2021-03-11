@@ -15,7 +15,6 @@ import {
 } from '@material-ui/core';
 import { Close, Visibility, VisibilityOff } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
-import { FcGoogle } from 'react-icons/fc';
 import { userLogin } from '../../../Store/Actions/UsersActions/UserActions';
 
 // ############
