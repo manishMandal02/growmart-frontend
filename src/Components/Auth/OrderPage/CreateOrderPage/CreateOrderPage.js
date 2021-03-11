@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ArrowBack, VerifiedUser } from '@material-ui/icons';
+import { ArrowBack, ArrowRightAlt, VerifiedUser } from '@material-ui/icons';
 import { CircularProgress, Step, StepLabel, Stepper } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { v4 as uuidv4 } from 'uuid';
@@ -152,9 +152,6 @@ const CreateOrderPage = ({ history, location }) => {
         <div className={classes.Stepper}>
           <Stepper activeStep={activeStep} alternativeLabel>
             <Step>
-              <StepLabel>SignIn</StepLabel>
-            </Step>
-            <Step>
               <StepLabel>Shipping Address</StepLabel>
             </Step>
             <Step>
@@ -163,11 +160,13 @@ const CreateOrderPage = ({ history, location }) => {
             <Step>
               <StepLabel>Order Summary</StepLabel>
             </Step>
+            <Step>
+              <StepLabel>Payment</StepLabel>
+            </Step>
           </Stepper>
         </div>
         <div className={classes.LeftContainer}>
-          {activeStep === 1 ||
-          location.search.split('=')[1] === 'shipping-address' ? (
+          {stepParams === 'shipping-address' ? (
             <div className={classes.Address}>
               <p>SHIPPING ADDRESS</p>
               <form>
@@ -200,7 +199,6 @@ const CreateOrderPage = ({ history, location }) => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveStep(2);
                     dispatch(
                       saveShippingAddress({
                         address,
@@ -209,8 +207,9 @@ const CreateOrderPage = ({ history, location }) => {
                         country,
                       })
                     );
+                    urlParams.set('step', 'payment-method');
                     history.push({
-                      search: '?payment-method',
+                      search: urlParams.toString(),
                     });
                   }}
                   disabled={Boolean(!address || !zipcode || !city || !country)}
@@ -219,7 +218,7 @@ const CreateOrderPage = ({ history, location }) => {
                 </button>
               </form>
             </div>
-          ) : activeStep === 2 ? (
+          ) : stepParams === 'payment-method' ? (
             <div className={classes.PaymentMethod}>
               <p>Select Payment Method</p>
               <form>
@@ -230,8 +229,9 @@ const CreateOrderPage = ({ history, location }) => {
                   checked={paymentMethod === 'Paypal'}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                <label for='paypal'>Paypal & Credit Card</label>
+                <label htmlFor='paypal'>Paypal & Credit Card</label>
                 <br />
+                {/* <Tooltip title='Feature currently underdevelopment'> */}
                 <input
                   type='radio'
                   id='stripe'
@@ -239,32 +239,33 @@ const CreateOrderPage = ({ history, location }) => {
                   checked={paymentMethod === 'Stripe'}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                <label for='stripe'>Stripe (Debit & Credit Card)</label>
+                <label htmlFor='stripe'>
+                  Stripe (Debit & Credit Card){' '}
+                  <span>*currently underdevelopment</span>
+                </label>
+                {/* </Tooltip> */}
               </form>
               <button
                 className={classes.BackButton}
                 onClick={(e) => {
-                  setActiveStep(1);
-                  history.push({
-                    search: '?shiiping-address',
-                  });
+                  history.goBack();
                 }}
               >
                 Go Back
               </button>
               <button
                 onClick={(e) => {
-                  setActiveStep(3);
+                  urlParams.set('step', 'order-summary');
                   dispatch(savePaymentMethod(paymentMethod));
                   history.push({
-                    search: '?order-summary',
+                    search: urlParams.toString(),
                   });
                 }}
               >
                 Continue
               </button>
             </div>
-          ) : activeStep === 3 ? (
+          ) : stepParams === 'order-summary' ? (
             <div className={classes.OrderSummary}>
               {/* <p>Your Order Summary</p> */}
               <p>
@@ -287,6 +288,37 @@ const CreateOrderPage = ({ history, location }) => {
                   </div>
                 ))}
               </div>
+              <button
+                className={classes.BackButton}
+                onClick={(e) => {
+                  history.goBack();
+                }}
+              >
+                Go Back
+              </button>
+              <button
+                onClick={(e) => {
+                  urlParams.set('step', 'payment');
+                  history.push({
+                    search: urlParams.toString(),
+                  });
+                }}
+              >
+                Continue
+              </button>
+            </div>
+          ) : stepParams === 'payment' ? (
+            <div
+              style={{
+                fontSize: '1.4em',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '1em 0',
+                fontWeight: '600',
+              }}
+            >
+              Complete your payment with {cart.paymentMethod}
+              <ArrowRightAlt />
             </div>
           ) : null}
         </div>
@@ -317,16 +349,21 @@ const CreateOrderPage = ({ history, location }) => {
               Total Amount <span>${cart.totalPrice}</span>
             </p>
           </div>
-          <button
-            disabled={activeStep < 3}
-            onClick={paypalPaymentSuccessHandler}
-          >
-            {loading ? (
-              <CircularProgress color='white' size={35} />
-            ) : (
-              'Place Order'
-            )}
-          </button>
+          {activeStep === 3 && (
+            <div className={classes.PaypalButton}>
+              {/* {loadingPay && <CircularProgress size={30} />} */}
+              {!sdkReady ? (
+                <CircularProgress size={30} />
+              ) : loading ? (
+                <CircularProgress />
+              ) : (
+                <PayPalButton
+                  amount={cart.totalPrice}
+                  onSuccess={paypalPaymentSuccessHandler}
+                />
+              )}
+            </div>
+          )}
         </div>
         <span>
           <VerifiedUser />{' '}
@@ -404,7 +441,17 @@ const CreateOrderPage = ({ history, location }) => {
                   ${cart.totalPrice} <span>Orer Total Price</span>
                 </p>
                 <button
-                  onClick={() => {
+                  disabled={Boolean(!address || !zipcode || !city || !country)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(
+                      saveShippingAddress({
+                        address,
+                        zipcode,
+                        city,
+                        country,
+                      })
+                    );
                     urlParams.set('step', 'payment-method');
                     history.push({
                       search: urlParams.toString(),

@@ -55,7 +55,7 @@ const QuickViewModal = ({ product, closeModal }) => {
         </Tooltip>
         <div className={classes.Container}>
           <div className={classes.ImageWrapper}>
-            <img src={product.image} alt={`${product.name}`} />
+            <img src={product.image} alt={`${product.name}`} loading='lazy' />
             <span>
               <Tooltip
                 placement='top'
@@ -63,7 +63,11 @@ const QuickViewModal = ({ product, closeModal }) => {
                 title={product.name}
                 enterDelay={600}
               >
-                <img src={product.image} alt={`${product.name} overview`} />
+                <img
+                  src={product.image}
+                  alt={`${product.name} overview`}
+                  loading='lazy'
+                />
               </Tooltip>
             </span>
           </div>

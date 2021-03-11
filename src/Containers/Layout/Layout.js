@@ -20,6 +20,7 @@ import LoginModalMobile from '../../Components/Auth/LoginModalMobile/LoginModalM
 
 const Layout = () => {
   const [width] = useWindowSize();
+
   return (
     <Router>
       <Header />
@@ -67,52 +68,6 @@ const Layout = () => {
             <Route component={NotFound} />
           </Switch>
         )}
-        {/* <Route path='/user/create-order/' component={CreateOrderPage} exact />
-          <Route path='/user/order/:id' component={OrderPage} />
-          <Route path='/user/cart' component={CartPage} exact />
-          <Route path='/register' component={RegisterPage} />
-          <Route path='/login' component={LoginPage} />
-          <Route path='/product/:id' component={ProdcutPage} />
-          <Route path='/category/:category' component={MainBody} exact />
-          <Route path='/brand/:brand' component={MainBody} exact />
-          <Route path='/' component={MainBody} exact />
-          <Route path='/' component={MainBody} />
-          <Route component={NotFound} /> */}
-
-        {/* ************** Experimental ********* */}
-        {/* <Route path='/price/:price' component={MainBody} exact />
-        <Route path='/page/:pageNumber' component={MainBody} exact />
-        <Route
-          path='/page/:pageNumber/price/:price'
-          component={MainBody}
-          exact
-        /> */}
-        {/* <Route path='/search/:keyword' component={MainBody} exact /> */}
-        {/* <Route
-          path='/category/:category/page/:pageNumber'
-          component={MainBody}
-          exact
-        /> */}
-        {/* <Route
-          path='/brand/:brand/page/:pageNumber'
-          component={MainBody}
-          exact
-        />
-        <Route
-          path='/search/:keyword/page/:pageNumber'
-          component={MainBody}
-          exact
-        />
-        <Route
-          path='/search/:keyword/price/:price'
-          component={MainBody}
-          exact
-        />
-        <Route
-          path='/search/:keyword/price/:price/page/:pageNumber'
-          component={MainBody}
-          exact
-        /> */}
       </main>
       {width > 900 && <Footer />}
     </Router>

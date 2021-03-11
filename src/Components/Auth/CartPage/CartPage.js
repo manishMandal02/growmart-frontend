@@ -144,14 +144,7 @@ const CartPage = ({ history }) => {
               </p>
             </div>
             {width > 900 && (
-              <button
-                disabled={cartItems.length <= 0}
-                onClick={() =>
-                  history.push(
-                    '/login?redirect=user/create-order?shippping-address'
-                  )
-                }
-              >
+              <button disabled={cartItems.length <= 0} onClick={handelCheckOut}>
                 Checkout
               </button>
             )}

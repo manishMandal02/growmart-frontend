@@ -211,8 +211,8 @@ const ProdcutPage = ({ match }) => {
             </Helmet>
 
             <div className={classes.ImageWrapper}>
-              <img src={product.image} alt={`${product.name}`} />
-              {width > 770 && (
+              <img src={product.image} alt={`${product.name}`} loading='lazy' />
+              {width > 900 && (
                 <span>
                   <Tooltip
                     title={product.name || ''}

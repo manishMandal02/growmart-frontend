@@ -10,7 +10,7 @@
   .LeftWrapper {
     width: 60%;
     max-width: 60%;
-    max-height: 80vh;
+    max-height: 100vh;
     background-color: #ffff;
     box-shadow: $shadow2;
     display: flex;
@@ -102,7 +102,7 @@
         }
       }
       .PaymentMethod {
-        width: 50%;
+        width: 70%;
         > p {
           font-size: 1.3em;
           font-weight: 600;
@@ -112,12 +112,17 @@
         > form {
           margin-top: 0.6em;
           font-size: 1.2em;
+          width: 100%;
           > input {
             margin-bottom: 1.1em;
           }
           > label {
+            width: 100%;
             font-size: 1em;
             margin-left: 0.2em;
+            > span {
+              font-size: 0.6em;
+            }
           }
         }
 
@@ -133,7 +138,6 @@
           color: #ffff;
           cursor: pointer;
           transition: all 0.1s;
-
           &:hover {
             box-shadow: $shadow2;
           }
@@ -145,164 +149,199 @@
           margin-right: 0.6em;
         }
       }
-      .OrderSummary {
-        width: 80%;
-        margin-left: -4em;
-        height: 60vh;
-        > p:nth-child(2) {
-          margin-top: 0.6em;
+    }
+    .OrderSummary {
+      width: 80%;
+      margin-left: -4em;
+      height: 74vh;
+      > p:nth-child(2) {
+        margin-top: 0.6em;
+        margin-bottom: 1em;
+      }
+      > p {
+        font-size: 1.3em;
+        font-weight: 600;
+        color: $dark-grey;
+        margin-bottom: 0.4em;
+
+        p {
+          margin-top: 0.2em;
           margin-bottom: 1em;
+          font-size: 0.8em;
+          color: #000000;
+          font-weight: 500;
+          width: 65%;
         }
-        > p {
-          font-size: 1.3em;
-          font-weight: 600;
-          color: $dark-grey;
-          margin-bottom: 0.4em;
-
-          p {
-            margin-top: 0.2em;
-            margin-bottom: 1em;
-            font-size: 0.8em;
+      }
+      > p:nth-child(2) {
+        color: $dark-grey;
+        span {
+          color: #000000;
+          font-weight: 500;
+        }
+      }
+      > div {
+        height: 60%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        width: 100%;
+        border: 2px solid $light-grey;
+        .OrderItems {
+          display: flex;
+          width: 110%;
+          border-bottom: 1px solid $light-grey;
+          padding: 0.2em 0.5em;
+          img {
+            width: 12%;
+            border-radius: 0.1em;
+          }
+          > a {
+            text-decoration: none;
+            margin-left: 1.2em;
+            font-size: 1.1em;
+            margin-top: 0.4em;
             color: #000000;
-            font-weight: 500;
-            width: 65%;
-          }
-        }
-        > p:nth-child(2) {
-          color: $dark-grey;
-          span {
-            color: #000000;
-            font-weight: 500;
-          }
-        }
-        > div {
-          height: 66%;
-          overflow-x: hidden;
-          overflow-y: scroll;
-          width: 100%;
-          border: 2px solid $light-grey;
-          .OrderItems {
-            display: flex;
-            width: 110%;
-            border-bottom: 1px solid $light-grey;
-            padding: 0.2em 0.5em;
-            img {
-              width: 12%;
-              border-radius: 0.1em;
+            width: 45%;
+            &:hover {
+              color: $primary-color;
             }
-            > a {
-              text-decoration: none;
-              margin-left: 1.2em;
-              font-size: 1.1em;
-              margin-top: 0.4em;
-              color: #000000;
-              width: 45%;
-              &:hover {
-                color: $primary-color;
-              }
-            }
-            > span {
-              margin-left: 1em;
-              width: 30%;
+          }
+          > span {
+            margin-left: 1em;
+            width: 30%;
 
-              font-size: 1.1em;
-              margin-top: 0.4em;
-            }
-          }
-          .OrderItems:last-child {
-            border: none;
+            font-size: 1.1em;
+            margin-top: 0.4em;
           }
         }
+        .OrderItems:last-child {
+          border: none;
+        }
+      }
+      > button {
+        outline: none;
+        border: none;
+        border-radius: 0.1em;
+        width: 25%;
+        position: relative;
+        left: 30%;
+        margin-top: 1.6em;
+        padding: 0.5em;
+        font-size: 1.1em;
+        background-color: $primary-color;
+        color: #ffff;
+        cursor: pointer;
+        transition: all 0.1s;
+        font-weight: 600;
+        &:hover {
+          box-shadow: $shadow2;
+        }
+      }
+      .BackButton {
+        background-color: $dark-grey;
+        font-size: 1.1em;
+        color: #fff;
+        font-weight: 500;
+        margin-right: 0.6em;
       }
     }
   }
-  .RightWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 1.5em;
-    width: 25%;
-    .RightContainer {
-      width: 100%;
-      background-color: #ffff;
-      box-shadow: $shadow2;
-      > p:nth-child(1) {
-        padding: 1em;
-        font-size: 1.2em;
-        color: $mid-grey;
-        font-weight: 600;
-        border-bottom: 1px solid $light-grey;
-      }
-      > div:nth-child(2) {
-        padding: 1em 1.6em 0.2em 1.6em;
-        p {
-          margin-bottom: 0.76em;
-          font-size: 1.16em;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          span {
-            font-weight: 600;
-            color: $primary-color;
-          }
-        }
-        > p:nth-child(4) {
-          font-size: 1.2em;
-          padding: 0.6em 0;
-          border-top: 1.6px dashed $light-grey;
-          border-bottom: 1.6px dashed $light-grey;
+}
+.RightWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1.5em;
+  width: 25%;
+  .RightContainer {
+    width: 100%;
+    background-color: #ffff;
+    box-shadow: $shadow2;
+    > p:nth-child(1) {
+      padding: 1em;
+      font-size: 1.2em;
+      color: $mid-grey;
+      font-weight: 600;
+      border-bottom: 1px solid $light-grey;
+    }
+    > div:nth-child(2) {
+      padding: 1em 1.6em 0.2em 1.6em;
+      p {
+        margin-bottom: 0.76em;
+        font-size: 1.16em;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span {
           font-weight: 600;
+          color: $primary-color;
         }
       }
-      button {
-        border-radius: 1px;
-        width: 100%;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        color: #ffff;
-        padding: 0.8em 0.8em;
-        font-size: 1.3em;
+      > p:nth-child(4) {
+        font-size: 1.2em;
+        padding: 0.6em 0;
+        border-top: 1.6px dashed $light-grey;
+        border-bottom: 1.6px dashed $light-grey;
         font-weight: 600;
-        transition: all 0.2s;
-        background-image: linear-gradient(
-          to right,
-          $primary-color 0%,
-          #93f9b9 0%,
-          #38b88b 100%
-        );
+      }
+    }
+    button {
+      border-radius: 1px;
+      width: 100%;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      color: #ffff;
+      padding: 0.8em 0.8em;
+      font-size: 1.3em;
+      font-weight: 600;
+      transition: all 0.2s;
+      background-image: linear-gradient(
+        to right,
+        $primary-color 0%,
+        #93f9b9 0%,
+        #38b88b 100%
+      );
+      &:hover {
+        //   box-shadow: $shadow1;
+        transform: scale(1.016);
+        box-shadow: $shadow2;
+      }
+      &:disabled {
+        cursor: not-allowed;
+        background-color: $light-grey;
+        color: #fffefe;
+        background-image: none;
         &:hover {
-          //   box-shadow: $shadow1;
-          transform: scale(1.016);
-          box-shadow: $shadow2;
-        }
-        &:disabled {
-          cursor: not-allowed;
-          background-color: $light-grey;
-          color: #fffefe;
-          background-image: none;
-          &:hover {
-            transform: scale(1);
-            box-shadow: none;
-          }
+          transform: scale(1);
+          box-shadow: none;
         }
       }
     }
-    > span:nth-child(2) {
-      margin-top: 1.2em;
+    .PaypalButton {
       display: flex;
       align-items: center;
-      svg {
-        font-size: 2em;
-        margin-right: 0.1em;
-        color: $mid-grey;
+      justify-content: center;
+      width: 100%;
+      > div {
+        width: 90%;
       }
-      p {
-        font-size: 1em;
-        color: $mid-grey;
-        font-weight: 600;
-      }
+    }
+  }
+  > span:nth-child(2) {
+    margin-top: 1.2em;
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 2em;
+      margin-right: 0.1em;
+      color: $mid-grey;
+    }
+    p {
+      font-size: 1em;
+      color: $mid-grey;
+      font-weight: 600;
     }
   }
 }

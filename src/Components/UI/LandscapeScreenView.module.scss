@@ -1,0 +1,30 @@
+@import '../../App.scss';
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  background-color: #355f4c;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  padding: 0.1em 0 9.6em 0;
+  > img {
+    width: 30%;
+  }
+  p:nth-child(2) {
+    color: $light-grey;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-top: -0.4em;
+    margin-bottom: 0.2em;
+  }
+  p:nth-child(3) {
+    color: $light-grey;
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+}
