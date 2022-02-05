@@ -1,1 +1,1 @@
-#Reactja e-commerce web app with Admin panel
+#Reactja e-commerce web app with Admin dashboard
