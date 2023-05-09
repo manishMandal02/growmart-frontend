@@ -10,7 +10,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 // npm install react-router react-redux redux redux-saga @material-ui/core @material-ui/icons @material-ui/styles @material-ui/lab
 
-axios.defaults.baseURL = 'https://growmart.herokuapp.com/';
+axios.defaults.baseURL = 'https://growmart.onrender.com/';
 // axios.defaults.baseURL = 'http://localhost:5000/';
 
 const theme = createMuiTheme({
